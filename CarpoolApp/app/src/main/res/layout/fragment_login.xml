@@ -16,7 +16,6 @@
         android:src="@drawable/carpool_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -28,16 +27,21 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="아이디" />
+            android:text="아이디"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
         <EditText
             android:id="@+id/eTLoginId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:background="@drawable/edit_text_box"
+            android:textSize="20sp"
             android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
@@ -49,14 +53,57 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="패스워드" />
+            android:text="패스워드"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/eTLoginPw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_box"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button"
+        android:text="Button"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:text="아직 회원이 아니신가요?"
+            android:textColor="#55000000"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/clickSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="회원가입하기"
+            android:textColor="@color/bnkRed"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <ImageView
@@ -68,5 +115,6 @@
         android:src="@drawable/bnk_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
