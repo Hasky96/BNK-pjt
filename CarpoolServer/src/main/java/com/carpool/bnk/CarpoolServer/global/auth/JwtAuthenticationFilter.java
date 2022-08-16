@@ -2,11 +2,11 @@ package com.carpool.bnk.CarpoolServer.global.auth;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.ssafy.wiselaundry.domain.laundry.service.LaundryService;
-import com.ssafy.wiselaundry.domain.user.db.entity.User;
-import com.ssafy.wiselaundry.domain.user.service.UserService;
-import com.ssafy.wiselaundry.global.util.JwtTokenUtil;
-import com.ssafy.wiselaundry.global.util.ResponseBodyWriteUtil;
+import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
+import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
+import com.carpool.bnk.CarpoolServer.domain.user.service.UserService;
+import com.carpool.bnk.CarpoolServer.global.util.JwtTokenUtil;
+import com.carpool.bnk.CarpoolServer.global.util.ResponseBodyWriteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,7 +28,9 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
     @Autowired
     private UserService userService;
-    private LaundryService laundryService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {
         super(authenticationManager);
@@ -68,17 +70,17 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             JWTVerifier verifier = JwtTokenUtil.getVerifier();
             JwtTokenUtil.handleError(token);
             DecodedJWT decodedJWT = verifier.verify(token.replace(JwtTokenUtil.TOKEN_PREFIX, ""));
-            String userEmail = decodedJWT.getSubject();
+            String userId = decodedJWT.getSubject();
 
             // Search in the DB if we find the user by token subject (username)
             // If so, then grab user details and create spring auth token using username, pass, authorities/roles
-            if (userEmail != null) {
+            if (userId != null) {
                 // jwt 토큰에 포함된 계정 정보(userEmail) 통해 실제 디비에 해당 정보의 계정이 있는지 조회
-                User user = userService.findByUserEmail(userEmail);
+                User user = userRepository.getUserByUserId(userId);
                 if(user != null) {
                     // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
                     UserDetails userDetails = new UserDetails(user);
-                    UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(userEmail,
+                    UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(userId,
                             null, userDetails.getAuthorities());
                     jwtAuthentication.setDetails(userDetails);
                     return jwtAuthentication;
