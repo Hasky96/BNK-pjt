@@ -1,4 +1,4 @@
-package com.example.carpoolapp.ui.notifications;
+package com.example.carpoolapp.ui.myPage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.carpoolapp.databinding.FragmentNotificationsBinding;
+import com.example.carpoolapp.databinding.FragmentMypageBinding;
 
-public class NotificationsFragment extends Fragment {
+public class MypageFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentMypageBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        MypageViewModel notificationsViewModel =
+                new ViewModelProvider(this).get(MypageViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentMypageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
