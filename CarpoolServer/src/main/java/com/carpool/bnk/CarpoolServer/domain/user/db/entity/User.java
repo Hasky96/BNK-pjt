@@ -1,5 +1,6 @@
 package com.carpool.bnk.CarpoolServer.domain.user.db.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +30,14 @@ public class User  {
 
     @Column(name = "user_car_no")
     private String userCarNo;
+
+    @Builder
+    public User(String userId, String userPw, String userCarInfo, String userCarNo){
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userCarInfo = userCarInfo;
+        this.userCarNo = userCarNo;
+    }
 
     @Override
     public String toString() {
