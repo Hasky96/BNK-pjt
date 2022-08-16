@@ -18,6 +18,7 @@
         android:theme="@style/Theme.CarpoolApp"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
+        <!--    usesCleartextTraffic가 있어야 http통신 가능    -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

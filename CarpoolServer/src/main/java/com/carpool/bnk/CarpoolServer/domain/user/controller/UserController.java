@@ -15,11 +15,4 @@ public class UserController {
         return ResponseEntity.status(200).body("Hi!");
     }
     
-    @GetMapping("/connect")
-    public Message connect() {
-    	Message message=new Message();
-    	message.setMessage("연결 성공");
-    	System.out.println("연결 성공");
-    	return message;
-    }
 }

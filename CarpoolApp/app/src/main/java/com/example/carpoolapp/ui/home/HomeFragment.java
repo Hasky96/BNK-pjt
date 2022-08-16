@@ -39,12 +39,10 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<Message> call, Response<Message> response) {
                 Message message=response.body();
                 textView.setText(message.getMessage());
-                Log.d("jjk","성공");
             }
             //실패
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
-                Log.d("jjk","실패");
             }
         });
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
