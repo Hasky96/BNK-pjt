@@ -2,13 +2,15 @@
 
 BNK시스템 신입사원 연수 프로젝트 (12days)
 
-<hr/>
-* IDCHECK (GET)
+---
+USER
+---
+* IDCHECK(GET)
   ```
   /api/user/idcheck?id={checkId}
   ```
-  <hr/>
-* SIGNUP (POST)
+---
+* SIGNUP(POST)
   ```
   /api/user/signup
   ```
@@ -21,7 +23,7 @@ BNK시스템 신입사원 연수 프로젝트 (12days)
     "userCarNo" : "123가1223"
   }
   ```
-  <hr/>
+---
 * LOGIN(POST)
   ```
   /api/user/login
@@ -33,4 +35,20 @@ BNK시스템 신입사원 연수 프로젝트 (12days)
     "userPw" : "1234"
   }
   ```
-  <hr/>
+---
+CARPOOL
+---
+* CREATE(POST)
+  ```
+  api/carpool/create
+  ```
+  ```json{
+    "carpoolWriter":1,
+    "carpoolDriver":1,
+    "carpoolType":"false",
+    "carpoolLocation":"location",
+    "carpoolQuota":5,
+    "carpoolInfo":"Info",
+    "carpoolFee":3000
+  }
+  ```
