@@ -3,4 +3,11 @@
     <string name="title_MyReservation">내 예약</string>
     <string name="title_Carpool">카풀</string>
     <string name="title_Mypage">MY</string>
+
+    <string-array name="spPersonamount">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

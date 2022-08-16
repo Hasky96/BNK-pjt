@@ -21,7 +21,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.carpool.CarpoolRegister"
+           android:name=".ui.carpool.CarpoolRegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
