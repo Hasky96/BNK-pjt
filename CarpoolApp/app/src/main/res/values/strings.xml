@@ -3,6 +3,8 @@
     <string name="title_MyReservation">내 예약</string>
     <string name="title_Carpool">카풀</string>
     <string name="title_Mypage">MY</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
 
     <string-array name="spPersonamount">
         <item>1</item>

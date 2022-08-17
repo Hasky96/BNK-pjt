@@ -58,7 +58,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
         btnCarpoolRegister = findViewById(R.id.btnCarpoolRegister);
         tvDepartureDate = findViewById(R.id.tvDepartureDate);
         edtLocation = findViewById(R.id.edtLocation);
-        edtFee = findViewById(R.id.edtFee);
+//        edtFee = findViewById(R.id.edtFee);
         edtInfo = findViewById(R.id.edtInfo);
         chkDriver = findViewById(R.id.chkDriver);
 
