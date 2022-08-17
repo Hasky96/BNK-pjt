@@ -90,7 +90,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/eTSignupCarId"
+            android:id="@+id/eTSignupCarNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_box"
@@ -128,7 +128,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonSignup"
         android:layout_width="260dp"
         android:layout_height="40dp"
         android:layout_marginStart="75dp"
@@ -147,5 +147,5 @@
         android:layout_marginTop="137dp"
         android:src="@drawable/bnk_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

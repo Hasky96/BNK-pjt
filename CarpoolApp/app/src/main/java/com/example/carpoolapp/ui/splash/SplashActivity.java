@@ -32,7 +32,6 @@ public class SplashActivity extends AppCompatActivity {
         //프래그먼트 이동
         getSupportFragmentManager()
                 .beginTransaction()
-                .addToBackStack(null) //뒤로가기 가능하게 만듬
                 .replace(R.id.ConstraintFragment, fragment).commit();
 
     }
