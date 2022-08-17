@@ -49,6 +49,7 @@ CARPOOL
     "carpoolLocation":"location",
     "carpoolQuota":5,
     "carpoolInfo":"Info",
-    "carpoolFee":3000
+    "carpoolFee":3000,
+    "carpoolTime": "2022-08-15T12:13:14"
   }
   ```

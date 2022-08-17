@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CarpoolRepository extends JpaRepository<Carpool, Integer> {
-    Carpool findCarpoolByCarpoolWriter(int carpoolWriter);
+    Carpool getCarpoolByCarpoolWriter(int carpoolWriter);
+    Carpool getCarpoolByCarpoolNo(int carpoolNo);
 }
