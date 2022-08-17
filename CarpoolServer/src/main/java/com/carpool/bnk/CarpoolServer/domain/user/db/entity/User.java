@@ -27,7 +27,7 @@ public class User  {
     @Column(name = "user_no")
     private int userNo;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id",unique = true)
     private String userId;
 
     @JsonIgnore

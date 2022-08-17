@@ -10,17 +10,17 @@ import lombok.Setter;
 @Setter
 public class CarpoolCreateRes {
 
-    private int capoolNo;
+    private int carpoolNo;
     private String msg;
 
     public CarpoolCreateRes(int carpoolNo, String msg) {
-        this.capoolNo = capoolNo;
+        this.carpoolNo = carpoolNo;
         this.msg = msg;
     }
 
     public static CarpoolCreateRes of(int carpoolNo, String msg){
         CarpoolCreateRes res = new CarpoolCreateRes();
-        res.capoolNo = carpoolNo;
+        res.carpoolNo = carpoolNo;
         res.msg = msg;
         return res;
     }
