@@ -1,14 +1,22 @@
 package com.carpool.bnk.CarpoolServer.domain.carpool.service;
 
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
+import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Occupants;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.CarpoolRepository;
+import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.OccupantsRepository;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolCreateReq;
+import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
+import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
 import com.carpool.bnk.CarpoolServer.domain.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @Service
+@Transactional
 public class CarpoolServiceImpl implements CarpoolService{
 
     @Autowired
@@ -19,6 +27,9 @@ public class CarpoolServiceImpl implements CarpoolService{
 
     @Autowired
     CarpoolRepository carpoolRepository;
+
+    @Autowired
+    OccupantsRepository occupantsRepository;
 
     @Override
     public Carpool carpoolCreate(CarpoolCreateReq body) {
@@ -32,6 +43,54 @@ public class CarpoolServiceImpl implements CarpoolService{
                                         body.getCarpoolTime()
         );
         carpoolRepository.save(newCarpool);
+        Occupants join = new Occupants(newCarpool, userRepository.getUserByUserNo(body.getCarpoolWriter()));
+        occupantsRepository.save(join);
         return newCarpool;
+    }
+
+    @Override
+    public Carpool carpoolUpdate(Carpool carpool, CarpoolUpdateReq body) {
+        try {
+            carpool.setCarpoolFee(body.getCarpoolFee());
+            carpool.setCarpoolInfo(body.getCarpoolInfo());
+            carpool.setCarpoolQuota(body.getCarpoolQuota());
+            carpool.setCarpoolTime(body.getCarpoolTime());
+            carpool.setCarpoolLocation(body.getCarpoolLocation());
+            carpool.setCarpoolType(body.isCarpoolType());
+            return carpool;
+        }catch (Exception e){
+            System.err.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public boolean joinCarpool(Carpool carpool, User user) {
+        boolean ret = true;
+        try {
+            Occupants joinUser = new Occupants(carpool, user);
+            occupantsRepository.save(joinUser);
+        }catch (Exception e){
+            ret = false;
+            System.err.println(e);
+        }
+        return ret;
+    }
+
+    @Override
+    public boolean leaveCarpool(Carpool carpool, User user) {
+        List<Occupants> list = carpool.getOccupants();
+        int relationNo = 0;
+        boolean flag = false;
+        for(Occupants occu:list){
+            if(occu.getUser().getUserNo() == user.getUserNo()){
+                relationNo = occu.getRelationNo();
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) return false; //
+        occupantsRepository.deleteByRelationNo(relationNo);
+        return true;//
     }
 }

@@ -59,11 +59,11 @@ public class Carpool {
     private LocalDateTime carpoolTime;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Occupants> occupants = new ArrayList<Occupants>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Comments> comments = new ArrayList<Comments>();
 
     @Builder

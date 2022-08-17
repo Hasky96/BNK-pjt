@@ -42,9 +42,9 @@ public class UserController {
     public ResponseEntity<UserLoginRes> login(@RequestBody UserLoginReq body){
         User userInfo= userService.login(body);
         if(userInfo!=null){
-            return ResponseEntity.status(200).body(new UserLoginRes().of(200,"Success!", JwtTokenUtil.getToken(userInfo.getUserId()), userInfo.getUserId(), userInfo.getUserNo()));
+            return ResponseEntity.status(200).body(new UserLoginRes().of(200,"Success!", JwtTokenUtil.getToken(userInfo.getUserId()),userInfo));
         }
-        return ResponseEntity.status(400).body(new UserLoginRes().of(400,"Login failed", "", "",0));
+        return ResponseEntity.status(400).body(new UserLoginRes().of(400,"Login failed", "", null));
     }
 
 //    @PostMapping("/login")
