@@ -1,11 +1,19 @@
 package com.carpool.bnk.CarpoolServer.domain.user.db.entity;
 
+import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
+import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Comments;
+import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Occupants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.internal.build.AllowPrintStacktrace;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -22,6 +30,8 @@ public class User  {
     @Column(name = "user_id")
     private String userId;
 
+    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "user_password")
     private String userPw;
 
@@ -30,6 +40,7 @@ public class User  {
 
     @Column(name = "user_car_no")
     private String userCarNo;
+
 
     @Builder
     public User(String userId, String userPw, String userCarInfo, String userCarNo){

@@ -1,14 +1,19 @@
 package com.carpool.bnk.CarpoolServer.domain.carpool.db.entity;
 
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -46,24 +51,23 @@ public class Carpool {
     private int carpoolFee;
 
     @Column(name = "capool_created")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime carpoolCreated;
 
-    @Override
-    public String toString() {
-        return  "carpoolNo=" + carpoolNo +
-                "\n carpoolWriter=" + carpoolWriter +
-                "\n carpoolDriver=" + carpoolDriver +
-                "\n carpoolType=" + carpoolType +
-                "\n carpoolLocation='" + carpoolLocation +
-                "\n carpoolQuota=" + carpoolQuota +
-                "\n carpoolInfo='" + carpoolInfo +
-                "\n carpoolFee=" + carpoolFee +
-                "\n carpoolCreated=" + carpoolCreated +
-                '}';
-    }
+    @Column(name = "carpool_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime carpoolTime;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE)
+    private List<Occupants> occupants = new ArrayList<Occupants>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE)
+    private List<Comments> comments = new ArrayList<Comments>();
 
     @Builder
-    public Carpool(User carpoolDriver, User carpoolWriter, boolean carpoolType, String carpoolLocation, int carpoolQuota, String carpoolInfo, int carpoolFee){
+    public Carpool(User carpoolDriver, User carpoolWriter, boolean carpoolType, String carpoolLocation, int carpoolQuota, String carpoolInfo, int carpoolFee, LocalDateTime carpoolTime){
         this.carpoolDriver = carpoolDriver;
         this.carpoolWriter = carpoolWriter;
         this.carpoolType = carpoolType;
@@ -72,5 +76,6 @@ public class Carpool {
         this.carpoolInfo = carpoolInfo;
         this.carpoolFee = carpoolFee;
         this.carpoolCreated = LocalDateTime.now();
+        this.carpoolTime = carpoolTime;
     }
 }
