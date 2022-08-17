@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- default color  -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,7 +9,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bnkRed">#E91A1A</color>
+
+    <!-- bnk color  -->
+    <color name="bnkRed">#D7191F</color>
+    <color name="bnkDarkRed">#8B0304</color>
+    <color name="bnkSilver">#909394</color>
+    <color name="bnkDarkGrey">#655C4F</color>
+    <color name="bnkLightGrey">#B7A997</color>
+    <color name="bnkGold">#896E4A</color>
+
 
 
 </resources>
