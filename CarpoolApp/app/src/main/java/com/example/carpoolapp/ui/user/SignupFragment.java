@@ -1,5 +1,6 @@
 package com.example.carpoolapp.ui.user;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +11,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentSignupBinding;
+import com.example.carpoolapp.model.LoginResponse;
+import com.example.carpoolapp.model.SignupRequest;
+import com.example.carpoolapp.model.SignupResponse;
+import com.example.carpoolapp.server.Retrofit_client;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SignupFragment extends Fragment {
@@ -21,6 +31,8 @@ public class SignupFragment extends Fragment {
     private String userPw;
     private String userCarInfo;
     private String userCarNo;
+    private Call<SignupResponse> call;
+    private SignupResponse signupResponse;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,17 +76,29 @@ public class SignupFragment extends Fragment {
         binding.buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("jjk",userId+userPw+userCarNo+userCarInfo);
-                //데이터를 넘겨줘야할 때 사용하기
-                LoginFragment fragment=new LoginFragment();
-                Bundle bundle=new Bundle();
-                fragment.setArguments(bundle);
-                //프래그먼트에서 프래그먼트로 이동
-                requireActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack(null) //뒤로가기 가능하게 만듬
-                        .replace(R.id.ConstraintFragment, fragment).commit();
+                SignupRequest signupRequest=new SignupRequest(userId,userPw,userCarInfo,userCarNo);
+                call= Retrofit_client.getApiService().signup(signupRequest);
+                call.enqueue(new Callback<SignupResponse>() {
+                    @Override
+                    public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                        Toast.makeText(getActivity().getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
+                        //데이터를 넘겨줘야할 때 사용하기
+                        LoginFragment fragment=new LoginFragment();
+                        Bundle bundle=new Bundle();
+                        fragment.setArguments(bundle);
+                        //프래그먼트에서 프래그먼트로 이동
+                        requireActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .addToBackStack(null) //뒤로가기 가능하게 만듬
+                                .replace(R.id.ConstraintFragment, fragment).commit();
+                    }
+                    @Override
+                    public void onFailure(Call<SignupResponse> call, Throwable t) {
+                        Toast.makeText(getActivity().getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

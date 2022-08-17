@@ -1,9 +1,11 @@
 package com.example.carpoolapp.ui.user;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -12,22 +14,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.carpoolapp.MainActivity;
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentLoginBinding;
+import com.example.carpoolapp.model.LoginRequest;
+import com.example.carpoolapp.model.LoginResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private String userId;
     private String userPw;
-    private Call<String> call;
+    private Call<LoginResponse> call;
+    private LoginResponse loginResponse;
     private String token;
     private SharedPreferences preferences;
 
@@ -57,27 +62,38 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
+        preferences= getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
+
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                call=Retrofit_client.getApiService().login(userId, userPw);
-                call.enqueue(new Callback<String>() {
+                LoginRequest loginRequest=new LoginRequest(userId, userPw);
+                call=Retrofit_client.getApiService().login(loginRequest);
+                call.enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(@NonNull Call<LoginResponse> call, Response<LoginResponse> response) {
                         //자동로그인을 위해서 아이디, 비밀번호, 토큰저장
-                        token=response.body();
-                        SharedPreferences.Editor editor=preferences.edit();
-                        editor.putString("userId",userId);
-                        editor.putString("userPw",userPw);
-                        editor.putString("token",token);
-                        editor.commit();
-                        //editor.clear(); //초기화
-                        //로그인처리가 되면 카풀앱으로
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
+                        loginResponse=response.body();
+                        if(loginResponse!=null){
+                            token=loginResponse.getAccessToken();
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("userId",loginResponse.getUserId());
+                            editor.putInt("userNo",loginResponse.getUserNo());
+                            editor.putString("userPw",userPw);
+                            editor.putString("token",token);
+                            editor.commit();
+                            //editor.clear(); //초기화
+                            //로그인처리가 되면 카풀앱으로
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(getActivity().getApplicationContext(), "아이디, 비밀번호가 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
                         Log.d("jjk","실패");
                     }
                 });

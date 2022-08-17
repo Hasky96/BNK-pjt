@@ -1,19 +1,19 @@
 package com.example.carpoolapp.server;
 
+import com.example.carpoolapp.model.LoginRequest;
+import com.example.carpoolapp.model.LoginResponse;
+import com.example.carpoolapp.model.SignupRequest;
+import com.example.carpoolapp.model.SignupResponse;
+
 import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface Retrofit_interface {
-    @FormUrlEncoded
-    @POST("/api/user/login")
-    Call<String> login(@Field("userId") String userId,
-                       @Field("userPw") String userPw);
 
-    @FormUrlEncoded
+    @POST("/api/user/login")
+    Call<LoginResponse> login(@Body LoginRequest loginRequest);
+
     @POST("/api/user/signup")
-    Call<String> signup(@Field("userId") String userId,
-                        @Field("userPw") String userPw,
-                        @Field("userCarInfo") String userCarInfo,
-                        @Field("userCarNo") String userCarNo);
+    Call<SignupResponse> signup(@Body SignupRequest signupRequest);
     
 }
