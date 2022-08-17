@@ -28,7 +28,8 @@ public class CarpoolServiceImpl implements CarpoolService{
                                         body.getCarpoolLocation(),
                                         body.getCarpoolQuota(),
                                         body.getCarpoolInfo(),
-                                        body.getCarpoolFee()
+                                        body.getCarpoolFee(),
+                                        body.getCarpoolTime()
         );
         carpoolRepository.save(newCarpool);
         return newCarpool;
