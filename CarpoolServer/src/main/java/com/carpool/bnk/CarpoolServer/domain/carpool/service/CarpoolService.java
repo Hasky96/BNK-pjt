@@ -6,6 +6,8 @@ import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 public interface CarpoolService {
     public Carpool carpoolCreate(CarpoolCreateReq body);
@@ -15,4 +17,6 @@ public interface CarpoolService {
     boolean joinCarpool(Carpool carpool, User use);
 
     boolean leaveCarpool(Carpool carpool, User user);
+
+    List<Carpool> getUserCarpools(int userNo);
 }

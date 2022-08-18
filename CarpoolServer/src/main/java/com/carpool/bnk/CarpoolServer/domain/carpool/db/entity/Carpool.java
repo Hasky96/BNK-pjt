@@ -1,5 +1,6 @@
 package com.carpool.bnk.CarpoolServer.domain.carpool.db.entity;
 
+import com.carpool.bnk.CarpoolServer.domain.user.db.bean.UserDetail;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -32,7 +33,7 @@ public class Carpool {
     private User carpoolWriter;
 
     @ManyToOne
-    @JoinColumn(name = "carpool_driver")
+    @JoinColumn(name = "carpool_driver", nullable = true)
     private User carpoolDriver;
 
     @Column(name = "carpool_type")
@@ -47,7 +48,7 @@ public class Carpool {
     @Column(name = "carpool_info")
     private String carpoolInfo;
 
-    @Column(name = "carpool_fee")
+    @Column(name = "carpool_mileage")
     private int carpoolFee;
 
     @Column(name = "capool_created")
@@ -66,16 +67,19 @@ public class Carpool {
     @OneToMany(mappedBy = "carpool", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Comments> comments = new ArrayList<Comments>();
 
+    @Column(name = "done")
+    private boolean done;
+
     @Builder
-    public Carpool(User carpoolDriver, User carpoolWriter, boolean carpoolType, String carpoolLocation, int carpoolQuota, String carpoolInfo, int carpoolFee, LocalDateTime carpoolTime){
-        this.carpoolDriver = carpoolDriver;
-        this.carpoolWriter = carpoolWriter;
+    public Carpool(User carpoolDriver, User carpoolWriter, boolean carpoolType, String carpoolLocation, int carpoolQuota, String carpoolInfo, LocalDateTime carpoolTime){
+        if(carpoolDriver != null) this.carpoolDriver = carpoolDriver.userDetail();
+        this.carpoolWriter = carpoolWriter.userDetail();
         this.carpoolType = carpoolType;
         this.carpoolLocation = carpoolLocation;
         this.carpoolQuota = carpoolQuota;
         this.carpoolInfo = carpoolInfo;
-        this.carpoolFee = carpoolFee;
         this.carpoolCreated = LocalDateTime.now();
         this.carpoolTime = carpoolTime;
+        this.done = false;
     }
 }
