@@ -31,7 +31,6 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="아이디"
-            android:textColor="@color/black"
             android:textSize="15sp" />
 
         <EditText
@@ -59,7 +58,6 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="패스워드"
-            android:textColor="@color/black"
             android:textSize="15sp" />
 
         <EditText
