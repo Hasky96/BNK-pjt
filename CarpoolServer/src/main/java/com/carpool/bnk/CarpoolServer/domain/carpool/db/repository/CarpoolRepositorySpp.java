@@ -27,5 +27,11 @@ public class CarpoolRepositorySpp{
     }
 
 
+    public int getCarpoolCnt(int userNo) {
 
+        return (int) jpaQueryFactory.select(qCarpool)
+                .from(qCarpool)
+                .where(qCarpool.carpoolDriver.userNo.eq(userNo), qCarpool.done.eq(true))
+                .fetchCount();
+    }
 }

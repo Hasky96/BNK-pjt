@@ -6,6 +6,7 @@ import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolCreateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolCreateRes;
 import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolDetailRes;
+import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolDoneRes;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolService;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolServiceImpl;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
@@ -85,7 +86,7 @@ public class CarpoolController {
         return ResponseEntity.status(500).body("Server Error!");
     }
 
-    @DeleteMapping("leave/{carpoolNo}")
+    @DeleteMapping("/leave/{carpoolNo}")
     public ResponseEntity<?> leave(@PathVariable("carpoolNo")int carpoolNo, Authentication authentication){
         Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);
         UserDetails userDetails = (UserDetails) authentication.getDetails();
@@ -94,5 +95,16 @@ public class CarpoolController {
         int statusCode = status ? 200:400;
         String msg = status ? "Successfully Deleted!":"user not in the carpool.";
         return ResponseEntity.status(statusCode).body(msg);
+    }
+
+    @PostMapping("/{carpoolNo}/done")
+    public ResponseEntity<?> done(@PathVariable("carpoolNo")int carpoolNo, Authentication authentication){
+        Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);
+        User driver = carpool.getCarpoolDriver();
+        if(carpool.getCarpoolDriver().getUserNo() != ((UserDetails)authentication.getDetails()).getUser().getUserNo()){
+            return ResponseEntity.status(400).body("운전자만 카풀을 종료할 수 있음!");
+        }
+        int mileage = carpoolService.carpoolDone(carpool);
+        return ResponseEntity.status(200).body(new CarpoolDoneRes(driver.getUserId(), carpool.getCarpoolFee(), driver.getMileage(), "정상적으로 완료되었습니다."));
     }
 }
