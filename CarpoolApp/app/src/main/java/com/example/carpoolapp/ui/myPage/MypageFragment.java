@@ -12,10 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.carpoolapp.MainActivity;
+import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentMypageBinding;
 import com.example.carpoolapp.ui.splash.SplashActivity;
+import com.example.carpoolapp.ui.user.LoginFragment;
 
 public class MypageFragment extends Fragment {
 
@@ -45,6 +49,14 @@ public class MypageFragment extends Fragment {
                 Intent intent = new Intent(getContext(), SplashActivity.class);
                 intent.putExtra("status","logout");
                 startActivity(intent);
+            }
+        });
+
+        binding.buttonUpdateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.mypageUpdateFragment);
             }
         });
 
