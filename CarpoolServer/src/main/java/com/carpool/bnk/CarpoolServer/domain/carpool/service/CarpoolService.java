@@ -1,6 +1,7 @@
 package com.carpool.bnk.CarpoolServer.domain.carpool.service;
 
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
+import com.carpool.bnk.CarpoolServer.domain.carpool.dto.CarpoolsDto;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolCreateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
@@ -18,5 +19,9 @@ public interface CarpoolService {
 
     boolean leaveCarpool(Carpool carpool, User user);
 
-    List<Carpool> getUserCarpools(int userNo);
+    List<CarpoolsDto> getUserCarpools(int userNo);
+
+    int carpoolDone(Carpool carpool);
+
+    int getCarpoolCnt(int userNo);
 }
