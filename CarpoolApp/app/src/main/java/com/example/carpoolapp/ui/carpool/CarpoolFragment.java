@@ -10,11 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentCarpoolBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+// 카풀 리스트 프래그먼트
 public class CarpoolFragment extends Fragment {
 
     private FragmentCarpoolBinding binding;
@@ -28,8 +30,9 @@ public class CarpoolFragment extends Fragment {
         flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
+//                startActivity(intent);
+                Navigation.findNavController(root).navigate(R.id.loginFragment);
             }
         });
 

@@ -55,6 +55,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
     boolean carpoolType = false;
     private SharedPreferences preferences;
     private String Authorization;
+    int mhourOfDay,mminute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,21 +79,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
         arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spPersonamount, android.R.layout.simple_spinner_item);
         spPersonamount.setAdapter(arrayAdapter);
 
-        TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
 
-            @Override
-
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                if(flag == 0) {
-                    tvDepartureTime.setText(hourOfDay + ":" + minute);
-                } else if (flag == 1){
-                    tvDepartureTime.setText(hourOfDay + ":" + minute);
-                }
-
-            }
-
-        };
 
         Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -119,7 +106,20 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
         tvDepartureTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog dialog = new TimePickerDialog(CarpoolRegisterActivity.this,android.R.style.Theme_Holo_Light_Dialog_NoActionBar, listener, 15, 24, false);
+
+                TimePickerDialog dialog = new TimePickerDialog(CarpoolRegisterActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                if(flag == 0) {
+                                    tvDepartureTime.setText(String.format("%02d",hourOfDay) + ":" + String.format("%02d",minute));
+                                    mhourOfDay = hourOfDay;
+                                    mminute = minute;
+                                }
+                            }
+                        }, mhourOfDay, mminute, true
+                );
                 dialog.setTitle("시간");
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.show();
@@ -133,23 +133,27 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
                 String strCarpoolTime = tvDepartureDate.getText().toString() + "T" + tvDepartureTime.getText().toString();
 
                 CarpoolRequest carpoolRequest = new CarpoolRequest();
-                carpoolRequest.setCarpoolWriter(2);
+
+                carpoolType = rdoGrouptoggle.getCheckedRadioButtonId() == R.id.rdoBackHome ? true : false;
+                carpoolRequest.setCarpoolType(carpoolType);
+                Log.d(">>", carpoolType+"");
+
+                carpoolRequest.setCarpoolWriter(preferences.getInt("userNo",0));
                 carpoolRequest.setCarpoolTime(strCarpoolTime);
                 Log.d(">>", strCarpoolTime);
                 carpoolRequest.setCarpoolLocation(edtLocation.getText().toString());
                 carpoolRequest.setCarpoolQuota(Integer.parseInt(spPersonamount.getSelectedItem().toString()));
                 carpoolRequest.setCarpoolFee(123);
                 carpoolRequest.setCarpoolInfo(edtInfo.getText().toString());
-                carpoolType = rdoGrouptoggle.getCheckedRadioButtonId() == R.id.rdoBackHome ? true : false;
-                carpoolRequest.setCarpoolType(carpoolType);
-                Log.d(">>", carpoolType+"");
+
                 if(chkDriver.isChecked()){
-                    int userNo = preferences.getInt("userNo",-1);
-                    carpoolRequest.setCarpoolDriver(2);
+                    carpoolRequest.setCarpoolDriver(preferences.getInt("userNo",0));
+                    Log.d(">>", "checked"+ carpoolRequest.getCarpoolDriver());
                 }
                 else{
-                    // 운전자 요청 글일 경우 userNo -1
-                    carpoolRequest.setCarpoolDriver(-1);
+                    // 운전자 요청 글일 경우 userNo 0
+                    carpoolRequest.setCarpoolDriver(0);
+                    Log.d(">>", "unchecked"+ carpoolRequest.getCarpoolDriver());
                 }
 
                 carpoolService = Retrofit_client.getApiService();
@@ -158,6 +162,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<CarpoolResponse> call, Response<CarpoolResponse> response) {
                         Log.d(">>", "success");
+                        finish();
                     }
 
                     @Override
