@@ -24,8 +24,6 @@ public class CarpoolCreateReq {
 
     private String carpoolInfo;
 
-    private int carpoolFee;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime carpoolTime;
 
