@@ -4,7 +4,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
-import com.carpool.bnk.CarpoolServer.domain.user.service.UserService;
 import com.carpool.bnk.CarpoolServer.global.util.JwtTokenUtil;
 import com.carpool.bnk.CarpoolServer.global.util.ResponseBodyWriteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,13 @@ import java.io.IOException;
  */
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
         super(authenticationManager);
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
