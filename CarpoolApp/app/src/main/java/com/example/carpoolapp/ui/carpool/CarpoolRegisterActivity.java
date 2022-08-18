@@ -133,7 +133,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
                 String strCarpoolTime = tvDepartureDate.getText().toString() + "T" + tvDepartureTime.getText().toString();
 
                 CarpoolRequest carpoolRequest = new CarpoolRequest();
-                carpoolRequest.setCarpoolWriter(2);
+                carpoolRequest.setCarpoolWriter(preferences.getInt("userNo",0));
                 carpoolRequest.setCarpoolTime(strCarpoolTime);
                 Log.d(">>", strCarpoolTime);
                 carpoolRequest.setCarpoolLocation(edtLocation.getText().toString());
