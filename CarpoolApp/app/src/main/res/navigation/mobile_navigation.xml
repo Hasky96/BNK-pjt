@@ -22,4 +22,9 @@
         android:name="com.example.carpoolapp.ui.myPage.MypageFragment"
         android:label="@string/title_Mypage"
         tools:layout="@layout/fragment_mypage" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.carpoolapp.ui.user.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
