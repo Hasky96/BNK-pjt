@@ -1,10 +1,14 @@
 package com.carpool.bnk.CarpoolServer.domain.user.controller;
 
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
+import com.carpool.bnk.CarpoolServer.domain.carpool.dto.CarpoolsDto;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolService;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
+import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
 import com.carpool.bnk.CarpoolServer.domain.user.request.UserLoginReq;
+import com.carpool.bnk.CarpoolServer.domain.user.request.UserPwUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.user.request.UserSignupReq;
+import com.carpool.bnk.CarpoolServer.domain.user.request.UserUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.user.response.UserInfoRes;
 import com.carpool.bnk.CarpoolServer.domain.user.response.UserLoginRes;
 import com.carpool.bnk.CarpoolServer.domain.user.response.UserSignupRes;
@@ -27,6 +31,9 @@ public class UserController {
 
     @Autowired
     CarpoolService carpoolService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/test")
     public ResponseEntity<String> test(){
@@ -61,7 +68,7 @@ public class UserController {
     public ResponseEntity<?> info(Authentication authentication){
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
-        List<Carpool> carpools = carpoolService.getUserCarpools(user.getUserNo());
+        List<CarpoolsDto> carpools = carpoolService.getUserCarpools(user.getUserNo());
         UserInfoRes info = new UserInfoRes(
                 user.getUserNo(),
                 user.getUserId(),
@@ -70,6 +77,32 @@ public class UserController {
                 user.getMileage(),
                 carpools
         );
+        info.setCarpoolCnt(carpoolService.getCarpoolCnt(user.getUserNo()));
         return ResponseEntity.status(200).body(info);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody UserUpdateReq body, Authentication authentication){
+        try{
+            UserDetails userDetails = (UserDetails) authentication.getDetails();
+            User user = userRepository.getUserByUserNo(userDetails.getUser().getUserNo());
+            user.setUserCarNo(body.getUserCarNo());
+            user.setUserCarInfo(body.getUserCarInfo());
+            userRepository.save(user);
+        }catch (Exception e){
+            System.err.println(e);
+            return ResponseEntity.status(400).body("wrong info");
+        }
+        return ResponseEntity.status(200).body("Successfully updated");
+    }
+
+    @PostMapping("/pwupdate")
+    public ResponseEntity<?> pwCheck(@RequestBody UserPwUpdateReq body, Authentication authentication){
+        UserDetails user = (UserDetails) authentication.getDetails();
+        int res = userService.pwUpdate(body, userRepository.getUserByUserNo(user.getUser().getUserNo()));
+        int status = res==1?200:400;
+        String msg = res==1?"Success!":"Wrong Password";
+        return ResponseEntity.status(status).body(msg);
+    }
+
 }

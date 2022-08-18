@@ -5,11 +5,13 @@ import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Occupants;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.CarpoolRepository;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.CarpoolRepositorySpp;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.OccupantsRepository;
+import com.carpool.bnk.CarpoolServer.domain.carpool.dto.CarpoolsDto;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolCreateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
 import com.carpool.bnk.CarpoolServer.domain.user.service.UserService;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,8 +114,35 @@ public class CarpoolServiceImpl implements CarpoolService{
     }
 
     @Override
-    public List<Carpool> getUserCarpools(int userNo) {
+    public List<CarpoolsDto> getUserCarpools(int userNo) {
         List<Carpool> carpools = carpoolRepositorySpp.userCarpools(userNo);
-        return carpools;
+        List<CarpoolsDto> list = new ArrayList<>();
+        for(Carpool carpool: carpools){
+            CarpoolsDto dto = new CarpoolsDto();
+            dto.setCarpoolNo(carpool.getCarpoolNo());
+            dto.setCarpoolWriter(carpool.getCarpoolWriter().getUserNo());
+            if(carpool.getCarpoolDriver()!=null) dto.setCarpoolDriver(carpool.getCarpoolDriver().getUserNo());
+            dto.setCarpoolType(carpool.isCarpoolType());
+            dto.setCarpoolInfo(carpool.getCarpoolInfo());
+            dto.setCarpoolLocation(carpool.getCarpoolLocation());
+            dto.setCarpoolQuota(carpool.getCarpoolQuota());
+            dto.setCarpoolTime(carpool.getCarpoolTime());
+            dto.setDone(carpool.isDone());
+            list.add(dto);
+        }
+        return list;
+    }
+
+    @Override
+    public int carpoolDone(Carpool carpool) {
+        carpool.setDone(true);
+        User driver = carpool.getCarpoolDriver();
+        driver.setMileage(driver.getMileage()+carpool.getCarpoolFee());
+        return carpool.getCarpoolFee();
+    }
+
+    @Override
+    public int getCarpoolCnt(int userNo) {
+        return carpoolRepositorySpp.getCarpoolCnt(userNo);
     }
 }

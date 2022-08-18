@@ -3,6 +3,7 @@ package com.carpool.bnk.CarpoolServer.domain.user.service;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
 import com.carpool.bnk.CarpoolServer.domain.user.request.UserLoginReq;
+import com.carpool.bnk.CarpoolServer.domain.user.request.UserPwUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.user.request.UserSignupReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -43,5 +44,15 @@ public class UserServiceImpl implements UserService{
             return userInfo;
         }
         return null;
+    }
+
+    @Override
+    public int pwUpdate(UserPwUpdateReq body, User user) {
+        if (passwordEncoder.matches( body.getOldPw(), user.getUserPw())){
+            user.setUserPw(passwordEncoder.encode(body.getNewPw()));
+            userRepository.save(user);
+            return 1;
+        }
+        return 0;
     }
 }
