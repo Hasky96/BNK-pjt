@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.carpool.CarpoolRegister"
+            android:name=".ui.carpool.CarpoolRegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
