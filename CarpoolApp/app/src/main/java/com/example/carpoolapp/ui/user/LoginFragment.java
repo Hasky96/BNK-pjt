@@ -34,6 +34,7 @@ public class LoginFragment extends Fragment {
     private Call<LoginResponse> call;
     private LoginResponse loginResponse;
     private String token;
+    private String Authorization;
     private SharedPreferences preferences;
 
     @Override
@@ -76,12 +77,13 @@ public class LoginFragment extends Fragment {
                         //자동로그인을 위해서 아이디, 비밀번호, 토큰저장
                         loginResponse=response.body();
                         if(loginResponse!=null){
-                            token=loginResponse.getAccessToken();
+                            Authorization="Bearer "+loginResponse.getAccessToken();
                             SharedPreferences.Editor editor=preferences.edit();
                             editor.putString("userId",loginResponse.getUserId());
                             editor.putInt("userNo",loginResponse.getUserNo());
-                            editor.putString("userPw",userPw);
-                            editor.putString("token",token);
+                            editor.putString("Authorization",Authorization);
+                            editor.putString("userCarInfo",loginResponse.getUserCarInfo());
+                            editor.putString("userCarNo",loginResponse.getUserCarNo());
                             editor.commit();
                             //editor.clear(); //초기화
                             //로그인처리가 되면 카풀앱으로
