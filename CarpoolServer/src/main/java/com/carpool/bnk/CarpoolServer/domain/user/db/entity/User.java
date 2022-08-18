@@ -1,25 +1,19 @@
 package com.carpool.bnk.CarpoolServer.domain.user.db.entity;
 
-import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
-import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Comments;
-import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Occupants;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.internal.build.AllowPrintStacktrace;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name="user")
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties(value = "userPw")
 public class User  {
 
     @Id
@@ -30,7 +24,6 @@ public class User  {
     @Column(name = "user_id",unique = true)
     private String userId;
 
-    @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "user_password")
     private String userPw;
@@ -41,15 +34,28 @@ public class User  {
     @Column(name = "user_car_no")
     private String userCarNo;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "user_mileage")
+    private int mileage;
+
 
     @Builder
-    public User(String userId, String userPw, String userCarInfo, String userCarNo){
+    public User(String userId, String userCarInfo, String userCarNo){
         this.userId = userId;
-        this.userPw = userPw;
         this.userCarInfo = userCarInfo;
         this.userCarNo = userCarNo;
     }
 
+    public User userDetail(){
+        User user = new User();
+        user.setUserPw(null);
+        user.setUserId(this.userId);
+        user.setUserNo(this.userNo);
+        user.setUserCarNo(this.userCarNo);
+        user.setUserCarInfo(this.userCarInfo);
+        user.setMileage(this.mileage);
+        return user;
+    }
     @Override
     public String toString() {
         return userId;
