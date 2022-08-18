@@ -1,5 +1,6 @@
 package com.example.carpoolapp.ui.carpool;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,22 +11,28 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentCarpoolBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CarpoolFragment extends Fragment {
 
     private FragmentCarpoolBinding binding;
-
+    FloatingActionButton flbCarpoolRegister;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CarpoolViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(CarpoolViewModel.class);
-
         binding = FragmentCarpoolBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        flbCarpoolRegister = root.findViewById(R.id.flbCarpoolRegister);
+        flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return root;
     }
 
