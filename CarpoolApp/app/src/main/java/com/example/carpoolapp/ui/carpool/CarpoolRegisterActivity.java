@@ -2,6 +2,7 @@ package com.example.carpoolapp.ui.carpool;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -43,24 +46,34 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
     EditText edtLocation, edtFee, edtInfo;
     CheckBox chkDriver;
     Button btnCarpoolRegister;
+    RadioButton rdoGoWork, rdoBackHome;
+    RadioGroup rdoGrouptoggle;
     Spinner spPersonamount;
     ArrayAdapter arrayAdapter;
     int flag;
     private Retrofit_interface carpoolService;
+    boolean carpoolType = false;
+    private SharedPreferences preferences;
+    private String Authorization;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carpool_register);
 
+        preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
+        Authorization = preferences.getString("Authorization",null);
+
         spPersonamount = findViewById(R.id.spPersonamount);
         tvDepartureTime = findViewById(R.id.tvDepartureTime);
         btnCarpoolRegister = findViewById(R.id.btnCarpoolRegister);
         tvDepartureDate = findViewById(R.id.tvDepartureDate);
         edtLocation = findViewById(R.id.edtLocation);
-//        edtFee = findViewById(R.id.edtFee);
         edtInfo = findViewById(R.id.edtInfo);
         chkDriver = findViewById(R.id.chkDriver);
+        rdoGoWork = findViewById(R.id.rdoGoWork);
+        rdoBackHome = findViewById(R.id.rdoBackHome);
+        rdoGrouptoggle = findViewById(R.id.rdoGrouptoggle);
 
         arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spPersonamount, android.R.layout.simple_spinner_item);
         spPersonamount.setAdapter(arrayAdapter);
@@ -125,12 +138,13 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
                 Log.d(">>", strCarpoolTime);
                 carpoolRequest.setCarpoolLocation(edtLocation.getText().toString());
                 carpoolRequest.setCarpoolQuota(Integer.parseInt(spPersonamount.getSelectedItem().toString()));
-                carpoolRequest.setCarpoolFee(Integer.parseInt(edtFee.getText().toString()));
+                carpoolRequest.setCarpoolFee(123);
                 carpoolRequest.setCarpoolInfo(edtInfo.getText().toString());
+                carpoolType = rdoGrouptoggle.getCheckedRadioButtonId() == R.id.rdoBackHome ? true : false;
+                carpoolRequest.setCarpoolType(carpoolType);
+                Log.d(">>", carpoolType+"");
                 if(chkDriver.isChecked()){
-                    Context context = getApplicationContext();
-                    SharedPreferences sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE);
-                    int userNo = sharedPref.getInt("userNo",-1);
+                    int userNo = preferences.getInt("userNo",-1);
                     carpoolRequest.setCarpoolDriver(2);
                 }
                 else{
@@ -154,6 +168,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
 

@@ -7,7 +7,7 @@ public class CarpoolRequest {
     int carpoolWriter;
     int carpoolDriver;
     String carpoolTime ;
-    int carpoolFee;
+    int carpoolFee=123;
     boolean carpoolType;
     String carpoolLocation;
     int carpoolQuota;
