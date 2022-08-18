@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.carpoolRequest.CarpoolRegisterActivity">
+    tools:context=".ui.carpool.CarpoolRegisterActivity">
 
     <ImageView
         android:id="@+id/carpoolLogo"
@@ -18,29 +18,64 @@
 
     <LinearLayout
         android:id="@+id/lyBtnContainer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carpoolLogo">
 
-        <Button
-            android:id="@+id/bntGowork"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/button"
-            android:text="출근" />
+        <RadioGroup
+            android:id="@+id/rdoGrouptoggle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="0dp"
+            android:background="@drawable/rdo_out_line"
+            android:checkedButton="@+id/rdoGoWork"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bntBackHome"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/button"
-            android:text="퇴근" />
+            <RadioButton
+                android:id="@+id/rdoGoWork"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:gravity="center"
+                android:text="출근"
+                android:textColor="@drawable/toggle_textcolor" />
+
+            <RadioButton
+                android:id="@+id/rdoBackHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:gravity="center"
+                android:text="퇴근"
+                android:textColor="@drawable/toggle_textcolor" />
+        </RadioGroup>
+        <!--        <Button-->
+        <!--            android:id="@+id/btnGowork"-->
+        <!--            android:layout_width="120dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginRight="15dp"-->
+        <!--            android:background="@drawable/button"-->
+        <!--            android:text="출근" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/btnBackHome"-->
+        <!--            android:layout_width="120dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginLeft="15dp"-->
+        <!--            android:background="@drawable/disable_button"-->
+        <!--            android:text="퇴근" />-->
+
     </LinearLayout>
 
     <LinearLayout
@@ -194,9 +229,11 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/button"
         android:text="등록"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lyContainer" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
