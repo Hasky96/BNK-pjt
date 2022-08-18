@@ -7,6 +7,7 @@ import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolCreateRes;
 import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolDetailRes;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolService;
+import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolServiceImpl;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.carpool.bnk.CarpoolServer.global.auth.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,9 @@ public class CarpoolController {
         if(carpool.getCarpoolQuota() == carpool.getOccupants().size()) return ResponseEntity.status(500).body("Already Full!");
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
+        if(CarpoolServiceImpl.getOccuUserIds(carpool.getOccupants()).contains(user.getUserId())){
+            return ResponseEntity.status(400).body("Already in List");
+        }
         boolean result = carpoolService.joinCarpool(carpool, user);
         if(result) return ResponseEntity.status(200).body("Successfully Added");
         return ResponseEntity.status(500).body("Server Error!");

@@ -22,7 +22,8 @@ public class UserServiceImpl implements UserService{
     public User signup(UserSignupReq body) {
         if(userRepository.getUserByUserId(body.getUserId()) !=null)
             return null;
-        User user = new User(body.getUserId(), body.getUserPw(), body.getUserCarInfo(), body.getUserCarNo());
+        User user = new User(body.getUserId(), body.getUserCarInfo(), body.getUserCarNo());
+        user.setUserPw(body.getUserPw());
         user.setUserPw(passwordEncoder.encode(body.getUserPw()));
         userRepository.save(user);
         return user;
