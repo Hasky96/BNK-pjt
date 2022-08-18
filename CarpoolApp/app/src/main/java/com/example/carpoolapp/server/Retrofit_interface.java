@@ -14,7 +14,7 @@ public interface Retrofit_interface {
 
     //카풀 등록
     @POST("api/carpool/create")
-    Call<CarpoolResponse> insertCarpool (@Body CarpoolRequest carpool);
+    Call<CarpoolResponse> insertCarpool (@Header("Authorization") String Authorization,@Body CarpoolRequest carpool);
 
     @POST("/api/user/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);

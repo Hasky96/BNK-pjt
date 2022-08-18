@@ -32,12 +32,12 @@ public class SplashFragment extends Fragment {
         binding = FragmentSplashBinding.inflate(getLayoutInflater());
 
         preferences = getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
-        String token = preferences.getString("token", null);
+        String Authorization = preferences.getString("Authorization", null);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (token != null) {
-                    Log.d("jjk", token);
+                if (Authorization != null) {
+                    Log.d("jjk", Authorization);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 } else {

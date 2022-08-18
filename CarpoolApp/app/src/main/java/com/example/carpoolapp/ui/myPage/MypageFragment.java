@@ -24,15 +24,18 @@ public class MypageFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MypageViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(MypageViewModel.class);
+//        MypageViewModel notificationsViewModel = new ViewModelProvider(this).get(MypageViewModel.class);
 
         binding = FragmentMypageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        final TextView textView = binding.textNotifications;
+//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         preferences= getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
+        binding.tvProfileId.setText(preferences.getString("userId",null));
+        binding.tvProfileCarNo.setText(preferences.getString("userCarNo",null));
+        binding.tvProfileCarInfo.setText(preferences.getString("userCarInfo",null));
+
         binding.buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +47,7 @@ public class MypageFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         return root;
     }
