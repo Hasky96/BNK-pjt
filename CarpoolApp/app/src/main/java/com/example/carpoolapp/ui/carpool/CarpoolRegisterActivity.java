@@ -45,6 +45,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
     Button btnCarpoolRegister;
     Spinner spPersonamount;
     ArrayAdapter arrayAdapter;
+    private SharedPreferences preferences;
+    private String Authorization;
     int flag;
     private Retrofit_interface carpoolService;
 
@@ -53,12 +55,14 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carpool_register);
 
+        preferences= getSharedPreferences("User", Context.MODE_PRIVATE);
+        Authorization=preferences.getString("Authorization",null);
+
         spPersonamount = findViewById(R.id.spPersonamount);
         tvDepartureTime = findViewById(R.id.tvDepartureTime);
         btnCarpoolRegister = findViewById(R.id.btnCarpoolRegister);
         tvDepartureDate = findViewById(R.id.tvDepartureDate);
         edtLocation = findViewById(R.id.edtLocation);
-//        edtFee = findViewById(R.id.edtFee);
         edtInfo = findViewById(R.id.edtInfo);
         chkDriver = findViewById(R.id.chkDriver);
 
@@ -125,7 +129,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
                 Log.d(">>", strCarpoolTime);
                 carpoolRequest.setCarpoolLocation(edtLocation.getText().toString());
                 carpoolRequest.setCarpoolQuota(Integer.parseInt(spPersonamount.getSelectedItem().toString()));
-                carpoolRequest.setCarpoolFee(Integer.parseInt(edtFee.getText().toString()));
+                carpoolRequest.setCarpoolFee(123);
                 carpoolRequest.setCarpoolInfo(edtInfo.getText().toString());
                 if(chkDriver.isChecked()){
                     Context context = getApplicationContext();
@@ -139,7 +143,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
                 }
 
                 carpoolService = Retrofit_client.getApiService();
-                Call<CarpoolResponse> call = carpoolService.insertCarpool(carpoolRequest);
+                Call<CarpoolResponse> call = carpoolService.insertCarpool(Authorization,carpoolRequest);
                 call.enqueue(new Callback<CarpoolResponse>() {
                     @Override
                     public void onResponse(Call<CarpoolResponse> call, Response<CarpoolResponse> response) {

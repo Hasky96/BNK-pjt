@@ -6,15 +6,19 @@ public class LoginResponse {
     private String accessToken;
     private String userId;
     private Integer userNo;
+    private String userCarInfo;
+    private String userCarNo;
 
-
-    public LoginResponse(String message, Integer statusCode, String accessToken, String userId, Integer userNo) {
+    public LoginResponse(String message, Integer statusCode, String accessToken, String userId, Integer userNo, String userCarInfo, String userCarNo) {
         this.message = message;
         this.statusCode = statusCode;
         this.accessToken = accessToken;
         this.userId = userId;
         this.userNo = userNo;
+        this.userCarInfo = userCarInfo;
+        this.userCarNo = userCarNo;
     }
+
     public String getMessage() {
         return message;
     }
@@ -30,5 +34,7 @@ public class LoginResponse {
     public Integer getUserNo() {
         return userNo;
     }
+    public String getUserCarInfo() {return userCarInfo;}
+    public String getUserCarNo() {return userCarNo;}
 }
 

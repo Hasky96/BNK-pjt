@@ -32,6 +32,10 @@ public class MypageFragment extends Fragment {
 //        final TextView textView = binding.textNotifications;
 //        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         preferences= getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
+        binding.tvProfileId.setText(preferences.getString("userId",null));
+        binding.tvProfileCarNo.setText(preferences.getString("userCarNo",null));
+        binding.tvProfileCarInfo.setText(preferences.getString("userCarInfo",null));
+
         binding.buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
