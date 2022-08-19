@@ -34,7 +34,6 @@ public class CarpoolFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         return root;
     }
 

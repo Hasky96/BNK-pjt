@@ -28,13 +28,10 @@ public class MypageFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        MypageViewModel notificationsViewModel = new ViewModelProvider(this).get(MypageViewModel.class);
 
         binding = FragmentMypageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        final TextView textView = binding.textNotifications;
-//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         preferences= getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
         binding.tvProfileId.setText(preferences.getString("userId",null));
         binding.tvProfileCarNo.setText(preferences.getString("userCarNo",null));
