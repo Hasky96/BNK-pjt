@@ -8,6 +8,7 @@ import com.example.carpoolapp.model.LoginRequest;
 import com.example.carpoolapp.model.LoginResponse;
 import com.example.carpoolapp.model.SignupRequest;
 import com.example.carpoolapp.model.SignupResponse;
+import com.example.carpoolapp.model.UserUpdateRequest;
 
 import java.util.List;
 
@@ -28,5 +29,8 @@ public interface Retrofit_interface {
 
     @POST("/api/user/signup")
     Call<SignupResponse> signup(@Body SignupRequest signupRequest);
+
+    @PUT("/api/user/update")
+    Call<String> updateUser(@Header("Authorization") String Authorization, @Body UserUpdateRequest userUpdateRequest);
     
 }
