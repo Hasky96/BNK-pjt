@@ -2,6 +2,7 @@ package com.example.carpoolapp.server;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.carpoolapp.model.Carpool;
 import com.example.carpoolapp.model.CarpoolRequest;
 import com.example.carpoolapp.model.CarpoolResponse;
 import com.example.carpoolapp.model.LoginRequest;
@@ -21,7 +22,7 @@ public interface Retrofit_interface {
     Call<CarpoolResponse> insertCarpool (@Header("Authorization") String Authorization,@Body CarpoolRequest carpool);
 
     @GET("")
-    Call<LiveData<List<CarpoolResponse>>> listAllCarpool();
+    Call<LiveData<List<Carpool>>> getAllCarpool();
 
     @POST("/api/user/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
