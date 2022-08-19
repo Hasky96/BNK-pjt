@@ -30,12 +30,10 @@ public class CarpoolFragment extends Fragment {
         flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
-//                startActivity(intent);
-                Navigation.findNavController(root).navigate(R.id.loginFragment);
+                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
+                startActivity(intent);
             }
         });
-
         return root;
     }
 

@@ -21,10 +21,19 @@
         android:id="@+id/navigation_mypage"
         android:name="com.example.carpoolapp.ui.myPage.MypageFragment"
         android:label="@string/title_Mypage"
-        tools:layout="@layout/fragment_mypage" />
+        tools:layout="@layout/fragment_mypage" >
+        <action
+            android:id="@+id/action_navigation_mypage_to_mypageUpdateFragment"
+            app:destination="@id/mypageUpdateFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.carpoolapp.ui.user.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        android:id="@+id/mypageUpdateFragment"
+        android:name="com.example.carpoolapp.ui.myPage.MypageUpdateFragment"
+        android:label="fragment_mypage_update"
+        tools:layout="@layout/fragment_mypage_update" >
+        <action
+            android:id="@+id/action_mypageUpdateFragment_to_navigation_mypage"
+            app:destination="@id/navigation_mypage" />
+    </fragment>
+
 </navigation>
