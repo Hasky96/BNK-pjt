@@ -48,7 +48,7 @@ public class CarpoolDetailRes {
     public CarpoolDetailRes(Carpool carpool){
         this.carpoolNo = carpool.getCarpoolNo();
         this.writerNo = carpool.getCarpoolWriter().getUserNo();
-        this.driverNo = carpool.getCarpoolDriver().getUserNo();
+        if(carpool.getCarpoolDriver() != null) this.driverNo = carpool.getCarpoolDriver().getUserNo();
         this.created = carpool.getCarpoolCreated();
         this.fee = carpool.getCarpoolFee();
         this.info = carpool.getCarpoolInfo();

@@ -1,6 +1,5 @@
 package com.carpool.bnk.CarpoolServer.domain.user.controller;
 
-import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
 import com.carpool.bnk.CarpoolServer.domain.carpool.dto.CarpoolsDto;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolService;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
@@ -14,6 +13,7 @@ import com.carpool.bnk.CarpoolServer.domain.user.response.UserLoginRes;
 import com.carpool.bnk.CarpoolServer.domain.user.response.UserSignupRes;
 import com.carpool.bnk.CarpoolServer.domain.user.service.UserService;
 import com.carpool.bnk.CarpoolServer.global.auth.UserDetails;
+import com.carpool.bnk.CarpoolServer.global.util.CommonResponse;
 import com.carpool.bnk.CarpoolServer.global.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -91,18 +91,18 @@ public class UserController {
             userRepository.save(user);
         }catch (Exception e){
             System.err.println(e);
-            return ResponseEntity.status(400).body("wrong info");
+            return ResponseEntity.status(400).body(new CommonResponse("wrong info"));
         }
-        return ResponseEntity.status(200).body("Successfully updated");
+        return ResponseEntity.status(200).body(new CommonResponse("Successfully updated"));
     }
 
-    @PostMapping("/pwupdate")
+    @PutMapping("/pwupdate")
     public ResponseEntity<?> pwCheck(@RequestBody UserPwUpdateReq body, Authentication authentication){
         UserDetails user = (UserDetails) authentication.getDetails();
         int res = userService.pwUpdate(body, userRepository.getUserByUserNo(user.getUser().getUserNo()));
         int status = res==1?200:400;
         String msg = res==1?"Success!":"Wrong Password";
-        return ResponseEntity.status(status).body(msg);
+        return ResponseEntity.status(status).body(new CommonResponse(msg));
     }
 
 }
