@@ -1,137 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="130dp"
-    android:background="@drawable/red_round_square">
+												   xmlns:app="http://schemas.android.com/apk/res-auto"
+												   xmlns:tools="http://schemas.android.com/tools"
+												   android:layout_width="match_parent"
+												   android:layout_height="130dp"
+												   android:background="@drawable/red_round_square">
 
     <LinearLayout
-        android:id="@+id/itemBar"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@drawable/half_round_square"
-        android:backgroundTint="@color/bnkRed"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal" >
+		android:id="@+id/itemBar"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:background="@drawable/half_round_square"
+		android:backgroundTint="@color/bnkRed"
+		android:orientation="horizontal"
+		app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvItemcarpoolType"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:text="출근"
-            android:textColor="@color/white"
-            android:textSize="23dp" />
+			android:id="@+id/tvItemcarpoolType"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_marginLeft="25dp"
+			android:text="출근"
+			android:textColor="@color/white"
+			android:textSize="23dp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="250dp"
-            android:orientation="horizontal">
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="250dp"
+			android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvCurperson"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:text="현"
-                android:textColor="@color/white"
-                android:textSize="23dp" />
+				android:id="@+id/tvCurperson"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_marginLeft="25dp"
+				android:text="현"
+				android:textColor="@color/white"
+				android:textSize="23dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="/"
-                android:textColor="@color/white"
-                android:textSize="23dp" />
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:text="/"
+				android:textColor="@color/white"
+				android:textSize="23dp" />
 
             <TextView
-                android:id="@+id/tvTotalPerson"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="수"
-                android:textColor="@color/white"
-                android:textSize="23dp" />
+				android:id="@+id/tvTotalPerson"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:text="수"
+				android:textColor="@color/white"
+				android:textSize="23dp" />
         </LinearLayout>
 
     </LinearLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cyItemContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemBar"
-        tools:layout_editor_absoluteX="10dp">
+		android:id="@+id/cyItemContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="10dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/itemBar"
+		tools:layout_editor_absoluteX="10dp">
 
         <TextView
-            android:id="@+id/tvDepartLoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="출발지"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+			android:id="@+id/tvDepartLoc"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="10dp"
+			android:text="출발지"
+			android:textSize="28sp"
+			android:textStyle="bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvItemDepartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="7:00"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@+id/tvDepartLoc"
-            app:layout_constraintRight_toRightOf="@+id/tvDepartLoc"
-            app:layout_constraintTop_toTopOf="@+id/tvItemCarNum" />
+			android:id="@+id/tvItemDepartTime"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="5dp"
+			android:text="7:00"
+			android:textSize="15sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toLeftOf="@+id/tvDepartLoc"
+			app:layout_constraintRight_toRightOf="@+id/tvDepartLoc"
+			app:layout_constraintTop_toTopOf="@+id/tvItemCarNum" />
 
         <ImageView
-            android:id="@+id/ivItemcar"
-            android:layout_width="68dp"
-            android:layout_height="60dp"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ticket_car_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvDestinationLoc"
-            app:layout_constraintStart_toEndOf="@+id/tvDepartLoc" />
+			android:id="@+id/ivItemcar"
+			android:layout_width="68dp"
+			android:layout_height="60dp"
+			android:layout_row="0"
+			android:layout_column="1"
+			android:layout_columnWeight="1"
+			android:layout_marginStart="50dp"
+			android:layout_marginEnd="50dp"
+			android:layout_marginBottom="8dp"
+			android:src="@drawable/ticket_car_icon"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/tvDestinationLoc"
+			app:layout_constraintStart_toEndOf="@+id/tvDepartLoc" />
 
         <TextView
-            android:id="@+id/tvItemCarNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginRight="8dp"
-            android:text="차번호"
-            app:layout_constraintBottom_toBottomOf="@+id/ivItemcar"
-            app:layout_constraintRight_toRightOf="@+id/ivItemcar"
-            app:layout_constraintStart_toStartOf="@id/ivItemcar" />
+			android:id="@+id/tvItemCarNum"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="15dp"
+			android:layout_marginRight="8dp"
+			android:text="차번호"
+			app:layout_constraintBottom_toBottomOf="@+id/ivItemcar"
+			app:layout_constraintRight_toRightOf="@+id/ivItemcar"
+			app:layout_constraintStart_toStartOf="@id/ivItemcar" />
 
         <TextView
-            android:id="@+id/tvDestinationLoc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:maxLines="1"
-            android:text="도착지"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+			android:id="@+id/tvDestinationLoc"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_columnWeight="1"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="20dp"
+			android:maxLines="1"
+			android:text="도착지"
+			android:textSize="30sp"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
