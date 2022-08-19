@@ -15,7 +15,9 @@
         android:id="@+id/navigation_carpool"
         android:name="com.example.carpoolapp.ui.carpool.CarpoolFragment"
         android:label="@string/title_Carpool"
-        tools:layout="@layout/fragment_carpool" />
+        tools:layout="@layout/fragment_carpool" ><action
+        android:id="@+id/action_navigation_carpool_to_carpoolDetailFragment"
+        app:destination="@id/carpoolDetailFragment" /></fragment>
 
     <fragment
         android:id="@+id/navigation_mypage"
@@ -34,6 +36,12 @@
         <action
             android:id="@+id/action_mypageUpdateFragment_to_navigation_mypage"
             app:destination="@id/navigation_mypage" />
-    </fragment>
+    </fragment><fragment
+    android:id="@+id/carpoolDetailFragment"
+    android:name="com.example.carpoolapp.ui.carpool.CarpoolDetailFragment"
+    android:label="fragment_carpool_detail"
+    tools:layout="@layout/fragment_carpool_detail" ><action
+    android:id="@+id/action_carpoolDetailFragment_to_navigation_carpool"
+    app:destination="@id/navigation_carpool" /></fragment>
 
 </navigation>
