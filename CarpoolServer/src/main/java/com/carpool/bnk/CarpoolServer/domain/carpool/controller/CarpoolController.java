@@ -4,10 +4,7 @@ import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.CarpoolRepository;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolCreateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
-import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolCreateRes;
-import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolDetailRes;
-import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolDoneRes;
-import com.carpool.bnk.CarpoolServer.domain.carpool.response.CarpoolsRes;
+import com.carpool.bnk.CarpoolServer.domain.carpool.response.*;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolService;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolServiceImpl;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
@@ -116,9 +113,9 @@ public class CarpoolController {
     @GetMapping("/all")
     public ResponseEntity<?> all(){
         List<Carpool> list = carpoolService.getAllCarpools();
-        List<CarpoolDetailRes> ret =new ArrayList<>();
+        List<CarpoolAllDetailRes> ret =new ArrayList<>();
         for (Carpool carpool: list) {
-                    ret.add(new CarpoolDetailRes(carpool));
+                    ret.add(new CarpoolAllDetailRes(carpool));
         }
         return ResponseEntity.status(200).body(new CarpoolsRes(ret,"Success!"));
     }

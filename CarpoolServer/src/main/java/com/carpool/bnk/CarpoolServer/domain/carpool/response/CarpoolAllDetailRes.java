@@ -3,8 +3,6 @@ package com.carpool.bnk.CarpoolServer.domain.carpool.response;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Comments;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Occupants;
-import com.carpool.bnk.CarpoolServer.domain.carpool.dto.CommentDto;
-import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,13 +10,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
-public class CarpoolDetailRes {
+public class CarpoolAllDetailRes {
+
 
     private int carpoolNo;
 
@@ -44,10 +42,8 @@ public class CarpoolDetailRes {
 
     private String occupants;
 
-    private List<CommentDto> comments;
-
     @Builder
-    public CarpoolDetailRes(Carpool carpool){
+    public CarpoolAllDetailRes(Carpool carpool){
         this.carpoolNo = carpool.getCarpoolNo();
         this.writerNo = carpool.getCarpoolWriter().getUserNo();
         if(carpool.getCarpoolDriver() != null) this.driverNo = carpool.getCarpoolDriver().getUserNo();
@@ -60,7 +56,6 @@ public class CarpoolDetailRes {
         this.time = carpool.getCarpoolTime();
 
         this.occupants = this.getOccuUserIds(carpool.getOccupants());
-        this.comments = this.toCommentDto(carpool.getComments());
     }
 
     private String getOccuUserIds(List<Occupants> list){
@@ -72,19 +67,4 @@ public class CarpoolDetailRes {
         sb.append("]");
         return sb.toString();
     }
-
-    private List<CommentDto> toCommentDto(List<Comments> list){
-        List<CommentDto> ret = new ArrayList<>();
-        for (Comments comm: list){
-            CommentDto dto = new CommentDto();
-            dto.setUserNo(comm.getUser().getUserNo());
-            dto.setUserId(comm.getUser().getUserId());
-            dto.setCommentNo(comm.getCommentNo());
-            dto.setComment(comm.getCommentContent());
-            dto.setCreated(comm.getCreated());
-            ret.add(dto);
-        }
-        return ret;
-    }
-
 }
