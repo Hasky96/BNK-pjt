@@ -11,39 +11,35 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.carpoolapp.R;
-import com.example.carpoolapp.model.Carpool;
+import com.example.carpoolapp.model.CarpoolAllDetailRes;
 import com.example.carpoolapp.model.CarpoolResponse;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolViewHolder> {
 
 
 	ArrayList<CarpoolResponse> carpoolResponseArrayList;
-	DiffUtil.ItemCallback<Carpool> diffCallback = new DiffUtil.ItemCallback<Carpool>() {
+	DiffUtil.ItemCallback<CarpoolAllDetailRes> diffCallback = new DiffUtil.ItemCallback<CarpoolAllDetailRes>() {
 
 		@Override
-		public boolean areItemsTheSame(@NonNull Carpool oldItem, @NonNull Carpool newItem) {
+		public boolean areItemsTheSame(@NonNull CarpoolAllDetailRes oldItem, @NonNull CarpoolAllDetailRes newItem) {
 			return oldItem.getCarpoolNo() == newItem.getCarpoolNo();
 		}
 
 		@SuppressLint("DiffUtilEquals")
 		@Override
-		public boolean areContentsTheSame(@NonNull Carpool oldItem, @NonNull Carpool newItem) {
+		public boolean areContentsTheSame(@NonNull CarpoolAllDetailRes oldItem, @NonNull CarpoolAllDetailRes newItem) {
 			return oldItem.hashCode() == newItem.hashCode();
 		}
 
 	};
 
-	AsyncListDiffer<Carpool> differ = new AsyncListDiffer<>(this, diffCallback);
+	AsyncListDiffer<CarpoolAllDetailRes> differ = new AsyncListDiffer<>(this, diffCallback);
 
-	public void submitList(List<Carpool> carpoolList) {
+	public void submitList(List<CarpoolAllDetailRes> carpoolList) {
 		differ.submitList(carpoolList);
 	}
 
@@ -56,7 +52,7 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 
 	@Override
 	public void onBindViewHolder(@NonNull CarpoolViewHolder holder, int position) {
-		Carpool carpool = differ.getCurrentList().get(position);
+		CarpoolAllDetailRes carpool = differ.getCurrentList().get(position);
 		// holder에 계속 set
 
 		holder.tvItemDepartTime.setText(carpool.getTime().toString());

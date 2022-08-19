@@ -31,13 +31,14 @@ public class CarpoolFragment extends Fragment {
 							 ViewGroup container, Bundle savedInstanceState) {
 		binding = FragmentCarpoolBinding.inflate(inflater, container, false);
 		View root = binding.getRoot();
+
 		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
 
 		carpoolAdapter = new CarpoolAdapter();
 		binding.rvCarpool.setAdapter(carpoolAdapter);
 		binding.rvCarpool.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		carpoolViewModel.carpoolList.observe(getViewLifecycleOwner(), carpoolList -> {
+		carpoolViewModel.getCarpools().observe(getViewLifecycleOwner(), carpoolList -> {
 			carpoolAdapter.submitList(carpoolList);
 		});
 

@@ -3,22 +3,14 @@ package com.example.carpoolapp.model;
 import java.util.List;
 
 public class CarpoolsResponse {
-	private List<Carpool> carpools;
+	private List<CarpoolAllDetailRes> carpools;
 	private String msg;
 
-	public CarpoolsResponse() {
-	}
-
-	public CarpoolsResponse(List<Carpool> carpools, String msg) {
-		this.carpools = carpools;
-		this.msg = msg;
-	}
-
-	public List<Carpool> getCarpools() {
+	public List<CarpoolAllDetailRes> getCarpools() {
 		return carpools;
 	}
 
-	public void setCarpools(List<Carpool> carpools) {
+	public void setCarpools(List<CarpoolAllDetailRes> carpools) {
 		this.carpools = carpools;
 	}
 
