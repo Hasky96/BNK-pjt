@@ -145,4 +145,9 @@ public class CarpoolServiceImpl implements CarpoolService{
     public int getCarpoolCnt(int userNo) {
         return carpoolRepositorySpp.getCarpoolCnt(userNo);
     }
+
+    @Override
+    public List<Carpool> getAllCarpools() {
+        return carpoolRepositorySpp.getAllCarpools();
+    }
 }
