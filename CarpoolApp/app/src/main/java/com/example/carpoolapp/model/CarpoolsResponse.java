@@ -6,6 +6,11 @@ public class CarpoolsResponse {
 	private List<CarpoolAllDetailRes> carpools;
 	private String msg;
 
+	public CarpoolsResponse(List<CarpoolAllDetailRes> carpools, String msg) {
+		this.carpools = carpools;
+		this.msg = msg;
+	}
+
 	public List<CarpoolAllDetailRes> getCarpools() {
 		return carpools;
 	}

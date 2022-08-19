@@ -34,7 +34,7 @@ public class CarpoolFragment extends Fragment {
 
 		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
 
-		carpoolAdapter = new CarpoolAdapter();
+		carpoolAdapter = new CarpoolAdapter(getActivity());
 		binding.rvCarpool.setAdapter(carpoolAdapter);
 		binding.rvCarpool.setLayoutManager(new LinearLayoutManager(getContext()));
 

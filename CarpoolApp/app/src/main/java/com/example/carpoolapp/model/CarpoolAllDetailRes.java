@@ -12,13 +12,26 @@ public class CarpoolAllDetailRes {
 	private int quota;
 	private String info;
 	private int fee;
-	private LocalDateTime created;
-	private LocalDateTime time;
+	private String created;
+	private String time;
 	private String occupants;
-	private List<CommentDto> comments;
 
 	public CarpoolAllDetailRes() {
 
+	}
+
+	public CarpoolAllDetailRes(int carpoolNo, int writerNo, int driverNo, boolean type, String location, int quota, String info, int fee, String created, String time, String occupants) {
+		this.carpoolNo = carpoolNo;
+		this.writerNo = writerNo;
+		this.driverNo = driverNo;
+		this.type = type;
+		this.location = location;
+		this.quota = quota;
+		this.info = info;
+		this.fee = fee;
+		this.created = created;
+		this.time = time;
+		this.occupants = occupants;
 	}
 
 	public int getCarpoolNo() {
@@ -85,19 +98,19 @@ public class CarpoolAllDetailRes {
 		this.fee = fee;
 	}
 
-	public LocalDateTime getCreated() {
+	public String getCreated() {
 		return created;
 	}
 
-	public void setCreated(LocalDateTime created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 
-	public LocalDateTime getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(LocalDateTime time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -109,11 +122,4 @@ public class CarpoolAllDetailRes {
 		this.occupants = occupants;
 	}
 
-	public List<CommentDto> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<CommentDto> comments) {
-		this.comments = comments;
-	}
 }

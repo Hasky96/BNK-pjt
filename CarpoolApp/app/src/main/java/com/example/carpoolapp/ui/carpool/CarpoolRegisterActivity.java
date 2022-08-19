@@ -1,6 +1,7 @@
 package com.example.carpoolapp.ui.carpool;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -160,6 +161,8 @@ protected void onCreate(Bundle savedInstanceState) {
 				@Override
 				public void onResponse(Call<CarpoolResponse> call, Response<CarpoolResponse> response) {
 					Log.d(">>", "success");
+					CarpoolViewModel carpoolViewModel = new ViewModelProvider(CarpoolRegisterActivity.this).get(CarpoolViewModel.class);
+					carpoolViewModel.getCarpools();
 					finish();
 				}
 
