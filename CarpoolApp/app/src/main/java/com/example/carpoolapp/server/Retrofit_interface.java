@@ -25,9 +25,6 @@ public interface Retrofit_interface {
     @POST("api/carpool/create")
     Call<CarpoolResponse> insertCarpool (@Header("Authorization") String Authorization,@Body CarpoolRequest carpool);
 
-    @GET("")
-    Call<LiveData<List<CarpoolResponse>>> listAllCarpool();
-
     @POST("/api/user/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
