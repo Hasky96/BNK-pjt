@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 public class CarpoolsRes {
 
-    private List<CarpoolDetailRes> carpools;
+    private List<CarpoolAllDetailRes> carpools;
 
     private String msg;
 }
