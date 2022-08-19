@@ -24,4 +24,6 @@ public interface CarpoolService {
     int carpoolDone(Carpool carpool);
 
     int getCarpoolCnt(int userNo);
+
+    List<Carpool> getAllCarpools();
 }
