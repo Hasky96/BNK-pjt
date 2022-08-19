@@ -43,6 +43,10 @@ dependencies {
 	implementation("com.google.guava:guava:29.0-jre")
 	annotationProcessor("com.google.guava:guava:29.0-jre")
 
+//	JSON
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+
 
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 

@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/android,macos,windows,java,visualstudiocode,intellij,androidstudio,eclipse,database,kotlin
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,macos,windows,java,visualstudiocode,intellij,androidstudio,eclipse,database,kotlin
 
+### Secret Key ###
+SecretKey.txt
+
+
 ### Android ###
 # Gradle files
 .gradle/
