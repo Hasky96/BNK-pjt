@@ -1,7 +1,7 @@
 package com.carpool.bnk.CarpoolServer.domain.Map.service;
 
-import com.carpool.bnk.CarpoolServer.domain.Map.request.MapRouteReq;
 import org.apache.tomcat.util.json.ParseException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,9 @@ import java.util.Scanner;
 public class MapServiceimpl implements MapService{
     static private String[] keys;
 
+    static private String itCenterLat = "128.857733";
+    static private String itCenterLng = "35.137249";
+
     static {
         try {
             keys = new Scanner(new File("/Users/dean/Desktop/BNK-pjt/CarpoolServer/src/main/java/com/carpool/bnk/CarpoolServer/domain/Map/service/SecretKey"))
@@ -28,19 +31,18 @@ public class MapServiceimpl implements MapService{
     static private String Appkey = keys[1];
     static private String AppSecret = keys[3];
 
+    public static JSONObject s2j(String str) throws ParseException, org.json.simple.parser.ParseException {
+        JSONObject ret = new JSONObject();
+        JSONParser parser = new JSONParser();
+        ret = (JSONObject) parser.parse(str);
+        return ret;
+    }
+
     @Override
-    public void test() throws Exception {
-        System.out.println(Appkey+" " + AppSecret);
-
-        MapRouteReq a = new MapRouteReq();
-        a.setSLat("128.991215");
-        a.setSLng("35.160786");
-        a.setDLat("128.988500");
-        a.setDLng("35.178021");
-
+    public String getRoute(String sLng, String sLat) throws Exception {
         StringBuilder urlBuilder = new StringBuilder("https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving");
-        urlBuilder.append("?" + URLEncoder.encode("start","UTF-8") + "=" + URLEncoder.encode(a.getSLat()+","+a.getSLng(), "UTF-8")); /*페이지번호*/
-        urlBuilder.append("&" + URLEncoder.encode("goal","UTF-8") + "=" + URLEncoder.encode(a.getDLat()+","+a.getDLng(), "UTF-8"));
+        urlBuilder.append("?" + URLEncoder.encode("start","UTF-8") + "=" + URLEncoder.encode(sLat+","+sLng, "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("goal","UTF-8") + "=" + URLEncoder.encode(itCenterLat+","+itCenterLng, "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("option","UTF-8") + "=" + URLEncoder.encode("traoptimal", "UTF-8"));
 
         URL url = new URL(urlBuilder.toString());
@@ -64,18 +66,18 @@ public class MapServiceimpl implements MapService{
         br.close();
         conn.disconnect();
 
-        JSONObject json = s2j(sb.toString());
-        System.out.println(json.toString());
+        JSONObject res = s2j(sb.toString());
 
+        try {
+            JSONArray traoptimal = (JSONArray)((JSONObject)res.get("route")).get("traoptimal");
+            String path = ((JSONObject)traoptimal.get(0)).get("path").toString();
 
-
-
-
-    }
-    public static JSONObject s2j(String str) throws ParseException, org.json.simple.parser.ParseException {
-        JSONObject ret = new JSONObject();
-        JSONParser parser = new JSONParser();
-        ret = (JSONObject) parser.parse(str);
-        return ret;
+            return path;
+        }catch (Exception e){
+            System.err.println("=================get Path From naver Err=================");
+            System.err.println(e);
+            System.err.println(res);
+            return res.get("message").toString();
+        }
     }
 }
