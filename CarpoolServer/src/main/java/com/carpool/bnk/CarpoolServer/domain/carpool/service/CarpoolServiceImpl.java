@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class CarpoolServiceImpl implements CarpoolService{
                                         body.getCarpoolInfo(),
                                         body.getCarpoolTime()
         );
+        if(body.getCarpoolTime().isBefore(LocalDateTime.now())) return null;
         newCarpool.setCarpoolFee(100);
         newCarpool.setDone(false);
         carpoolRepository.save(newCarpool);

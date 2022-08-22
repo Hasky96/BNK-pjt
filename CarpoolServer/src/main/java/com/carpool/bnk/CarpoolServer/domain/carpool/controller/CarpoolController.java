@@ -39,7 +39,7 @@ public class CarpoolController {
         Carpool carpool = carpoolService.carpoolCreate(body);
 
         if(carpool==null){
-            return ResponseEntity.status(400).body(new CarpoolCreateRes(0,"Exist ID"));
+            return ResponseEntity.status(400).body(new CarpoolCreateRes(0,"ERROR \nSet time before now\netc..."));
         }
 
         return ResponseEntity.status(200).body(CarpoolCreateRes.of(carpool.getCarpoolNo(), "Success"));
@@ -93,6 +93,7 @@ public class CarpoolController {
         Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
+        if(carpool.getCarpoolWriter().getUserNo() == user.getUserNo()) return ResponseEntity.status(400).body(new CommonResponse("You are carpool writer! Delete the carpool!"));
         boolean status = carpoolService.leaveCarpool(carpool, user);
         int statusCode = status ? 200:400;
         String msg = status ? "Successfully Deleted!":"user not in the carpool.";
