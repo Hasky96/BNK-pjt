@@ -7,12 +7,47 @@
     android:orientation="vertical"
     tools:context=".ui.carpool.CarpoolFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCarpool"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+   <FrameLayout
+       android:id="@+id/frtab"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="5dp"
+       app:layout_constraintTop_toTopOf="parent">
 
+        <View
+            android:id="@+id/indicator"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:tabGravity="center"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabIndicatorColor="@color/bnkRed"
+            app:tabMode="fixed"
+            app:tabIndicatorFullWidth="false"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="@color/bnkRed" />
+
+   </FrameLayout>
+    
+    
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frtab"
+      />
+    
+    
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/flbCarpoolRegister"
         android:layout_width="wrap_content"
