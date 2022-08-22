@@ -3,6 +3,7 @@ package com.example.carpoolapp.ui.carpool;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +33,11 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 
 	ArrayList<CarpoolResponse> carpoolResponseArrayList;
 	FragmentActivity activity;
+	boolean carpoolType;
 
-	public CarpoolAdapter(FragmentActivity activity){
+	public CarpoolAdapter(FragmentActivity activity, boolean carpoolType){
 		this.activity = activity;
+		this.carpoolType = carpoolType;
 	}
 
 	DiffUtil.ItemCallback<CarpoolAllDetailRes> diffCallback = new DiffUtil.ItemCallback<CarpoolAllDetailRes>() {
@@ -70,15 +73,18 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 		CarpoolAllDetailRes carpool = differ.getCurrentList().get(position);
 		// holder에 계속 set
 		holder.tvItemDepartTime.setText(carpool.getTime().split("T")[1].substring(0,5));
+		Log.d(">>", activity.getCallingActivity() + "");
 
-		if( carpool.isType() ){
+		// 가지고 오는 데이터 개수가 3개여서 출근, 퇴근으로 색을 나누어도 각 탭에는 3개의 아이템이 만들어진다
+		// 결국 출근, 퇴근 나누어서 가지고 오는게 나을 듯??
+		if( carpool.isType() && carpoolType ){
 			//퇴근
 			holder.tvItemcarpoolType.setText("퇴근");
 			holder.tvDepartLoc.setText("회사");
 			holder.tvDestinationLoc.setText(carpool.getLocation());
 			holder.itemLine.setBackgroundResource(R.drawable.gray_round_square);
 			holder.itembar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B7A997")));
-		}else{
+		}else if( !carpool.isType() && !carpoolType){
 			//출근
 			holder.tvItemcarpoolType.setText("출근");
 			holder.tvDepartLoc.setText(carpool.getLocation());
@@ -92,8 +98,9 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 		holder.itemLine.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_activity_main);
-				navController.navigate(R.id.carpoolDetailFragment);
+				Bundle bundle = new Bundle();
+				bundle.putInt("carpoolNo", carpool.getCarpoolNo());
+				Navigation.findNavController(view).navigate(R.id.action_navigation_carpool_to_carpoolDetailFragment2, bundle);
 			}
 		});
 
