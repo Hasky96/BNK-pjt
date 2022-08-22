@@ -4,6 +4,5 @@ import java.io.IOException;
 
 public interface MapService {
 
-    void test() throws IOException, Exception;
-
+    String getRoute(String sLng, String sLat) throws Exception;
 }
