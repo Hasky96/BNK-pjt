@@ -71,7 +71,7 @@ public class MypageUpdateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.navigation_mypage);
+                navController.navigate(R.id.action_mypageUpdateFragment_to_navigation_mypage);
             }
         });
 
@@ -112,7 +112,7 @@ public class MypageUpdateFragment extends Fragment {
                             editor.commit();
                             Toast.makeText(getActivity(), "수정 완료", Toast.LENGTH_SHORT).show();
                             NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-                            navController.navigate(R.id.navigation_mypage);
+                            navController.navigate(R.id.action_mypageUpdateFragment_to_navigation_mypage);
                         }else {
                             Toast.makeText(getActivity(), "잘못된 형식으로 입력했습니다. 다시 입력하세요.", Toast.LENGTH_SHORT).show();
                         }

@@ -7,6 +7,18 @@
     android:paddingHorizontal="25dp"
     tools:context=".ui.myReservation.myReservationFragment">
 
+    <TextView
+        android:id="@+id/tvNoReserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="284dp"
+        android:text="예약 내역이 없습니다."
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
@@ -17,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayoutGo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="1dp"
@@ -27,7 +39,73 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
+        <TextView
+            android:id="@+id/tvReserveGoDepartLoc"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="34dp"
+            android:gravity="center"
+            android:text="출발"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/tvReserveGoTime"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="출발시간"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReserveGoDepartLoc" />
+
+        <ImageView
+            android:id="@+id/ivItemcar"
+            android:layout_width="68dp"
+            android:layout_height="50dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ticket_car_icon"
+            app:layout_constraintEnd_toStartOf="@+id/tvReserveGoDestinationLoc"
+            app:layout_constraintStart_toEndOf="@+id/tvReserveGoDepartLoc"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/tvReserveGoDestinationLoc"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="회사"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <Button
+            android:id="@+id/tvReserveGoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_white"
+            android:text="카풀보기"
+            android:textColor="@color/bnkRed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout5"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/half_round_square"
@@ -71,7 +149,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tvReserveAll"
+                    android:id="@+id/tvReserveGoAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5"
@@ -83,6 +161,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutOut"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="1dp"
@@ -90,7 +169,73 @@
         android:background="@drawable/gray_round_square"
         android:elevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutGo">
+
+
+        <TextView
+            android:id="@+id/tvReserveOutDepartLoc"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="34dp"
+            android:gravity="center"
+            android:text="회사"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/background" />
+
+        <TextView
+            android:id="@+id/tvReserveOutTime"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="출발시간"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReserveOutDepartLoc" />
+
+        <ImageView
+            android:id="@+id/ivItemcar2"
+            android:layout_width="68dp"
+            android:layout_height="50dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ticket_car_icon"
+            app:layout_constraintEnd_toStartOf="@+id/tvReserveOutDestinationLoc"
+            app:layout_constraintStart_toEndOf="@+id/tvReserveOutDepartLoc"
+            app:layout_constraintTop_toBottomOf="@+id/background" />
+
+        <TextView
+            android:id="@+id/tvReserveOutDestinationLoc"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="도착지점"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/background" />
+
+        <Button
+            android:id="@+id/tvReserveOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_white"
+            android:text="카풀보기"
+            android:textColor="@color/bnkRed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/background"
