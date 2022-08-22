@@ -16,13 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentCarpoolBinding;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 // 카풀 리스트 프래그먼트
 public class CarpoolFragment extends Fragment {
 
 	private FragmentCarpoolBinding binding;
-	FloatingActionButton flbCarpoolRegister;
+	ExtendedFloatingActionButton flbCarpoolRegister;
 	RecyclerView rvCarpool;
 	CarpoolViewModel carpoolViewModel;
 	CarpoolAdapter carpoolAdapter;
