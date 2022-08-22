@@ -115,6 +115,7 @@ public class LoginFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .addToBackStack(null) //뒤로가기 가능하게 만듬
+                        .setCustomAnimations(R.anim.slide_page_in, R.anim.slide_page_out)
                         .replace(R.id.ConstraintFragment, fragment).commit();
             }
         });
