@@ -48,6 +48,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    // flex layout
-    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    // viewpager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }

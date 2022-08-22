@@ -160,9 +160,9 @@ protected void onCreate(Bundle savedInstanceState) {
 			call.enqueue(new Callback<CarpoolResponse>() {
 				@Override
 				public void onResponse(Call<CarpoolResponse> call, Response<CarpoolResponse> response) {
-					Log.d(">>", "success");
-					CarpoolViewModel carpoolViewModel = new ViewModelProvider(CarpoolRegisterActivity.this).get(CarpoolViewModel.class);
-					carpoolViewModel.getCarpools();
+					Log.d(">>", "insert success");
+//					CarpoolViewModel carpoolViewModel = new ViewModelProvider(CarpoolRegisterActivity.this).get(CarpoolViewModel.class);
+//					carpoolViewModel.getCarpools();
 					finish();
 				}
 
