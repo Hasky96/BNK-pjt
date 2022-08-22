@@ -7,6 +7,18 @@
     android:paddingHorizontal="25dp"
     tools:context=".ui.myReservation.myReservationFragment">
 
+    <TextView
+        android:id="@+id/tvNoReserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="284dp"
+        android:text="예약 내역이 없습니다."
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
@@ -17,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayoutGo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="1dp"
@@ -41,7 +53,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
         <TextView
-            android:id="@+id/tvReserveTime"
+            android:id="@+id/tvReserveGoTime"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -137,7 +149,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tvReserveAll"
+                    android:id="@+id/tvReserveGoAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5"
@@ -149,6 +161,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutOut"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="1dp"
@@ -156,7 +169,7 @@
         android:background="@drawable/gray_round_square"
         android:elevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutGo">
 
 
         <TextView
