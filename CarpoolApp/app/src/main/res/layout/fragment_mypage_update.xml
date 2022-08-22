@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.myPage.MypageFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.myPage.MypageUpdateFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
@@ -15,10 +15,12 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/round_square"
         android:elevation="10dp"
-        android:padding="30dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:paddingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -29,7 +31,6 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
@@ -38,14 +39,12 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tvProfileId"
+                android:id="@+id/tvProfileUpdateId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="아이디"
                 android:textSize="20sp" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="300dp"
@@ -59,16 +58,18 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:text="차량번호"
+                android:text="비밀번호"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tvProfileCarNo"
+                android:id="@+id/tvProfileUpdatePw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="차량번호"
+                android:text="비밀번호 변경"
+                android:clickable="true"
+                android:background="@drawable/edit_text_box"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -85,16 +86,18 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:text="차량정보"
+                android:text="차량번호"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvProfileCarInfo"
+            <EditText
+                android:id="@+id/eTProfileUpdateCarNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="차량정보"
+                android:background="@drawable/edit_text_box"
+                android:inputType="textPersonName"
+                android:maxLength="10"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -111,89 +114,55 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:text="마일리지"
+                android:text="차량정보"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvProfileMileage"
+            <EditText
+                android:id="@+id/eTProfileUpdateCarInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="마일리지"
-                android:textSize="20sp" />
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_box"
+                android:maxLength="20"
+                android:textSize="20sp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="카풀건수"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tvProfileCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="카풀 건수"
-                android:textSize="20sp" />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:background="@drawable/button_white"
-        android:text="로그아웃"
-        android:textColor="@color/bnkRed"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="28dp"
-        android:src="@drawable/mypage_logo"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/mypage_update_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
-        android:id="@+id/buttonUpdateUser"
+        android:id="@+id/buttonUpdateUserCommit"
         android:layout_width="180dp"
         android:layout_height="40dp"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/button"
         android:text="회원수정"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
     <Button
-        android:id="@+id/buttonDeleteUser"
+        android:id="@+id/buttonUpdateUserCancel"
         android:layout_width="180dp"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_white"
-        android:text="회원탈퇴"
+        android:text="취소"
         android:textColor="@color/bnkRed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

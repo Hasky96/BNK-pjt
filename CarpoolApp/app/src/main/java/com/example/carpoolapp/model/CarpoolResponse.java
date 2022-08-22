@@ -1,5 +1,6 @@
 package com.example.carpoolapp.model;
 
+// 카풀 생성 응답
 public class CarpoolResponse {
     int carpoolNo;
     String msg;

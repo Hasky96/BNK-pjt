@@ -35,6 +35,54 @@ USER
     "userPw" : "1234"
   }
   ```
+  ---
+* INFO(GET)
+  ```
+  /api/user/info
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+ 
+  ---
+* USERUPDATE(PUT)
+  ```
+  /api/user/update
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  body
+  ```
+  {
+    "userCarInfo" : "changed info",
+    "userCarNo" : "changed number"
+  }
+  ```
+* USERPWUPDATE(PUT)
+  ```
+  /api/user/pwupdate
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  body
+  ```
+  {
+    "oldPw" : "1234",
+    "newPw" : "12345"
+  }
+  ```
+  
 ---
 CARPOOL
 ---
@@ -42,6 +90,13 @@ CARPOOL
   ```
   api/carpool/create
   ```
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  body
   ```json{
     "carpoolWriter":1,
     "carpoolDriver":1,
@@ -51,5 +106,71 @@ CARPOOL
     "carpoolInfo":"Info",
     "carpoolFee":3000,
     "carpoolTime": "2022-08-15T12:13:14"
+  }
+  ```
+  * CARPOOLDONE(POST)
+  ```
+  /api/carpool/{carpoolNo}/done
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+    * CARPOOLJOIN(POST)
+  ```
+  /api/carpool/join/{carpoolNo}
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  ---
+* CARPOOLUPDATE(PUT)
+  ```
+  api/carpool/{carpoolNo}
+  ```
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  body
+  ```json
+  {
+    "carpoolType":true,
+    "carpoolLocation":"location",
+    "carpoolQuota":5,
+    "carpoolInfo":"Info",
+    "carpoolFee":3000,
+    "carpoolTime": "2022-08-15T12:13:14"
+  }
+  ```
+  ---
+  ```
+    * CARPOOLLEAVE(POST)
+  ```
+  /api/carpool/leave/{carpoolNo}
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+    ---
+  ```
+    * CARPOOLDETAIL(GET)
+  ```
+  /api/carpool/{carpoolNo}
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
   }
   ```

@@ -21,7 +21,7 @@ public class MapServiceimpl implements MapService{
 
     static {
         try {
-            keys = new Scanner(new File("/Users/dean/Desktop/BNK-pjt/CarpoolServer/src/main/java/com/carpool/bnk/CarpoolServer/domain/Map/service/SecretKey"))
+            keys = new Scanner(new File("C:\\jjk\\BNK-pjt\\CarpoolServer\\src\\main\\java\\com\\carpool\\bnk\\CarpoolServer\\domain\\Map\\service\\SecretKey"))
                     .nextLine().split(":");
         } catch (Exception e) {
             e.printStackTrace();

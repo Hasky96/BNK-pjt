@@ -1,5 +1,8 @@
 package com.example.carpoolapp.ui.myReservation;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentMyreservationBinding;
+import com.example.carpoolapp.ui.splash.SplashActivity;
 
 public class myReservationFragment extends Fragment {
 
@@ -24,8 +29,6 @@ public class myReservationFragment extends Fragment {
         binding = FragmentMyreservationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

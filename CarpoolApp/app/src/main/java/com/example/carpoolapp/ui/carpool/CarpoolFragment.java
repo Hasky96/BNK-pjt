@@ -10,35 +10,53 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentCarpoolBinding;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
+// 카풀 리스트 프래그먼트
 public class CarpoolFragment extends Fragment {
 
-    private FragmentCarpoolBinding binding;
-    FloatingActionButton flbCarpoolRegister;
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentCarpoolBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+	private FragmentCarpoolBinding binding;
+	ExtendedFloatingActionButton flbCarpoolRegister;
+	RecyclerView rvCarpool;
+	CarpoolViewModel carpoolViewModel;
+	CarpoolAdapter carpoolAdapter;
 
-        flbCarpoolRegister = root.findViewById(R.id.flbCarpoolRegister);
-        flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+	public View onCreateView(@NonNull LayoutInflater inflater,
+							 ViewGroup container, Bundle savedInstanceState) {
+		binding = FragmentCarpoolBinding.inflate(inflater, container, false);
+		View root = binding.getRoot();
 
-        return root;
-    }
+		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+		carpoolAdapter = new CarpoolAdapter(getActivity());
+		binding.rvCarpool.setAdapter(carpoolAdapter);
+		binding.rvCarpool.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		carpoolViewModel.getCarpools().observe(getViewLifecycleOwner(), carpoolList -> {
+			carpoolAdapter.submitList(carpoolList);
+		});
+
+		binding.flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
+				startActivity(intent);
+			}
+		});
+
+
+		return root;
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		binding = null;
+	}
 }
