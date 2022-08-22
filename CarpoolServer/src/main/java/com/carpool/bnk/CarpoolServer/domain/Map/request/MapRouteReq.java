@@ -9,11 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MapRouteReq {
 
-    private String sLat;
+    private String latitude;
 
-    private String sLng;
+    private String longitude;
 
-    private String dLat;
-
-    private String dLng;
 }

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class MypageFragment extends Fragment {
         binding.tvProfileCarNo.setText(preferences.getString("userCarNo",null));
         binding.tvProfileCarInfo.setText(preferences.getString("userCarInfo",null));
         Authorization=preferences.getString("Authorization",null);
+        Log.d("jjk",Authorization);
         call= Retrofit_client.getApiService().userInfo(Authorization);
         call.enqueue(new Callback<UserInfoResponse>() {
             @Override
