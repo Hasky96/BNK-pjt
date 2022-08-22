@@ -24,6 +24,8 @@ public class CarpoolDetailRes {
 
     private int writerNo;
 
+    private String writerId;
+
     private int driverNo;
 
     private boolean type;
@@ -50,6 +52,7 @@ public class CarpoolDetailRes {
     public CarpoolDetailRes(Carpool carpool){
         this.carpoolNo = carpool.getCarpoolNo();
         this.writerNo = carpool.getCarpoolWriter().getUserNo();
+        this.writerId = carpool.getCarpoolWriter().getUserId();
         if(carpool.getCarpoolDriver() != null) this.driverNo = carpool.getCarpoolDriver().getUserNo();
         this.created = carpool.getCarpoolCreated();
         this.fee = carpool.getCarpoolFee();
