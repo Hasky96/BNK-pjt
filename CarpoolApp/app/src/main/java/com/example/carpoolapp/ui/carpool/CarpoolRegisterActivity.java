@@ -91,7 +91,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		spPersonamount.setAdapter(arrayAdapter);
 
 		Intent intent = getIntent();
-		if (intent != null){
+//		Log.d(">>","wwwww "+ intent.getStringExtra("from"));
+		if (intent.getStringExtra("from") != null && intent.getStringExtra("from").equals("detail")){
 
 			btnCarpoolRegister.setText("수정");
 			btnCarpoolRegister.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B7A997")));
