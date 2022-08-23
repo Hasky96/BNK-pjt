@@ -16,28 +16,40 @@
 		android:name="com.example.carpoolapp.ui.carpool.CarpoolFragment"
 		android:label="@string/title_Carpool"
 		tools:layout="@layout/fragment_carpool">
-		
-	<action
-		android:id="@+id/action_navigation_carpool_to_carpoolDetailFragment2"
-		app:destination="@id/carpoolDetailFragment2" /></fragment>
+
+		<action
+			android:id="@+id/action_navigation_carpool_to_carpoolDetailFragment2"
+			app:destination="@id/carpoolDetailFragment2"
+			app:enterAnim="@anim/slide_page_in"
+			app:exitAnim="@anim/slide_page_out"
+			app:popEnterAnim="@anim/slide_page_back_in"
+			app:popExitAnim="@anim/slide_page_back_out" /></fragment>
 
     <fragment
 		android:id="@+id/navigation_mypage"
 		android:name="com.example.carpoolapp.ui.myPage.MypageFragment"
 		android:label="@string/title_Mypage"
 		tools:layout="@layout/fragment_mypage">
-        <action
+		<action
 			android:id="@+id/action_navigation_mypage_to_mypageUpdateFragment"
-			app:destination="@id/mypageUpdateFragment" />
+			app:destination="@id/mypageUpdateFragment"
+			app:enterAnim="@anim/slide_page_in"
+			app:exitAnim="@anim/slide_page_out"
+			app:popEnterAnim="@anim/slide_page_back_in"
+			app:popExitAnim="@anim/slide_page_back_out" />
     </fragment>
     <fragment
 		android:id="@+id/mypageUpdateFragment"
 		android:name="com.example.carpoolapp.ui.myPage.MypageUpdateFragment"
 		android:label="fragment_mypage_update"
 		tools:layout="@layout/fragment_mypage_update">
-        <action
+		<action
 			android:id="@+id/action_mypageUpdateFragment_to_navigation_mypage"
-			app:destination="@id/navigation_mypage" />
+			app:destination="@id/navigation_mypage"
+			app:enterAnim="@anim/slide_page_in"
+			app:exitAnim="@anim/slide_page_out"
+			app:popEnterAnim="@anim/slide_page_back_in"
+			app:popExitAnim="@anim/slide_page_back_out" />
     </fragment>
 	
 	
@@ -51,7 +63,9 @@
 			tools:layout="@layout/fragment_carpool">
 		<action
 			android:id="@+id/action_navigation_carpool_to_carpoolDetailFragment"
-			app:destination="@id/carpoolDetailFragment" /></fragment>
+			app:destination="@id/carpoolDetailFragment"
+			app:enterAnim="@anim/slide_page_in"
+			app:exitAnim="@anim/slide_page_out" /></fragment>
 
         <fragment
 			android:id="@+id/carpoolDetailFragment"

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MapRouthRes {
+public class MapRouteRes {
     private String msg;
 
     private String path;

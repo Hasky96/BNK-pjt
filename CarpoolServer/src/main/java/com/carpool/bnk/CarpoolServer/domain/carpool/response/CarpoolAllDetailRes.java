@@ -17,12 +17,13 @@ import java.util.List;
 @Setter
 public class CarpoolAllDetailRes {
 
-
     private int carpoolNo;
 
     private int writerNo;
 
     private int driverNo;
+
+    private String carNo;
 
     private boolean type;
 
@@ -46,7 +47,10 @@ public class CarpoolAllDetailRes {
     public CarpoolAllDetailRes(Carpool carpool){
         this.carpoolNo = carpool.getCarpoolNo();
         this.writerNo = carpool.getCarpoolWriter().getUserNo();
-        if(carpool.getCarpoolDriver() != null) this.driverNo = carpool.getCarpoolDriver().getUserNo();
+        if(carpool.getCarpoolDriver() != null){
+            this.driverNo = carpool.getCarpoolDriver().getUserNo();
+            this.carNo = carpool.getCarpoolDriver().getUserCarNo();
+        }
         this.created = carpool.getCarpoolCreated();
         this.fee = carpool.getCarpoolFee();
         this.info = carpool.getCarpoolInfo();
