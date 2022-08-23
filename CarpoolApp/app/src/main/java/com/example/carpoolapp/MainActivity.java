@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        overridePendingTransition(R.anim.slide_page_back_up,R.anim.slide_page_back_down);
+        overridePendingTransition(R.anim.slide_page_up,R.anim.slide_page_down);
 
 //        BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
