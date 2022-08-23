@@ -29,12 +29,10 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.maps.model.RoundCap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,30 +141,5 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
             }
         });
 
-    }
-
-    private void stylePolyline(Polyline polyline) {
-        String type = "";
-        // Get the data object stored with the polyline.
-        if (polyline.getTag() != null) {
-            type = polyline.getTag().toString();
-        }
-
-//        switch (type) {
-//            // If no type is given, allow the API to use the default.
-//            case "A":
-//                // Use a custom bitmap as the cap at the start of the line.
-//                polyline.setStartCap(
-//                        new CustomCap(
-//                                BitmapDescriptorFactory.fromResource(R.drawable.ic_arrow), 10));
-//                break;
-//            case "B":
-//                // Use a round cap at the start of the line.
-//                polyline.setStartCap(new RoundCap());
-//                break;
-//        }
-
-        polyline.setEndCap(new RoundCap());
-        polyline.setJointType(JointType.ROUND);
     }
 }
