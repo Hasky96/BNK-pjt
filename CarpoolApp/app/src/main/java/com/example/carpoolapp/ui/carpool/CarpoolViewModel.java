@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.model.CarpoolAllDetailRes;
 import com.example.carpoolapp.model.CarpoolDetailRes;
 import com.example.carpoolapp.model.CarpoolsResponse;
@@ -30,6 +30,7 @@ public class CarpoolViewModel extends AndroidViewModel {
 	private SharedPreferences preferences;
 	private String Authorization;
 	public MutableLiveData<CarpoolDetailRes> carpoolDetail;
+	public MutableLiveData<String> msg;
 
 	public CarpoolViewModel(@NonNull Application application) {
 		super(application);
@@ -55,6 +56,14 @@ public class CarpoolViewModel extends AndroidViewModel {
 		return carpoolDetail;
 	}
 
+	public LiveData<String> getMsg(){
+		if (msg == null) {
+			msg = new MutableLiveData<>();
+		}
+
+		return msg;
+	}
+
 	public void loadCarpools() {
 
 		carpoolService = Retrofit_client.getApiService();
@@ -68,7 +77,7 @@ public class CarpoolViewModel extends AndroidViewModel {
 
 			@Override
 			public void onFailure(Call<CarpoolsResponse> call, Throwable t) {
-				Log.d(">>>", "fail " + t.getMessage() );
+				Log.d(">>>", "fail load carpoolss " + t.getMessage() );
 			}
 		});
 	}
@@ -87,6 +96,55 @@ public class CarpoolViewModel extends AndroidViewModel {
 			@Override
 			public void onFailure(Call<CarpoolDetailRes> call, Throwable t) {
 				Log.d(">>","carpool detaili fail");
+			}
+		});
+	}
+
+	public void joinCarpool(int carpoolNo){
+		carpoolService = Retrofit_client.getApiService();
+		Call<CommonResponse> joinCarpool = carpoolService.joinCarpool(Authorization, carpoolNo);
+		joinCarpool.enqueue(new Callback<CommonResponse>() {
+			@Override
+			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+				Log.d(">>","carpool join success " +response.code());
+				if(response.code() == 200){
+//					Log.d(">>", "carpool join Success " + response.body().getMsg());
+					msg.setValue("카풀에 참여되었습니다");
+
+				}else {
+//					Log.d(">>","carpool join failed " +response.errorBody().toString() );
+					msg.setValue("카풀 참여에 실패하였습니다");
+				}
+				loadCarpoolDetail(carpoolNo);
+			}
+
+			@Override
+			public void onFailure(Call<CommonResponse> call, Throwable t) {
+				Log.d(">>","carpool join fail " + t.getMessage());
+			}
+		});
+	}
+
+	public void cancelCarpool(int carpoolNo){
+		carpoolService = Retrofit_client.getApiService();
+		Call<CommonResponse> cancelCarpool = carpoolService.cancelCarpool(Authorization, carpoolNo);
+		cancelCarpool.enqueue(new Callback<CommonResponse>() {
+			@Override
+			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+				if(response.code() == 200){
+					Log.d(">>", "carpool leave Success " + response.code() + "/" +  response.body().getMsg());
+					msg.postValue("카풀 참여를 취소하였습니다");
+
+				}else {
+					Log.d(">>","carpool leave failed " +response.errorBody().toString() );
+					msg.postValue("카풀참여 취소할 수 없습니다");
+				}
+				loadCarpoolDetail(carpoolNo);
+			}
+
+			@Override
+			public void onFailure(Call<CommonResponse> call, Throwable t) {
+
 			}
 		});
 	}
