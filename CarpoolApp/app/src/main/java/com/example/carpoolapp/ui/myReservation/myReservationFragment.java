@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentMyreservationBinding;
@@ -95,6 +96,14 @@ public class myReservationFragment extends Fragment {
                                 binding.tvReserveOutDestinationLoc.setText(carpool.getLocation());
                                 binding.tvReserveOutAll.setText(""+carpool.getQuota());
                                 binding.tvReserveOutCount.setText(""+occupants.length);
+                                binding.tvReserveOutButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("carpoolNo", carpool.getCarpoolNo());
+                                        Navigation.findNavController(view).navigate(R.id.action_navigation_myReservation_to_carpoolDetailFragment2, bundle);
+                                    }
+                                });
                             }
                             //출근
                             else {
@@ -104,6 +113,12 @@ public class myReservationFragment extends Fragment {
                                 binding.tvReserveGoDepartLoc.setText(carpool.getLocation());
                                 binding.tvReserveGoAll.setText(""+carpool.getQuota());
                                 binding.tvReserveGoCount.setText(""+occupants.length);
+                                binding.tvReserveGoButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                });
                             }
                         }
                     }

@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.carpoolapp.MainActivity;
 import com.example.carpoolapp.R;
@@ -33,6 +35,12 @@ public class SplashFragment extends Fragment {
 
         preferences = getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
         String Authorization = preferences.getString("Authorization", null);
+        Animation animUp = AnimationUtils.loadAnimation(getActivity(),R.anim.slide_logo_up);
+        Animation animDown = AnimationUtils.loadAnimation(getActivity(),R.anim.slide_logo_down);
+
+        binding.SplashCarpoolLogo.startAnimation(animDown);
+        binding.SplashBNKLogo.startAnimation(animUp);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

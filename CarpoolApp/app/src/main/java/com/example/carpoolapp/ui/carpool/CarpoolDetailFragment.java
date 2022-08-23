@@ -59,6 +59,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
     private Call<CarpoolMapResponse> call;
     private SharedPreferences preferences;
     private String Authorization;
+    private String location;
 
     CarpoolDetailRes cdetail;
     String cmsg;
@@ -117,6 +118,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
         carpoolViewModel.getCarpoolDetail(carpoolNo).observe(this, carpoolDetail -> {
             cdetail = carpoolDetail;
             binding.tvDetailLoc.setText(carpoolDetail.getLocation());
+            location=carpoolDetail.getLocation();
             binding.ttvDetailPerson.setText(carpoolDetail.getOccupants().split(",").length +"/" + carpoolDetail.getQuota());
             binding.tvDetailCarInfo.setText(carpoolDetail.getInfo());
             binding.tvDetailTime.setText(carpoolDetail.getTime().split("T")[1].substring(0,5));
@@ -167,7 +169,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
-        String query="부산광역시 사하구 하단동";
+        String query=location;
         CarpoolMapRequest carpoolMapRequest=new CarpoolMapRequest(query);
         //폴리라인
         call= Retrofit_client.getApiService().mapList(Authorization,carpoolMapRequest);
