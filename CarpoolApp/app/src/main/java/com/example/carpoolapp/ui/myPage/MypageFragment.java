@@ -105,7 +105,7 @@ public class MypageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.mypageUpdateFragment);
+                navController.navigate(R.id.action_navigation_mypage_to_mypageUpdateFragment);
             }
         });
 
