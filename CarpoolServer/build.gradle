@@ -46,6 +46,12 @@ dependencies {
 //	JSON
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
+	// EXCEL
+	// https://mvnrepository.com/artifact/org.apache.poi/poi => ExcelRead
+	implementation 'org.apache.poi:poi:5.2.2'
+	// https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
+
 
 
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'

@@ -7,6 +7,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -38,6 +41,7 @@ public class CarpoolRepositorySpp{
     public List<Carpool> getAllCarpools(){
         return jpaQueryFactory.select(qCarpool)
                 .from(qCarpool)
+                .where(qCarpool.carpoolCreated.after(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.of(18,00))))
                 .orderBy(qCarpool.carpoolTime.desc()).fetch();
     }
 }

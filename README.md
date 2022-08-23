@@ -108,6 +108,7 @@ CARPOOL
     "carpoolTime": "2022-08-15T12:13:14"
   }
   ```
+  ---
   * CARPOOLDONE(POST)
   ```
   /api/carpool/{carpoolNo}/done
@@ -146,24 +147,21 @@ CARPOOL
     "carpoolLocation":"location",
     "carpoolQuota":5,
     "carpoolInfo":"Info",
-    "carpoolFee":3000,
     "carpoolTime": "2022-08-15T12:13:14"
   }
   ```
   ---
-  ```
     * CARPOOLLEAVE(POST)
   ```
   /api/carpool/leave/{carpoolNo}
-  ````
+  ```
   Header
   ```
   {
     "Authorization" : "Bearer JWT"
   }
   ```
-    ---
-  ```
+  ---
     * CARPOOLDETAIL(GET)
   ```
   /api/carpool/{carpoolNo}
@@ -174,3 +172,38 @@ CARPOOL
     "Authorization" : "Bearer JWT"
   }
   ```
+  
+  ---
+    * GETROUTE(POST)
+  ```
+  /api/map/route
+  ```
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  body
+  ```json
+  {
+    "latitude" : "129.0653633",
+    "longitude" : "35.1528347"
+  }
+  ```
+  ---
+  * GETADDRESS(GET)
+  ```
+  api/map/loca
+  ```
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  PARAM
+  ```
+    query={검색어} ex) 문현역, 사상역, 미음산단로 127번길 21
+  ```
+  

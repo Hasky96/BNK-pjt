@@ -21,17 +21,17 @@ public class User  {
     @Column(name = "user_no")
     private int userNo;
 
-    @Column(name = "user_id",unique = true)
+    @Column(name = "user_id",unique = true, length = 20)
     private String userId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "user_password")
+    @Column(name = "user_password", length = 20)
     private String userPw;
 
-    @Column(name = "user_car_info")
+    @Column(name = "user_car_info", length = 20)
     private String userCarInfo;
 
-    @Column(name = "user_car_no")
+    @Column(name = "user_car_no", length = 10)
     private String userCarNo;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
