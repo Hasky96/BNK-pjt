@@ -73,7 +73,11 @@ public class MapServiceimpl implements MapService{
     }
 
     @Override
-    public String getRoute(String sLng, String sLat) throws Exception {
+    public String getRoute(String query) throws Exception {
+        // query Lat Lng
+        List<Location> resp = this.getLocations(query);
+        String sLat = resp.get(0).getLocaLat();
+        String sLng = resp.get(0).getLocaLng();
         StringBuilder urlBuilder = new StringBuilder("https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving");
         urlBuilder.append("?" + URLEncoder.encode("start","UTF-8") + "=" + URLEncoder.encode(sLat+","+sLng, "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("goal","UTF-8") + "=" + URLEncoder.encode(itCenterLat+","+itCenterLng, "UTF-8"));

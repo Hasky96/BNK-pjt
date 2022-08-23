@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MapService {
 
-    String getRoute(String sLng, String sLat) throws Exception;
+    String getRoute(String query) throws Exception;
 
     List<Location> getLocations(String query) throws Exception;
 }
