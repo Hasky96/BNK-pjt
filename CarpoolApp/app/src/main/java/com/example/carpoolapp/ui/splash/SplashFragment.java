@@ -39,6 +39,7 @@ public class SplashFragment extends Fragment {
                 if (Authorization != null) {
                     Log.d("jjk", Authorization);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                 } else {
                     //딜레이 후 시작할 코드 작성
@@ -50,6 +51,7 @@ public class SplashFragment extends Fragment {
                     requireActivity()
                             .getSupportFragmentManager()
                             .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_page_in, R.anim.slide_page_out)
                             .replace(R.id.ConstraintFragment, fragment).commit();
                 }
             }

@@ -73,7 +73,6 @@ public class myReservationFragment extends Fragment {
             List<CarpoolAllDetailRes> list = new ArrayList<>();
             for (CarpoolAllDetailRes temp: carpoolList) {
                 if(!temp.isType()) list.add(temp);
-                Log.d("jjk","1");
             }
 
             for (CarpoolAllDetailRes carpool:carpoolList){
@@ -86,11 +85,9 @@ public class myReservationFragment extends Fragment {
                     String occupantList=carpool.getOccupants().substring(1,carpool.getOccupants().length()-1);
                     String[] occupants=occupantList.split(",");
 
-                    Log.d("jjk","2");
                     for(String occupant:occupants){
                         if(occupant.equals(userId)){
                             //퇴근
-                            Log.d("jjk","3");
                             if (carpool.isType()){
                                 binding.constraintLayoutOut.setVisibility(View.VISIBLE);
                                 binding.tvNoReserve.setVisibility(View.INVISIBLE);

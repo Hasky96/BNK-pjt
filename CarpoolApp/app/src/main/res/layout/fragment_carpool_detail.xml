@@ -261,16 +261,20 @@
             
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-				android:layout_width="match_parent"
-				android:layout_height="500dp"
-				android:layout_marginTop="30dp"
-				android:background="@drawable/round_square"
-				android:elevation="10dp"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/cyCarpoolDetail">
+            <com.google.android.gms.maps.MapView
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:id="@+id/mapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/round_square"
+                android:elevation="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:name="com.google.android"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+                >
+            </com.google.android.gms.maps.MapView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

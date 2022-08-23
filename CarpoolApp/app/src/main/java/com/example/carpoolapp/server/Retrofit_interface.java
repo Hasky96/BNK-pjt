@@ -2,6 +2,8 @@ package com.example.carpoolapp.server;
 
 import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.model.CarpoolDetailRes;
+import com.example.carpoolapp.model.CarpoolMapRequest;
+import com.example.carpoolapp.model.CarpoolMapResponse;
 import com.example.carpoolapp.model.CarpoolRequest;
 import com.example.carpoolapp.model.CarpoolResponse;
 import com.example.carpoolapp.model.CarpoolsResponse;
@@ -42,6 +44,12 @@ public interface Retrofit_interface {
 	@POST("/api/user/login")
 	Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
+    @GET("/api/user/info")
+    Call<UserInfoResponse> userInfo(@Header("Authorization") String Authorization);
+
+    @POST("/api/map/route")
+    Call<CarpoolMapResponse> mapList(@Header("Authorization") String Authorization, @Body CarpoolMapRequest carpoolMapRequest);
+
 	@POST("/api/user/signup")
 	Call<SignupResponse> signup(@Body SignupRequest signupRequest);
 
@@ -51,6 +59,5 @@ public interface Retrofit_interface {
 	@PUT("/api/user/pwupdate")
 	Call<UserUpdatePwResponse> updatePwUser(@Header("Authorization") String Authorization, @Body UserUpdatePwRequest userUpdatePwRequest);
 
-	@GET("/api/user/info")
-	Call<UserInfoResponse> userInfo(@Header("Authorization") String Authorization);
+
 }
