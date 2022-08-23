@@ -177,7 +177,7 @@ CARPOOL
     * GETROUTE(POST)
   ```
   /api/map/route
-  ````
+  ```
   Header
   ```
   {
@@ -191,3 +191,19 @@ CARPOOL
     "longitude" : "35.1528347"
   }
   ```
+  ---
+  * GETADDRESS(GET)
+  ```
+  api/map/loca
+  ```
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  PARAM
+  ```
+    query={검색어} ex) 문현역, 사상역, 미음산단로 127번길 21
+  ```
+  
