@@ -1,8 +1,9 @@
 package com.example.carpoolapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CarpoolDetailRes {
+public class CarpoolDetailRes implements Serializable {
 
 	private int carpoolNo;
 	private int writerNo;
@@ -15,9 +16,16 @@ public class CarpoolDetailRes {
 	private String created;
 	private String time;
 	private String occupants;
+	private String writerId;
+	private String carNo;
+	private String carInfo;
 	private List<CommentDto> comments;
 
-	public CarpoolDetailRes(int carpoolNo, int writerNo, int driverNo, boolean type, String location, int quota, String info, int fee, String created, String time, String occupants, List<CommentDto> comments) {
+	public CarpoolDetailRes(){
+
+	}
+
+	public CarpoolDetailRes(int carpoolNo, int writerNo, int driverNo, boolean type, String location, int quota, String info, int fee, String created, String time, String occupants, String writerId, String carNo, String carInfo, List<CommentDto> comments) {
 		this.carpoolNo = carpoolNo;
 		this.writerNo = writerNo;
 		this.driverNo = driverNo;
@@ -29,6 +37,9 @@ public class CarpoolDetailRes {
 		this.created = created;
 		this.time = time;
 		this.occupants = occupants;
+		this.writerId = writerId;
+		this.carNo = carNo;
+		this.carInfo = carInfo;
 		this.comments = comments;
 	}
 
@@ -118,6 +129,30 @@ public class CarpoolDetailRes {
 
 	public void setOccupants(String occupants) {
 		this.occupants = occupants;
+	}
+
+	public String getWriterId() {
+		return writerId;
+	}
+
+	public void setWriterId(String writerId) {
+		this.writerId = writerId;
+	}
+
+	public String getCarNo() {
+		return carNo;
+	}
+
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+
+	public String getCarInfo() {
+		return carInfo;
+	}
+
+	public void setCarInfo(String carInfo) {
+		this.carInfo = carInfo;
 	}
 
 	public List<CommentDto> getComments() {

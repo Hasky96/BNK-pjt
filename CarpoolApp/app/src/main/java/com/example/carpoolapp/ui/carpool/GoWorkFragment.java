@@ -68,4 +68,10 @@ public class GoWorkFragment extends Fragment {
 		carpoolViewModel.loadCarpools();
 
 	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		carpoolViewModel.loadCarpools();
+	}
 }

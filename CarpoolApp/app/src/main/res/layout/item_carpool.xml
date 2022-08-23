@@ -20,16 +20,18 @@
         <TextView
 			android:id="@+id/tvItemcarpoolType"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:layout_marginLeft="20dp"
+			android:layout_marginTop="5dp"
 			android:text="출근"
 			android:textColor="@color/white"
-			android:textSize="23dp" />
-
-        <LinearLayout
+			android:textSize="18sp" />
+		
+		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="220dp"
+			android:layout_marginTop="5dp"
 			android:orientation="horizontal">
 
             <TextView
@@ -39,14 +41,14 @@
 				android:layout_marginLeft="25dp"
 				android:text="현"
 				android:textColor="@color/white"
-				android:textSize="23dp" />
+				android:textSize="18dp" />
 
             <TextView
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
 				android:text="/"
 				android:textColor="@color/white"
-				android:textSize="23dp" />
+				android:textSize="18dp" />
 
             <TextView
 				android:id="@+id/tvTotalPerson"
@@ -54,7 +56,7 @@
 				android:layout_height="match_parent"
 				android:text="수"
 				android:textColor="@color/white"
-				android:textSize="23dp" />
+				android:textSize="18dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -81,6 +83,10 @@
 			android:text="출발"
 			android:textSize="28sp"
 			android:textStyle="bold"
+			android:focusable="true"
+			android:singleLine="true"
+			android:ellipsize="marquee"
+			android:marqueeRepeatLimit="marquee_forever"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,12 +121,10 @@
 			android:id="@+id/tvItemCarNum"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="15dp"
-			android:layout_marginRight="8dp"
 			android:text="차번호"
+			app:layout_constraintLeft_toLeftOf="@id/ivItemcar"
 			app:layout_constraintBottom_toBottomOf="@+id/ivItemcar"
-			app:layout_constraintRight_toRightOf="@+id/ivItemcar"
-			app:layout_constraintStart_toStartOf="@id/ivItemcar" />
+			/>
 
         <TextView
 			android:id="@+id/tvDestinationLoc"
@@ -133,6 +137,10 @@
 			android:text="도착지점"
 			android:textSize="30sp"
 			android:textStyle="bold"
+			android:focusable="true"
+			android:singleLine="true"
+			android:ellipsize="marquee"
+			android:marqueeRepeatLimit="marquee_forever"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 

@@ -60,8 +60,15 @@ public class BackHomeFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		Log.d(">>", "onstart");
+		Log.d(">>", "backhome fg onstart");
 		carpoolViewModel.loadCarpools();
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		carpoolViewModel.loadCarpools();
+		Log.d(">>","back home onresume");
 	}
 }

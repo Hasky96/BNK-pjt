@@ -14,13 +14,14 @@ public class CarpoolAllDetailRes {
 	private int fee;
 	private String created;
 	private String time;
+	private String carNo;
 	private String occupants;
 
 	public CarpoolAllDetailRes() {
 
 	}
 
-	public CarpoolAllDetailRes(int carpoolNo, int writerNo, int driverNo, boolean type, String location, int quota, String info, int fee, String created, String time, String occupants) {
+	public CarpoolAllDetailRes(int carpoolNo, int writerNo, int driverNo, boolean type, String location, int quota, String info, int fee, String created, String time, String carNo, String occupants) {
 		this.carpoolNo = carpoolNo;
 		this.writerNo = writerNo;
 		this.driverNo = driverNo;
@@ -31,6 +32,7 @@ public class CarpoolAllDetailRes {
 		this.fee = fee;
 		this.created = created;
 		this.time = time;
+		this.carNo = carNo;
 		this.occupants = occupants;
 	}
 
@@ -114,6 +116,14 @@ public class CarpoolAllDetailRes {
 		this.time = time;
 	}
 
+	public String getCarNo() {
+		return carNo;
+	}
+
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+
 	public String getOccupants() {
 		return occupants;
 	}
@@ -121,5 +131,4 @@ public class CarpoolAllDetailRes {
 	public void setOccupants(String occupants) {
 		this.occupants = occupants;
 	}
-
 }
