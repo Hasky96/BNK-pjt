@@ -174,3 +174,23 @@ CARPOOL
     "Authorization" : "Bearer JWT"
   }
   ```
+  
+    ---
+  ```
+    * GETROUTE(POST)
+  ```
+  /api/map/route
+  ````
+  Header
+  ```
+  {
+    "Authorization" : "Bearer JWT"
+  }
+  ```
+  body
+  ```json
+  {
+    "latitude" : "129.0653633",
+    "longitude" : "35.1528347"
+  }
+  ```
