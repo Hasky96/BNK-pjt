@@ -35,7 +35,7 @@ public class Comments {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @Column(name = "comment_content")
+    @Column(name = "comment_content", length = 100)
     private String commentContent;
 
     @Builder

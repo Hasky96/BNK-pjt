@@ -104,6 +104,7 @@ public class CarpoolServiceImpl implements CarpoolService{
         }
         if (!flag) return false; //
         occupantsRepository.deleteByRelationNo(relationNo);
+        carpool.setCarpoolFee(carpool.getCarpoolFee()-100);
         return true;//
     }
 

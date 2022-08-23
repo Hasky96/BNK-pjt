@@ -24,6 +24,10 @@ public class CarpoolDetailRes {
 
     private int writerNo;
 
+    private String carNo;
+
+    private String carInfo;
+
     private String writerId;
 
     private int driverNo;
@@ -53,7 +57,11 @@ public class CarpoolDetailRes {
         this.carpoolNo = carpool.getCarpoolNo();
         this.writerNo = carpool.getCarpoolWriter().getUserNo();
         this.writerId = carpool.getCarpoolWriter().getUserId();
-        if(carpool.getCarpoolDriver() != null) this.driverNo = carpool.getCarpoolDriver().getUserNo();
+        if(carpool.getCarpoolDriver() != null){
+            this.driverNo = carpool.getCarpoolDriver().getUserNo();
+            this.carNo = carpool.getCarpoolDriver().getUserCarNo();
+            this.carInfo = carpool.getCarpoolDriver().getUserCarInfo();
+        }
         this.created = carpool.getCarpoolCreated();
         this.fee = carpool.getCarpoolFee();
         this.info = carpool.getCarpoolInfo();

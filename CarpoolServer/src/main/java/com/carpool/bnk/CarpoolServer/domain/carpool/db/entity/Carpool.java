@@ -39,13 +39,13 @@ public class Carpool {
     @Column(name = "carpool_type")
     private boolean carpoolType;  // true : 퇴근, false : 출근
 
-    @Column(name = "carpool_location")
+    @Column(name = "carpool_location", length = 50)
     private String carpoolLocation;
 
     @Column(name = "carpool_quota")
     private int carpoolQuota;
 
-    @Column(name = "carpool_info")
+    @Column(name = "carpool_info", length = 300)
     private String carpoolInfo;
 
     @Column(name = "carpool_mileage")

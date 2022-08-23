@@ -21,7 +21,7 @@ public class MapController {
     @PostMapping("/route")
 //    public ResponseEntity<?> getRoute() throws Exception{
     public ResponseEntity<?> getRoute(@RequestBody MapRouteReq body) throws Exception {
-        String path = mapService.getRoute(body.getLongitude(), body.getLatitude());
+        String path = mapService.getRoute(body.getQuery());
         return ResponseEntity.status(200).body(new MapRouteRes("SUCCESS!", path));
     }
 
