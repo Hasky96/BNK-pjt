@@ -3,6 +3,8 @@ package com.example.carpoolapp.server;
 import androidx.lifecycle.LiveData;
 
 import com.example.carpoolapp.model.CarpoolDetailRes;
+import com.example.carpoolapp.model.CarpoolMapRequest;
+import com.example.carpoolapp.model.CarpoolMapResponse;
 import com.example.carpoolapp.model.CarpoolRequest;
 import com.example.carpoolapp.model.CarpoolResponse;
 import com.example.carpoolapp.model.CarpoolsResponse;
@@ -47,4 +49,8 @@ public interface Retrofit_interface {
 
     @GET("/api/user/info")
     Call<UserInfoResponse> userInfo(@Header("Authorization") String Authorization);
+
+    @POST("/api/map/route")
+    Call<CarpoolMapResponse> mapList(@Header("Authorization") String Authorization, @Body CarpoolMapRequest carpoolMapRequest);
+
 }

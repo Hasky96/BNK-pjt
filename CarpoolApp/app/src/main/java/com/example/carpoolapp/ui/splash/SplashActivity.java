@@ -30,6 +30,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         String status=getIntent().getStringExtra("status");
 
+//        overridePendingTransition(R.anim.slide_page_up,R.anim.slide_page_down);
+
         if(status!=null && status.equals("logout")) {
             LoginFragment fragment=new LoginFragment();
             Bundle bundle=new Bundle();
