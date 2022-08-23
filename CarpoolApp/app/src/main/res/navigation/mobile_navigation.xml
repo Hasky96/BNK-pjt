@@ -71,11 +71,23 @@
 			android:id="@+id/carpoolDetailFragment"
 			android:name="com.example.carpoolapp.ui.carpool.CarpoolDetailFragment"
 			android:label="fragment_carpool_detail"
-			tools:layout="@layout/fragment_carpool_detail"/>
-    </navigation><fragment
-	android:id="@+id/carpoolDetailFragment2"
-	android:name="com.example.carpoolapp.ui.carpool.CarpoolDetailFragment"
-	android:label="fragment_carpool_detail"
-	tools:layout="@layout/fragment_carpool_detail" />
+			tools:layout="@layout/fragment_carpool_detail" />
+    </navigation>
+	
+	<fragment
+		android:id="@+id/carpoolDetailFragment2"
+		android:name="com.example.carpoolapp.ui.carpool.CarpoolDetailFragment"
+		android:label="fragment_carpool_detail"
+		tools:layout="@layout/fragment_carpool_detail">
+		<action
+			android:id="@+id/action_carpoolDetailFragment2_to_carpoolRegisterActivity"
+			app:destination="@id/carpoolRegisterActivity" />
+	</fragment>
+	
+	<activity
+		android:id="@+id/carpoolRegisterActivity"
+		android:name="com.example.carpoolapp.ui.carpool.CarpoolRegisterActivity"
+		android:label="activity_carpool_register"
+		tools:layout="@layout/activity_carpool_register" />
 
 </navigation>

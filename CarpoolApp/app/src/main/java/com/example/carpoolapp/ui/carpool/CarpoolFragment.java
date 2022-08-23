@@ -63,10 +63,10 @@ public class CarpoolFragment extends Fragment {
 		new TabLayoutMediator(tabLayout, viewPager2,
 				(tab, position) -> {
 				if( position == 0){
-					tab.setText("출근");
+					tab.setText(" 출근 ");
 				}
 				else{
-					tab.setText("퇴근");
+					tab.setText(" 퇴근 ");
 
 				}
 				}
@@ -83,7 +83,6 @@ public class CarpoolFragment extends Fragment {
 //		carpoolViewModel.getCarpools().observe(this, carpoolList -> {
 //			carpoolAdapter.submitList(carpoolList);
 //		});
-
 	}
 
 	@Override
@@ -97,7 +96,6 @@ public class CarpoolFragment extends Fragment {
 		super.onStart();
 		Log.d(">>", "onstart");
 //		carpoolViewModel.loadCarpools();
-
 	}
 
 	@Override

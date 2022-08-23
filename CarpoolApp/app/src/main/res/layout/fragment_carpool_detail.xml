@@ -1,42 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.carpool.CarpoolDetailFragment">
+												   xmlns:app="http://schemas.android.com/apk/res-auto"
+												   xmlns:tools="http://schemas.android.com/tools"
+												   android:layout_width="match_parent"
+												   android:layout_height="match_parent"
+												   tools:context=".ui.carpool.CarpoolDetailFragment">
     <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/carpool_detail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+		android:id="@+id/imgLogo"
+		android:layout_width="100dp"
+		android:layout_height="50dp"
+		android:layout_marginStart="8dp"
+		android:src="@drawable/carpool_detail"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:contentDescription="@string/app_name"
-        android:fillViewport="true"
-        app:layout_constraintStart_toStartOf="@id/imgLogo"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo">
+		android:layout_width="match_parent"
+		android:layout_height="550dp"
+		android:contentDescription="@string/app_name"
+		android:fillViewport="true"
+		app:layout_constraintStart_toStartOf="@id/imgLogo"
+		app:layout_constraintTop_toBottomOf="@+id/imgLogo">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp">
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="20dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/round_square"
-                android:elevation="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+				android:id="@+id/cyCarpoolDetail"
+				android:layout_width="match_parent"
+				android:layout_height="360dp"
+				android:layout_marginTop="20dp"
+				android:background="@drawable/round_square"
+				android:elevation="10dp"
+				android:padding="10dp"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+                
+                <LinearLayout
+					android:id="@+id/lyDetailLoc"
+					android:layout_width="300dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_marginTop="13dp"
+					android:orientation="horizontal"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent">
+                
+                    <TextView
+						android:layout_width="70dp"
+						android:layout_height="wrap_content"
+						android:text="출발 장소"
+						android:textColor="@color/black"
+						android:textSize="15sp" />
+                    
+                    <TextView
+						android:id="@+id/tvDetailLoc"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ems="10"
+						android:focusable="true"
+						android:singleLine="true"
+						android:ellipsize="marquee"
+						android:marqueeRepeatLimit="marquee_forever"
+						android:textSize="20sp" />
+                </LinearLayout>
+                
+                <LinearLayout
+					android:id="@+id/lyDetailTime"
+					android:layout_width="300dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+					android:orientation="horizontal"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailLoc">
+                
+                <TextView
+					android:layout_width="70dp"
+					android:layout_height="wrap_content"
+					android:text="출발 시간"
+					android:textColor="@color/black"
+					android:textSize="15sp" />
+                
+                <TextView
+					android:id="@+id/tvDetailTime"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="10"
+					android:textSize="20sp" />
+                </LinearLayout>
+                
+                <LinearLayout
+					android:id="@+id/lyDetailDate"
+					android:layout_width="300dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_marginTop="15dp"
+					android:orientation="horizontal"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailTime">
+                
+                <TextView
+					android:layout_width="70dp"
+					android:layout_height="wrap_content"
+					android:text="출발 날짜"
+					android:textColor="@color/black"
+					android:textSize="15sp" />
+                
+                <TextView
+					android:id="@+id/tvDetailDate"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="10"
+					android:textSize="20sp" />
+                </LinearLayout>
+				
+				<LinearLayout
+					android:id="@+id/lyDetailPerson"
+					android:layout_width="300dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_marginTop="15dp"
+					android:layout_marginLeft="5dp"
+					android:orientation="horizontal"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailDate">
+                
+                <TextView
+					android:layout_width="70dp"
+					android:layout_height="wrap_content"
+					android:text="인원"
+					android:textColor="@color/black"
+					android:textSize="15sp" />
+                
+                <TextView
+					android:id="@+id/ttvDetailPerson"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="10"
+					android:textSize="20sp" />
+                </LinearLayout>
+                
+                <LinearLayout
+					android:id="@+id/lyDetailInfo"
+					android:layout_width="300dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_marginTop="15dp"
+					android:orientation="horizontal"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailPerson">
+                
+                <TextView
+					android:layout_width="70dp"
+					android:layout_height="wrap_content"
+					android:text="특이사항"
+					android:textColor="@color/black"
+					android:textSize="15sp" />
+                
+                <TextView
+					android:id="@+id/tvDetailCarInfo"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="10"
+					android:textSize="20sp" />
+                </LinearLayout>
+				
+				<LinearLayout
+					android:id="@+id/lyDetailWriter"
+					android:layout_width="300dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_marginTop="15dp"
+					android:orientation="horizontal"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailInfo">
+                
+                <TextView
+					android:layout_width="70dp"
+					android:layout_height="wrap_content"
+					android:text="작성자"
+					android:textColor="@color/black"
+					android:textSize="15sp" />
+                
+                <TextView
+					android:id="@+id/tvDetailWriter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="10"
+					android:textSize="20sp" />
+                </LinearLayout>
+				
+				
+				<Button
+					android:id="@+id/btnCarpoolUpdate"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
+					android:layout_marginTop="25dp"
+					android:layout_marginBottom="8dp"
+					android:layout_marginLeft="20dp"
+					android:background="@drawable/round_square"
+					android:text="카풀 수정"
+					android:textColor="@color/black"
+					android:visibility="invisible"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent"
+				
+					 />
+				
+				<Button
+					android:id="@+id/btnCarpoolDelete"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="8dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginTop="25dp"
+					android:background="@drawable/round_square"
+					android:text="카풀 삭제"
+					android:textColor="@color/black"
+					android:visibility="invisible"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintLeft_toRightOf="@+id/btnCarpoolUpdate"/>
+				
+				
+				<Button
+					android:id="@+id/btnCarpoolJoin"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
+					android:layout_marginBottom="8dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginTop="25dp"
+					android:background="@drawable/round_square"
+					android:text="카풀 참여"
+					android:textColor="@color/bnkRed"
+					android:visibility="invisible"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent" />
+				<Button
+					android:id="@+id/btnCarpoolCancle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="8dp"
+					android:layout_marginRight="8dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginTop="25dp"
+					android:background="@drawable/round_square"
+					android:text="참여 취소"
+					android:visibility="invisible"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent" />
 
+            
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.gms.maps.MapView
