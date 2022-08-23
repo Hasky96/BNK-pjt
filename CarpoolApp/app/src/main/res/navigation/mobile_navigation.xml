@@ -9,7 +9,11 @@
 		android:id="@+id/navigation_myReservation"
 		android:name="com.example.carpoolapp.ui.myReservation.myReservationFragment"
 		android:label="@string/title_MyReservation"
-		tools:layout="@layout/fragment_myreservation" />
+		tools:layout="@layout/fragment_myreservation" >
+		<action
+			android:id="@+id/action_navigation_myReservation_to_carpoolDetailFragment2"
+			app:destination="@id/carpoolDetailFragment2" />
+	</fragment>
 
     <fragment
 		android:id="@+id/navigation_carpool"
