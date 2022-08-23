@@ -108,6 +108,7 @@ CARPOOL
     "carpoolTime": "2022-08-15T12:13:14"
   }
   ```
+  ---
   * CARPOOLDONE(POST)
   ```
   /api/carpool/{carpoolNo}/done
@@ -146,24 +147,21 @@ CARPOOL
     "carpoolLocation":"location",
     "carpoolQuota":5,
     "carpoolInfo":"Info",
-    "carpoolFee":3000,
     "carpoolTime": "2022-08-15T12:13:14"
   }
   ```
   ---
-  ```
     * CARPOOLLEAVE(POST)
   ```
   /api/carpool/leave/{carpoolNo}
-  ````
+  ```
   Header
   ```
   {
     "Authorization" : "Bearer JWT"
   }
   ```
-    ---
-  ```
+  ---
     * CARPOOLDETAIL(GET)
   ```
   /api/carpool/{carpoolNo}
@@ -175,8 +173,7 @@ CARPOOL
   }
   ```
   
-    ---
-  ```
+  ---
     * GETROUTE(POST)
   ```
   /api/map/route
