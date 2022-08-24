@@ -63,12 +63,15 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
         preferences= getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
 
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean autoLogin;
+                if (binding.checkBox.isChecked()){autoLogin=true;}
+                else {autoLogin=false;}
+
                 LoginRequest loginRequest=new LoginRequest(userId, userPw);
                 call=Retrofit_client.getApiService().login(loginRequest);
                 call.enqueue(new Callback<LoginResponse>() {
@@ -84,6 +87,8 @@ public class LoginFragment extends Fragment {
                             editor.putString("Authorization",Authorization);
                             editor.putString("userCarInfo",loginResponse.getUserCarInfo());
                             editor.putString("userCarNo",loginResponse.getUserCarNo());
+                            editor.putBoolean("autoLogin",autoLogin);
+                            editor.remove("status");
                             editor.commit();
                             //editor.clear(); //초기화
                             //로그인처리가 되면 카풀앱으로

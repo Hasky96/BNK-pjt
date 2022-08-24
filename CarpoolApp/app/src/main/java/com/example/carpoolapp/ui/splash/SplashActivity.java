@@ -51,4 +51,13 @@ public class SplashActivity extends AppCompatActivity {
                     .replace(R.id.ConstraintFragment, fragment).commit();
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        String status=getIntent().getStringExtra("status");
+        if (status!="logout"){
+            finish();
+        }
+    }
 }
