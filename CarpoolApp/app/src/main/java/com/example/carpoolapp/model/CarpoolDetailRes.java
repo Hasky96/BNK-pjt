@@ -162,4 +162,25 @@ public class CarpoolDetailRes implements Serializable {
 	public void setComments(List<CommentDto> comments) {
 		this.comments = comments;
 	}
+
+	@Override
+	public String toString() {
+		return "CarpoolDetailRes{" +
+				"carpoolNo=" + carpoolNo +
+				", writerNo=" + writerNo +
+				", driverNo=" + driverNo +
+				", type=" + type +
+				", location='" + location + '\'' +
+				", quota=" + quota +
+				", info='" + info + '\'' +
+				", fee=" + fee +
+				", created='" + created + '\'' +
+				", time='" + time + '\'' +
+				", occupants='" + occupants + '\'' +
+				", writerId='" + writerId + '\'' +
+				", carNo='" + carNo + '\'' +
+				", carInfo='" + carInfo + '\'' +
+				", comments=" + comments +
+				'}';
+	}
 }

@@ -64,5 +64,4 @@ public interface Retrofit_interface {
 	@PUT("/api/user/pwupdate")
 	Call<UserUpdatePwResponse> updatePwUser(@Header("Authorization") String Authorization, @Body UserUpdatePwRequest userUpdatePwRequest);
 
-
 }
