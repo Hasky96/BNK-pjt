@@ -22,6 +22,7 @@ public class MapController {
 //    public ResponseEntity<?> getRoute() throws Exception{
     public ResponseEntity<?> getRoute(@RequestBody MapRouteReq body) throws Exception {
         String path = mapService.getRoute(body.getQuery());
+        if(path.equals("Wrong Address")) return ResponseEntity.status(400).body(new MapRouteRes("Error Wrong Address", null));
         return ResponseEntity.status(200).body(new MapRouteRes("SUCCESS!", path));
     }
 
