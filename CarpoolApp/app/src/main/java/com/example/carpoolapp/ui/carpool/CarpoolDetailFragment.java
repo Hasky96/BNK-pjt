@@ -3,6 +3,7 @@ package com.example.carpoolapp.ui.carpool;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -38,6 +39,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -199,24 +201,22 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
             @Override
             public void run()
             {
+                LatLngBounds.Builder bounds=LatLngBounds.builder();
                 String[] list=pathList.split("\\],\\[");
                 List<LatLng> gpsList=new ArrayList<>();
                 for(String gps:list){
                     String[] latlon=gps.split(",");
-                    gpsList.add(new LatLng(Double.valueOf(latlon[1]),Double.valueOf(latlon[0])));
+                    LatLng latLng=new LatLng(Double.valueOf(latlon[1]),Double.valueOf(latlon[0]));
+                    gpsList.add(latLng);
+                    bounds.include(latLng);
                 }
-                Polyline polyline=googleMap.addPolyline(new PolylineOptions()
+                Polyline polyline=googleMap.addPolyline(new PolylineOptions().color(Color.parseColor("#D7191F"))
                         .clickable(true).addAll(gpsList));
                 //카메라이동
                 int all=gpsList.size();
                 int half=all/2;
-                CameraPosition cameraOption=CameraPosition.builder()
-                        .target(gpsList.get(half))
-                        .zoom(10.4f)
-                        .build();
-                CameraUpdate camera=CameraUpdateFactory.newCameraPosition(cameraOption);
-                googleMap.moveCamera(camera);
 
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(),100));
                 //출발,도착 마커
                 BitmapDrawable bitmapStart=(BitmapDrawable)getResources().getDrawable(R.drawable.marker_start);
                 BitmapDrawable bitmapEnd=(BitmapDrawable)getResources().getDrawable(R.drawable.marker_end);
@@ -232,7 +232,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
                 googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
                         .position(gpsList.get(all-1)).title("도착"));
             }
-        }, 600);
+        }, 1000);
 
     }
 }
