@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.carpoolapp.model.CarpoolJoinReq;
 import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.model.CarpoolAllDetailRes;
 import com.example.carpoolapp.model.CarpoolDetailRes;
@@ -106,24 +107,20 @@ public class CarpoolViewModel extends AndroidViewModel {
 		});
 	}
 
-	public void joinCarpool(int carpoolNo){
+	public void joinCarpool(int carpoolNo, boolean isDriverExist){
+		CarpoolJoinReq joinReq = new CarpoolJoinReq(isDriverExist);
+		Log.d(">>ss", isDriverExist +"");
 		carpoolService = Retrofit_client.getApiService();
-		Call<CommonResponse> joinCarpool = carpoolService.joinCarpool(Authorization, carpoolNo);
+		Call<CommonResponse> joinCarpool = carpoolService.joinCarpool(Authorization, carpoolNo, joinReq);
 		joinCarpool.enqueue(new Callback<CommonResponse>() {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+
+				Log.d(">>ss", joinReq.isDriver() +"");
 				Log.d(">>","carpool join success " +response.code());
 				if(response.code() == 200){
-//					Log.d(">>", "carpool join Success " + response.body().getMsg());
 					msg.setValue("카풀에 참여되었습니다");
-
 				}else {
-
-//					Gson gson = new GsonBuilder().create();
-//					Type type = new TypeToken<CommonResponse>() {}.getType();
-//					CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
-//					Log.d(">>","carpool join failed " +errorResponse.getMsg());
-//					CommonResponse com = response.errorBody();
 					msg.setValue("카풀 참여에 실패하였습니다");
 				}
 				loadCarpoolDetail(carpoolNo);

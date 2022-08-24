@@ -151,7 +151,22 @@
 					android:id="@+id/ttvDetailPerson"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:ems="10"
+					android:ems="3"
+					android:textSize="20sp" />
+					
+					 <TextView
+						 android:layout_width="70dp"
+						 android:layout_height="wrap_content"
+						 android:text="운전자"
+						 android:textColor="@color/black"
+						 android:textSize="15sp" />
+                
+                <TextView
+					android:id="@+id/ttvDetailDriver"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="3"
+					android:text="없음"
 					android:textSize="20sp" />
                 </LinearLayout>
                 
