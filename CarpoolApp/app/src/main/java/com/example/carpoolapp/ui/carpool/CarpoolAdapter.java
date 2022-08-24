@@ -71,12 +71,13 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 	@Override
 	public void onBindViewHolder(@NonNull CarpoolViewHolder holder, int position) {
 		CarpoolAllDetailRes carpool = differ.getCurrentList().get(position);
-		// holder에 계속 set
 
+		// holder에 계속 set
 		holder.tvItemDepartTime.setText(carpool.getTime().split("T")[1].substring(0,5));
 		Log.d(">>", activity.getCallingActivity() + "");
 		holder.tvDepartLoc.setSelected(true);
 		holder.tvDestinationLoc.setSelected(true);
+
 		// 가지고 오는 데이터 개수가 3개여서 출근, 퇴근으로 색을 나누어도 각 탭에는 3개의 아이템이 만들어진다
 		// 결국 출근, 퇴근 나누어서 가지고 오는게 나을 듯??
 		if( carpool.isType() && carpoolType ){

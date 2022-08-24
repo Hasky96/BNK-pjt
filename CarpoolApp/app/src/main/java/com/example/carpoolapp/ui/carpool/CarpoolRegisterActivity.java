@@ -66,7 +66,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 	private SharedPreferences preferences;
 	private String Authorization;
 	int mhourOfDay, mminute;
-	CarpoolDetailRes cdetail = new CarpoolDetailRes();;
+	CarpoolDetailRes cdetail = new CarpoolDetailRes();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,6 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		spPersonamount.setAdapter(arrayAdapter);
 
 		Intent intent = getIntent();
-//		Log.d(">>","wwwww "+ intent.getStringExtra("from"));
 		if (intent.getStringExtra("from") != null && intent.getStringExtra("from").equals("detail")){
 
 			btnCarpoolRegister.setText("수정");
@@ -196,8 +195,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 					Log.d(">>", "unchecked" + carpoolRequest.getCarpoolDriver());
 				}
 
+				// 버튼 텍스트에 따라서 요청을 다르게 한다
 				carpoolService = Retrofit_client.getApiService();
-
 				if( btnCarpoolRegister.getText().equals("등록")){
 					Call<CarpoolResponse> call = carpoolService.insertCarpool(Authorization, carpoolRequest);
 					call.enqueue(new Callback<CarpoolResponse>() {

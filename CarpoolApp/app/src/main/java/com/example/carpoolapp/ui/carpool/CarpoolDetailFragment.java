@@ -172,6 +172,8 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
             if( preferences.getInt("userNo",1) == cdetail.getWriterNo()){
                 binding.btnCarpoolUpdate.setVisibility(View.VISIBLE);
                 binding.btnCarpoolDelete.setVisibility(View.VISIBLE);
+                binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
+                binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
             }
         });
 

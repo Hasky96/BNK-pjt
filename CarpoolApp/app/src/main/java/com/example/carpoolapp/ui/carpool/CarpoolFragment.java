@@ -35,9 +35,7 @@ public class CarpoolFragment extends Fragment {
 	private final int numPage = 2;
 	private ViewPager2 viewPager2;
 	private FragmentStateAdapter fragmentStateAdapter;
-	private View indicator;
 	TabLayout tabLayout;
-	int indicatorWidth;
 
 	public View onCreateView(@NonNull LayoutInflater inflater,
 							 ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +49,6 @@ public class CarpoolFragment extends Fragment {
 				startActivity(intent);
 			}
 		});
-
 
 		//adapter
 		fragmentStateAdapter = new TabFragmentAdapter(getActivity(), numPage);
@@ -72,17 +69,12 @@ public class CarpoolFragment extends Fragment {
 				}
 		).attach();
 
-
 		return root;
 	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
-//		carpoolViewModel.getCarpools().observe(this, carpoolList -> {
-//			carpoolAdapter.submitList(carpoolList);
-//		});
 	}
 
 	@Override
@@ -95,7 +87,6 @@ public class CarpoolFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		Log.d(">>", "onstart");
-//		carpoolViewModel.loadCarpools();
 	}
 
 	@Override
