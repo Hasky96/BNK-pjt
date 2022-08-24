@@ -102,7 +102,8 @@ public class CarpoolViewModel extends AndroidViewModel {
 
 			@Override
 			public void onFailure(Call<CarpoolDetailRes> call, Throwable t) {
-				Log.d(">>","carpool detaili fail");
+				Log.d(">>","carpool detaili fail " + t.getMessage());
+
 			}
 		});
 	}

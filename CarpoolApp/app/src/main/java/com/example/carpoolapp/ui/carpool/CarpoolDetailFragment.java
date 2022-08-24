@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Handler;
 import android.os.Parcelable;
@@ -171,16 +172,7 @@ import retrofit2.Response;
 //                 }
 //             });
 
-//             // Comments
-//             Log.d("1q2w3e", cdetail.toString());
-//             Bundle bundle = new Bundle();
-//             List<CommentDto> comments = cdetail.getComments();
-//             bundle.putSerializable("comments", (Serializable) comments);
-//             bundle.putInt("carpoolWriterNo",cdetail.getWriterNo());
-//             CarpoolCommentsFragement carpoolCommentsFragement = new CarpoolCommentsFragement();
-//             carpoolCommentsFragement.setArguments(bundle);
-//             requireActivity().getSupportFragmentManager().beginTransaction()
-//                     .replace(R.id.commentFragment, carpoolCommentsFragement).commit();
+
 
 //             if( CarpoolUtil.isUserInCarpool(cdetail,preferences.getString("userId",null)) ){
 //                 binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
@@ -294,6 +286,8 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
+
 
 		binding = FragmentCarpoolDetailBinding.inflate(inflater, container, false);
 		View root = binding.getRoot();
@@ -427,6 +421,24 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				public void onFailure(Call<CarpoolMapResponse> call, Throwable t) {
 				}
 			});
+
+			 // Comments
+             Bundle bundle = new Bundle();
+             List<CommentDto> comments = carpoolDetail.getComments();
+				 StringBuilder sb = new StringBuilder();
+				 for(CommentDto dto:comments){
+					 sb.append(dto.toString()).append("/");
+				 }
+				 sb.setLength(sb.length()==0?0:sb.length()-1);
+//				 sb.setLength(sb.length()-1);
+				 String temp = sb.toString();
+				 bundle.putString("comments", temp);
+				 bundle.putInt("carpoolWriterNo",carpoolDetail.getWriterNo());
+				 CarpoolCommentsFragement carpoolCommentsFragement = new CarpoolCommentsFragement();
+				 carpoolCommentsFragement.setArguments(bundle);
+				 requireActivity().getSupportFragmentManager().beginTransaction()
+						 .replace(R.id.commentFragment, carpoolCommentsFragement).commit();
+
 
 			if (CarpoolUtil.isUserInCarpool(cdetail, preferences.getString("userId", null))) {
 				binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
