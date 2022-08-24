@@ -167,7 +167,9 @@ public class MapServiceimpl implements MapService{
             JSONArray locas = (JSONArray) res.get("addresses");
             for (Object obj:locas) {
                 JSONObject temp = (JSONObject)obj;
-                list.add(new Location(temp.get("roadAddress").toString(), (String) temp.get("jibunAddress"), (String) temp.get("x"), (String) temp.get("y")));
+                String roadAdd = temp.get("roadAddress").toString();
+                String jibunAdd = temp.get("jibunAddress").toString();
+                list.add(new Location(roadAdd.substring(roadAdd.indexOf(" ")+1), jibunAdd.substring(jibunAdd.indexOf(" ")+1)  ,  temp.get("x").toString(), temp.get("y").toString()));
             }
 
         }catch (Exception e){
