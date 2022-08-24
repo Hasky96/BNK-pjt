@@ -259,44 +259,45 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				.build();
 		CameraUpdate defaultCamera = CameraUpdateFactory.newCameraPosition(cameraOption);
 		googleMap.moveCamera(defaultCamera);
-		if (pathList != null) {
+
 			new Handler().postDelayed(new Runnable() {
 				@Override
 				public void run() {
+					if (pathList != null) {
+						LatLngBounds.Builder bounds = LatLngBounds.builder();
+						String[] list = pathList.split("\\],\\[");
+						List<LatLng> gpsList = new ArrayList<>();
+						for (String gps : list) {
+							String[] latlon = gps.split(",");
+							LatLng latLng = new LatLng(Double.valueOf(latlon[1]), Double.valueOf(latlon[0]));
+							gpsList.add(latLng);
+							bounds.include(latLng);
+						}
+						Polyline polyline = googleMap.addPolyline(new PolylineOptions().color(Color.parseColor("#D7191F"))
+								.clickable(true).addAll(gpsList));
+						//카메라이동
+						int all = gpsList.size();
+						int half = all / 2;
 
-					LatLngBounds.Builder bounds = LatLngBounds.builder();
-					String[] list = pathList.split("\\],\\[");
-					List<LatLng> gpsList = new ArrayList<>();
-					for (String gps : list) {
-						String[] latlon = gps.split(",");
-						LatLng latLng = new LatLng(Double.valueOf(latlon[1]), Double.valueOf(latlon[0]));
-						gpsList.add(latLng);
-						bounds.include(latLng);
+						googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100));
+						//출발,도착 마커
+						BitmapDrawable bitmapStart = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_start);
+						BitmapDrawable bitmapEnd = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_end);
+
+						Bitmap b = bitmapStart.getBitmap();
+						Bitmap smallStartMarker = Bitmap.createScaledBitmap(b, 140, 210, false);
+
+						Bitmap b2 = bitmapEnd.getBitmap();
+						Bitmap smallEndMarker = Bitmap.createScaledBitmap(b2, 120, 210, false);
+
+						googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallStartMarker))
+								.position(gpsList.get(0)).title("출발"));
+						googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
+								.position(gpsList.get(all - 1)).title("도착"));
 					}
-					Polyline polyline = googleMap.addPolyline(new PolylineOptions().color(Color.parseColor("#D7191F"))
-							.clickable(true).addAll(gpsList));
-					//카메라이동
-					int all = gpsList.size();
-					int half = all / 2;
-
-					googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100));
-					//출발,도착 마커
-					BitmapDrawable bitmapStart = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_start);
-					BitmapDrawable bitmapEnd = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_end);
-
-					Bitmap b = bitmapStart.getBitmap();
-					Bitmap smallStartMarker = Bitmap.createScaledBitmap(b, 140, 210, false);
-
-					Bitmap b2 = bitmapEnd.getBitmap();
-					Bitmap smallEndMarker = Bitmap.createScaledBitmap(b2, 120, 210, false);
-
-					googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallStartMarker))
-							.position(gpsList.get(0)).title("출발"));
-					googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
-							.position(gpsList.get(all - 1)).title("도착"));
-				}
+					}
 			}, 1000);
-		}
+
 
 
 	}
