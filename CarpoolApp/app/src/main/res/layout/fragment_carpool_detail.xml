@@ -6,7 +6,7 @@
 												   android:layout_height="match_parent"
 												   tools:context=".ui.carpool.CarpoolDetailFragment">
     <ImageView
-		android:id="@+id/imgLogo"
+		android:id="@+id/carpoolEnd"
 		android:layout_width="100dp"
 		android:layout_height="50dp"
 		android:layout_marginStart="8dp"
@@ -31,8 +31,8 @@
 		android:layout_height="550dp"
 		android:contentDescription="@string/app_name"
 		android:fillViewport="true"
-		app:layout_constraintStart_toStartOf="@id/imgLogo"
-		app:layout_constraintTop_toBottomOf="@+id/imgLogo">
+		app:layout_constraintStart_toStartOf="@id/carpoolEnd"
+		app:layout_constraintTop_toBottomOf="@+id/carpoolEnd">
 
         <androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"

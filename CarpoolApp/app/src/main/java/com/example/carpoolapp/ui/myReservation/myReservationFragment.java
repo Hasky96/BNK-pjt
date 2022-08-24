@@ -116,7 +116,9 @@ public class myReservationFragment extends Fragment {
                                 binding.tvReserveGoButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("carpoolNo", carpool.getCarpoolNo());
+                                        Navigation.findNavController(view).navigate(R.id.action_navigation_myReservation_to_carpoolDetailFragment2, bundle);
                                     }
                                 });
                             }

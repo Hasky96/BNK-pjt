@@ -109,15 +109,12 @@ public class CarpoolViewModel extends AndroidViewModel {
 
 	public void joinCarpool(int carpoolNo, boolean isDriverExist){
 		CarpoolJoinReq joinReq = new CarpoolJoinReq(isDriverExist);
-		Log.d(">>ss", isDriverExist +"");
+		Log.d(">>ss", joinReq.isDriver() +"");
 		carpoolService = Retrofit_client.getApiService();
 		Call<CommonResponse> joinCarpool = carpoolService.joinCarpool(Authorization, carpoolNo, joinReq);
 		joinCarpool.enqueue(new Callback<CommonResponse>() {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-
-				Log.d(">>ss", joinReq.isDriver() +"");
-				Log.d(">>","carpool join success " +response.code());
 				if(response.code() == 200){
 					msg.setValue("카풀에 참여되었습니다");
 				}else {
