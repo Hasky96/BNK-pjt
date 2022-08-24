@@ -116,7 +116,7 @@ public class CarpoolViewModel extends AndroidViewModel {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
 
-				Log.d(">>ss", joinReq.isDriver() +"");
+				Log.d(">>ss", joinReq.isDriverCheck() +"");
 				Log.d(">>","carpool join success " +response.code());
 				if(response.code() == 200){
 					msg.setValue("카풀에 참여되었습니다");
@@ -140,21 +140,26 @@ public class CarpoolViewModel extends AndroidViewModel {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
 				if(response.code() == 200){
-					Log.d(">>", "carpool leave Success " + response.code() + "/" +  response.body().getMsg());
+					Log.d(">>", "carpool leave code " + response.code() + "/" +  response.body().getMsg());
 					msg.postValue("카풀 참여를 취소하였습니다");
-
 				}else {
-					Gson gson = new GsonBuilder().create();
-					Type type = new TypeToken<CommonResponse>() {}.getType();
-					CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
+						Log.d(">>", "carpool leave code " + response.code() + "/" );
+						Gson gson = new GsonBuilder().create();
+						Type type = new TypeToken<CommonResponse>() {}.getType();
+						CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
 
-					if( errorResponse.getMsg().equals("You are carpool writer! Delete the carpool!")){
-						msg.postValue("카풀 생성자 입니다. 취소할 수 없습니다");
-					}else if( errorResponse.getMsg().equals("user not in the carpool.") ){
-						msg.postValue("참여하지 않았습니다. 취소할 수 없습니다");
+						if( response.code() == 400){
+							if(errorResponse.getMsg().equals("You are carpool writer! Delete the carpool!")){
+								msg.postValue("카풀 생성자 입니다. 취소할 수 없습니다");
+							}else if( errorResponse.getMsg().equals("user not in the carpool.") ) {
+								msg.postValue("참여하지 않았습니다. 취소할 수 없습니다");
+							}
+						}
+						else if( response.code() == 406 ){
+							msg.postValue("카풀 운전자입니다. 취소할 수 없습니다");
+						}
 					}
 
-				}
 				loadCarpoolDetail(carpoolNo);
 			}
 

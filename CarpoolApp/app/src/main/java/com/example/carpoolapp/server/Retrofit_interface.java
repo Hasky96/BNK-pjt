@@ -37,6 +37,7 @@ public interface Retrofit_interface {
 	Call<CommonResponse> joinCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo, @Body CarpoolJoinReq joinReq);
 
 	@DELETE("api/carpool/leave/{carpoolNo}")
+//	@HTTP(method = "DELETE", path="api/carpool/leave/{carpoolNo}",hasBody = true)
 	Call<CommonResponse> cancelCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo);
 
 	@DELETE("api/carpool/{carpoolNo}")

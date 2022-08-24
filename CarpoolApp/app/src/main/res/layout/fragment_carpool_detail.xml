@@ -148,7 +148,7 @@
 					android:textSize="15sp" />
                 
                 <TextView
-					android:id="@+id/ttvDetailPerson"
+					android:id="@+id/tvDetailPerson"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:ems="3"
@@ -162,7 +162,7 @@
 						 android:textSize="15sp" />
                 
                 <TextView
-					android:id="@+id/ttvDetailDriver"
+					android:id="@+id/tvDetailDriver"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:ems="3"

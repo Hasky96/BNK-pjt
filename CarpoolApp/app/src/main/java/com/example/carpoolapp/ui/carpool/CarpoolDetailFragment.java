@@ -85,43 +85,65 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			public void onClick(View view) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-				if( preferences.getString("userCarNo",null) == null ) {
+				// 차가 없는 사용자라면 그냥 참여 물어본다
+				// 카풀에 운전자가 없고,
+				if(  cdetail.getDriverNo() == 0 ) {
+
+					//  차가 없는 사용자
+					if (  preferences.getString("userCarNo",null) == null){
+						builder.setTitle("참여하시겠습니까?");
+						builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								// 차 없으면 그냥 참여
+								carpoolViewModel.joinCarpool(carpoolNo, false);
+							}
+						});
+						builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+							}
+						});
+					}else{
+						// 카풀에 운전자가 없고, 사용자가 자동차를 가지고 있다면 운전자 참여여부를 물어본다
+						builder.setTitle("운전자로 참여하시겠습니까?");
+						builder.setPositiveButton("운전자로 참여", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								// 운전자로 참여
+								carpoolViewModel.joinCarpool(carpoolNo, true);
+							}
+						});
+						builder.setNegativeButton("일반참여", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								// 운전자지만 일반 참여
+								carpoolViewModel.joinCarpool(carpoolNo, false);
+							}
+						});
+						builder.setNeutralButton("취소", new DialogInterface.OnClickListener(){
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+							}
+						});
+					}
+
+				}else{
 					builder.setTitle("참여하시겠습니까?");
-					builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+					builder.setPositiveButton("참여", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-							// 차 없으면 그냥 참여
 							carpoolViewModel.joinCarpool(carpoolNo, false);
 						}
 					});
 					builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-						}
-					});
-				}else{
-					builder.setTitle("운전자로 참여하시겠습니까?");
-					builder.setPositiveButton("운전자로 참여", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							// 운전자로 참여
-							carpoolViewModel.joinCarpool(carpoolNo, true);
-						}
-					});
-					builder.setNegativeButton("일반참여", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							// 운전자지만 일반 참여
 							carpoolViewModel.joinCarpool(carpoolNo, false);
 						}
 					});
-					builder.setNeutralButton("취소", new DialogInterface.OnClickListener(){
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							// 참여 취소
-						}
-					});
 				}
+
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
 
@@ -131,7 +153,9 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 		binding.btnCarpoolCancle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				// 카풀 드라이버면 참여 취소 못한다
 				carpoolViewModel.cancelCarpool(carpoolNo);
+
 			}
 		});
 
@@ -177,12 +201,12 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 
 		carpoolNo = getArguments().getInt("carpoolNo");
 		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
-
+		carpoolViewModel.loadCarpoolDetail(carpoolNo);
 		carpoolViewModel.getCarpoolDetail(carpoolNo).observe(this, carpoolDetail -> {
 			cdetail = carpoolDetail;
 			binding.tvDetailLoc.setText(carpoolDetail.getLocation());
 			location = carpoolDetail.getLocation();
-			binding.ttvDetailPerson.setText(carpoolDetail.getOccupants().split(",").length + "/" + carpoolDetail.getQuota());
+			binding.tvDetailPerson.setText(carpoolDetail.getOccupants().split(",").length + "/" + carpoolDetail.getQuota());
 			binding.tvDetailCarInfo.setText(carpoolDetail.getInfo());
 			binding.tvDetailTime.setText(carpoolDetail.getTime().split("T")[1].substring(0, 5));
 			binding.tvDetailDate.setText(carpoolDetail.getTime().split("T")[0]);
@@ -204,6 +228,11 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				public void onFailure(Call<CarpoolMapResponse> call, Throwable t) {
 				}
 			});
+
+			if(cdetail.getDriverNo() > 0){
+				binding.tvDetailDriver.setText(Integer.toString(cdetail.getDriverNo()));
+			}
+
 
 			if (CarpoolUtil.isUserInCarpool(cdetail, preferences.getString("userId", null))) {
 				binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
@@ -241,7 +270,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 	public void onStart() {
 		super.onStart();
 		Log.d(">>", "carpool detail fg start");
-		carpoolViewModel.loadCarpoolDetail(carpoolNo);
+
 	}
 
 	@Override
