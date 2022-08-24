@@ -98,6 +98,7 @@ public class MypageFragment extends Fragment {
                 Intent intent = new Intent(getContext(), SplashActivity.class);
                 intent.putExtra("status","logout");
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
