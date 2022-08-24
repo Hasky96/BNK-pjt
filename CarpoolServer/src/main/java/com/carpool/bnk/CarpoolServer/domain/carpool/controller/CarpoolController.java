@@ -3,11 +3,13 @@ package com.carpool.bnk.CarpoolServer.domain.carpool.controller;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.entity.Carpool;
 import com.carpool.bnk.CarpoolServer.domain.carpool.db.repository.CarpoolRepository;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolCreateReq;
+import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolJoinReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.request.CarpoolUpdateReq;
 import com.carpool.bnk.CarpoolServer.domain.carpool.response.*;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolService;
 import com.carpool.bnk.CarpoolServer.domain.carpool.service.CarpoolServiceImpl;
 import com.carpool.bnk.CarpoolServer.domain.user.db.entity.User;
+import com.carpool.bnk.CarpoolServer.domain.user.db.repository.UserRepository;
 import com.carpool.bnk.CarpoolServer.global.auth.UserDetails;
 import com.carpool.bnk.CarpoolServer.global.util.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class CarpoolController {
 
     @Autowired
     CarpoolRepository carpoolRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/test")
     public ResponseEntity<String> test(){
@@ -75,8 +80,11 @@ public class CarpoolController {
     }
 
     @PostMapping("/join/{carpoolNo}")
-    public ResponseEntity<?> join(@PathVariable("carpoolNo")int carpoolNo, Authentication authentication){
+    public ResponseEntity<?> join(@PathVariable("carpoolNo")int carpoolNo, Authentication authentication, @RequestBody CarpoolJoinReq body){
+
         Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);
+        boolean isDriver = body.isDriverCheck();
+        if(isDriver && carpool.getCarpoolDriver()!=null) return ResponseEntity.status(400).body(new CommonResponse("이미 드라이버 있음"));
         if(carpool.getCarpoolQuota() == carpool.getOccupants().size()) return ResponseEntity.status(500).body(new CommonResponse("Already Full!"));
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
@@ -84,6 +92,11 @@ public class CarpoolController {
             return ResponseEntity.status(400).body(new CommonResponse("Already in List"));
         }
         boolean result = carpoolService.joinCarpool(carpool, user);
+        if(isDriver){
+            carpool.setCarpoolDriver(user);
+            carpoolRepository.save(carpool);
+        }
+
         if(result) return ResponseEntity.status(200).body(new CommonResponse("Successfully Added"));
         return ResponseEntity.status(500).body(new CommonResponse("Server Error!"));
     }
@@ -93,7 +106,8 @@ public class CarpoolController {
         Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);
         UserDetails userDetails = (UserDetails) authentication.getDetails();
         User user = userDetails.getUser();
-        if(carpool.getCarpoolWriter().getUserNo() == user.getUserNo()) return ResponseEntity.status(400).body(new CommonResponse("You are carpool writer! Delete the carpool!"));
+        if(carpool.getCarpoolWriter().getUserNo() == user.getUserNo() ) return ResponseEntity.status(400).body(new CommonResponse("You are carpool writer! Delete the carpool!"));
+        if(carpool.getCarpoolDriver() != null &&carpool.getCarpoolDriver().getUserNo() == user.getUserNo() ) return ResponseEntity.status(406).body(new CommonResponse("You are carpool Driver! You cannot cancel!"));
         boolean status = carpoolService.leaveCarpool(carpool, user);
         int statusCode = status ? 200:400;
         String msg = status ? "Successfully Deleted!":"user not in the carpool.";
