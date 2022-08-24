@@ -13,6 +13,18 @@
 		android:src="@drawable/carpool_detail"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
+	
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:layout_marginEnd="24dp"
+		android:background="@drawable/round_square"
+		android:backgroundTint="#198754"
+		android:text="카풀 완료"
+		android:textColor="@color/white"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
 		android:layout_width="match_parent"
@@ -198,71 +210,67 @@
 					android:id="@+id/btnCarpoolUpdate"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginRight="8dp"
-					android:layout_marginTop="25dp"
-					android:layout_marginBottom="8dp"
 					android:layout_marginLeft="20dp"
-					android:background="@drawable/round_square"
+					android:layout_marginTop="25dp"
+					android:layout_marginBottom="16dp"
+					android:background="@drawable/gray_round_square"
 					android:text="카풀 수정"
 					android:textColor="@color/black"
 					android:visibility="invisible"
-					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
-					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintBottom_toBottomOf="parent"
-				
-					 />
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
+					
+					/>
 				
 				<Button
 					android:id="@+id/btnCarpoolDelete"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginBottom="8dp"
 					android:layout_marginLeft="10dp"
 					android:layout_marginTop="25dp"
-					android:background="@drawable/round_square"
+					android:layout_marginBottom="16dp"
+					android:background="@drawable/gray_round_square"
 					android:text="카풀 삭제"
 					android:textColor="@color/black"
 					android:visibility="invisible"
-					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintLeft_toRightOf="@+id/btnCarpoolUpdate"/>
+					app:layout_constraintLeft_toRightOf="@+id/btnCarpoolUpdate"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
 				
 				
 				<Button
 					android:id="@+id/btnCarpoolJoin"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginRight="8dp"
-					android:layout_marginBottom="8dp"
-					android:layout_marginLeft="10dp"
 					android:layout_marginTop="25dp"
-					android:background="@drawable/round_square"
+					android:layout_marginRight="8dp"
+					android:layout_marginBottom="16dp"
+					android:background="@drawable/gray_round_square"
 					android:text="카풀 참여"
 					android:textColor="@color/bnkRed"
 					android:visibility="invisible"
-					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent" />
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
 				<Button
 					android:id="@+id/btnCarpoolCancle"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginBottom="8dp"
-					android:layout_marginRight="8dp"
-					android:layout_marginLeft="10dp"
 					android:layout_marginTop="25dp"
+					android:layout_marginRight="8dp"
+					android:layout_marginBottom="16dp"
 					android:background="@drawable/round_square"
 					android:text="참여 취소"
 					android:visibility="invisible"
-					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent" />
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
 
             
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.gms.maps.MapView
-
                 android:id="@+id/mapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"

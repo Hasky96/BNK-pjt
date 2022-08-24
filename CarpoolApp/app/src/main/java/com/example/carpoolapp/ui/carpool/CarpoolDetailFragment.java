@@ -30,6 +30,7 @@ import com.example.carpoolapp.databinding.FragmentCarpoolDetailBinding;
 import com.example.carpoolapp.model.CarpoolDetailRes;
 import com.example.carpoolapp.model.CarpoolMapRequest;
 import com.example.carpoolapp.model.CarpoolMapResponse;
+import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -105,6 +106,23 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
             }
         });
 
+        binding.btnCarpoolDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<CommonResponse> deletecall = Retrofit_client.getApiService().deleteCarpool(Authorization,carpoolNo);
+                deletecall.enqueue(new Callback<CommonResponse>() {
+                    @Override
+                    public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                        Toast.makeText(getActivity().getApplicationContext(), "삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                        Navigation.findNavController(view).navigate(R.id.action_carpoolDetailFragment2_to_navigation_carpool);
+                    }
+                    @Override
+                    public void onFailure(Call<CommonResponse> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
 
         return root;
     }
@@ -156,8 +174,11 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
             if( preferences.getInt("userNo",1) == cdetail.getWriterNo()){
                 binding.btnCarpoolUpdate.setVisibility(View.VISIBLE);
                 binding.btnCarpoolDelete.setVisibility(View.VISIBLE);
+                binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
+                binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
             }
         });
+
 
         carpoolViewModel.getMsg().observe(this, msg ->{
             cmsg = msg;

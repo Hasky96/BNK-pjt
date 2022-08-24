@@ -16,12 +16,18 @@ import com.example.carpoolapp.model.CarpoolDetailRes;
 import com.example.carpoolapp.model.CarpoolsResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 import com.example.carpoolapp.server.Retrofit_interface;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class CarpoolViewModel extends AndroidViewModel {
 
@@ -112,7 +118,12 @@ public class CarpoolViewModel extends AndroidViewModel {
 					msg.setValue("카풀에 참여되었습니다");
 
 				}else {
-//					Log.d(">>","carpool join failed " +response.errorBody().toString() );
+
+//					Gson gson = new GsonBuilder().create();
+//					Type type = new TypeToken<CommonResponse>() {}.getType();
+//					CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
+//					Log.d(">>","carpool join failed " +errorResponse.getMsg());
+//					CommonResponse com = response.errorBody();
 					msg.setValue("카풀 참여에 실패하였습니다");
 				}
 				loadCarpoolDetail(carpoolNo);
@@ -136,8 +147,16 @@ public class CarpoolViewModel extends AndroidViewModel {
 					msg.postValue("카풀 참여를 취소하였습니다");
 
 				}else {
-					Log.d(">>","carpool leave failed " +response.errorBody().toString() );
-					msg.postValue("카풀참여 취소할 수 없습니다");
+					Gson gson = new GsonBuilder().create();
+					Type type = new TypeToken<CommonResponse>() {}.getType();
+					CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
+
+					if( errorResponse.getMsg().equals("You are carpool writer! Delete the carpool!")){
+						msg.postValue("카풀 생성자 입니다. 취소할 수 없습니다");
+					}else if( errorResponse.getMsg().equals("user not in the carpool.") ){
+						msg.postValue("참여하지 않았습니다. 취소할 수 없습니다");
+					}
+
 				}
 				loadCarpoolDetail(carpoolNo);
 			}

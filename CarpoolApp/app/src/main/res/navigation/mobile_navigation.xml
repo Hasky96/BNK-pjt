@@ -84,14 +84,7 @@
 		android:label="fragment_carpool_detail"
 		tools:layout="@layout/fragment_carpool_detail">
 		<action
-			android:id="@+id/action_carpoolDetailFragment2_to_carpoolRegisterActivity"
-			app:destination="@id/carpoolRegisterActivity" />
-	</fragment>
+			android:id="@+id/action_carpoolDetailFragment2_to_navigation_carpool"
+			app:destination="@id/navigation_carpool" /></fragment>
 	
-	<activity
-		android:id="@+id/carpoolRegisterActivity"
-		android:name="com.example.carpoolapp.ui.carpool.CarpoolRegisterActivity"
-		android:label="activity_carpool_register"
-		tools:layout="@layout/activity_carpool_register" />
-
-</navigation>
+	</navigation>

@@ -50,6 +50,7 @@ public class GoWorkFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
 		carpoolViewModel.getCarpools().observe(this,carpoolList ->{
+			// 출근 아이템만 추출
 			List<CarpoolAllDetailRes> list = new ArrayList<>();
 			for (CarpoolAllDetailRes temp: carpoolList) {
 				if(!temp.isType()) list.add(temp);
