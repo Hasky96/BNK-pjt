@@ -212,13 +212,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="운전여부" />
+                android:text="차량여부" />
 
             <CheckBox
                 android:id="@+id/chkDriver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="제가 운전합니다" />
+                android:text="차 가져왔습니다" />
         </LinearLayout>
     </LinearLayout>
     

@@ -112,6 +112,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 			spPersonamount.setSelection(arrayAdapter.getPosition(cdetail.getQuota()+""));
 			edtInfo.setText(cdetail.getInfo());
 
+			Log.d(">> update ", cdetail.getDriverNo()+"");
 			if( cdetail.getDriverNo() == 0){
 				chkDriver.setChecked(false);
 
@@ -178,23 +179,19 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
 				carpoolType = rdoGrouptoggle.getCheckedRadioButtonId() == R.id.rdoBackHome ? true : false;
 				carpoolRequest.setCarpoolType(carpoolType);
-				Log.d(">>", carpoolType + "");
 
 				carpoolRequest.setCarpoolWriter(preferences.getInt("userNo", 0));
 				carpoolRequest.setCarpoolTime(strCarpoolTime);
-				Log.d(">>", strCarpoolTime);
 				carpoolRequest.setCarpoolLocation(edtLocation.getText().toString());
 				carpoolRequest.setCarpoolQuota(Integer.parseInt(spPersonamount.getSelectedItem().toString()));
-				carpoolRequest.setCarpoolFee(123);
+				carpoolRequest.setCarpoolFee(0);
 				carpoolRequest.setCarpoolInfo(edtInfo.getText().toString());
 
 				if (chkDriver.isChecked()) {
 					carpoolRequest.setCarpoolDriver(preferences.getInt("userNo", 0));
-					Log.d(">>", "checked" + carpoolRequest.getCarpoolDriver());
 				} else {
 					// 운전자 요청 글일 경우 userNo 0
 					carpoolRequest.setCarpoolDriver(0);
-					Log.d(">>", "unchecked" + carpoolRequest.getCarpoolDriver());
 				}
 
 				// 버튼 텍스트에 따라서 요청을 다르게 한다
@@ -218,6 +215,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 					callupdate.enqueue(new Callback<CommonResponse>() {
 						@Override
 						public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+							// 다시 돌아갈 때 성공 코드로 가지고 가서 성공 코드면 다시 load
+							setResult(807);
 							finish();
 						}
 

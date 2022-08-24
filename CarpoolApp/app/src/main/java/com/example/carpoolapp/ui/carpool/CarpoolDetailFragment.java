@@ -12,6 +12,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -64,6 +68,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 	private String Authorization;
 	private String location;
 	private String pathList = null;
+	ActivityResultLauncher<Intent> intentActivityResultLauncher;
 
 	CarpoolDetailRes cdetail;
 	String cmsg;
@@ -165,7 +170,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
 				intent.putExtra("cdetail", cdetail);
 				intent.putExtra("from", "detail");
-				startActivity(intent);
+				intentActivityResultLauncher.launch(intent);
 
 			}
 		});
@@ -189,6 +194,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			}
 		});
 
+
 		return root;
 	}
 
@@ -196,11 +202,23 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		preferences = getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
 		Authorization = preferences.getString("Authorization", null);
 
 		carpoolNo = getArguments().getInt("carpoolNo");
 		carpoolViewModel = new ViewModelProvider(this).get(CarpoolViewModel.class);
+
+		intentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+			@Override
+			public void onActivityResult(ActivityResult result) {
+				if( result.getResultCode() == 807 ) {
+					carpoolViewModel.loadCarpoolDetail(carpoolNo);
+				}
+
+			}
+		});
+
 		carpoolViewModel.loadCarpoolDetail(carpoolNo);
 		carpoolViewModel.getCarpoolDetail(carpoolNo).observe(this, carpoolDetail -> {
 			cdetail = carpoolDetail;
@@ -247,6 +265,14 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				binding.btnCarpoolDelete.setVisibility(View.VISIBLE);
 				binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
+			}
+
+			if( cdetail.getDriverNo()==0) {
+				binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
+				binding.tvDetailDriver.setText("없음");
+			}else{
+				binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+				binding.tvDetailDriver.setText(cdetail.getDriverNo());
 			}
 		});
 
