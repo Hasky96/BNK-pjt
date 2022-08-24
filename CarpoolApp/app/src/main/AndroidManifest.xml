@@ -45,6 +45,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDh6X-vJ8izAkxxGDDKspsf8G3G_jUnDuw" />
+        <service android:name=".service.ForcedTerminationService"
+            android:stopWithTask="false"/>
     </application>
 
 </manifest>

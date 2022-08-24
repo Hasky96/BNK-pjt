@@ -28,70 +28,70 @@ import com.google.android.material.tabs.TabLayoutMediator;
 // 카풀 리스트 프래그먼트
 public class CarpoolFragment extends Fragment {
 
-	private FragmentCarpoolBinding binding;
+    private FragmentCarpoolBinding binding;
 //	CarpoolViewModel carpoolViewModel;
 //	CarpoolAdapter carpoolAdapter;
 
-	private final int numPage = 2;
-	private ViewPager2 viewPager2;
-	private FragmentStateAdapter fragmentStateAdapter;
-	TabLayout tabLayout;
+    private final int numPage = 2;
+    private ViewPager2 viewPager2;
+    private FragmentStateAdapter fragmentStateAdapter;
+    TabLayout tabLayout;
 
-	public View onCreateView(@NonNull LayoutInflater inflater,
-							 ViewGroup container, Bundle savedInstanceState) {
-		binding = FragmentCarpoolBinding.inflate(inflater, container, false);
-		View root = binding.getRoot();
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentCarpoolBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-		binding.flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
-				startActivity(intent);
-			}
-		});
+        binding.flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CarpoolRegisterActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
 
-		//adapter
-		fragmentStateAdapter = new TabFragmentAdapter(getActivity(), numPage);
-		viewPager2 = root.findViewById(R.id.viewpager2);
-		viewPager2.setAdapter(fragmentStateAdapter);
+        //adapter
+        fragmentStateAdapter = new TabFragmentAdapter(getActivity(), numPage);
+        viewPager2 = root.findViewById(R.id.viewpager2);
+        viewPager2.setAdapter(fragmentStateAdapter);
 
-		// Integrating TabLayout with ViewPager2
-		tabLayout = root.findViewById(R.id.tab);
-		new TabLayoutMediator(tabLayout, viewPager2,
-				(tab, position) -> {
-				if( position == 0){
-					tab.setText(" 출근 ");
-				}
-				else{
-					tab.setText(" 퇴근 ");
+        // Integrating TabLayout with ViewPager2
+        tabLayout = root.findViewById(R.id.tab);
+        new TabLayoutMediator(tabLayout, viewPager2,
+                (tab, position) -> {
+                    if (position == 0) {
+                        tab.setText(" 출근 ");
+                    } else {
+                        tab.setText(" 퇴근 ");
 
-				}
-				}
-		).attach();
+                    }
+                }
+        ).attach();
 
-		return root;
-	}
+        return root;
+    }
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		Log.d(">>", "resume");
-	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(">>", "resume");
+    }
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		Log.d(">>", "onstart");
-	}
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(">>", "onstart");
+    }
 
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		binding = null;
-	}
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }
