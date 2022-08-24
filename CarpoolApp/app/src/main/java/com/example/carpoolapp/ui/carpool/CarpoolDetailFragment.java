@@ -3,6 +3,7 @@ package com.example.carpoolapp.ui.carpool;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +39,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -59,6 +62,8 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
     private Call<CarpoolMapResponse> call;
     private SharedPreferences preferences;
     private String Authorization;
+    private String location;
+    private String pathList;
 
     CarpoolDetailRes cdetail;
     String cmsg;
@@ -117,11 +122,28 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
         carpoolViewModel.getCarpoolDetail(carpoolNo).observe(this, carpoolDetail -> {
             cdetail = carpoolDetail;
             binding.tvDetailLoc.setText(carpoolDetail.getLocation());
+            location=carpoolDetail.getLocation();
             binding.ttvDetailPerson.setText(carpoolDetail.getOccupants().split(",").length +"/" + carpoolDetail.getQuota());
             binding.tvDetailCarInfo.setText(carpoolDetail.getInfo());
             binding.tvDetailTime.setText(carpoolDetail.getTime().split("T")[1].substring(0,5));
             binding.tvDetailDate.setText(carpoolDetail.getTime().split("T")[0]);
             binding.tvDetailWriter.setText(carpoolDetail.getWriterId());
+
+            CarpoolMapRequest carpoolMapRequest=new CarpoolMapRequest(location);
+            //폴리라인
+            call= Retrofit_client.getApiService().mapList(Authorization,carpoolMapRequest);
+            call.enqueue(new Callback<CarpoolMapResponse>() {
+                @Override
+                public void onResponse(Call<CarpoolMapResponse> call, Response<CarpoolMapResponse> response) {
+                    String path=response.body().getPath();
+                    pathList=path.substring(2,path.length()-2);
+                    Log.d("jjk",pathList);
+                }
+                @Override
+                public void onFailure(Call<CarpoolMapResponse> call, Throwable t) {
+                    Log.d("jjk","안됨");
+                }
+            });
 
             if( CarpoolUtil.isUserInCarpool(cdetail,preferences.getString("userId",null)) ){
                 binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
@@ -167,33 +189,34 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
-        String query="부산광역시 사하구 하단동";
-        CarpoolMapRequest carpoolMapRequest=new CarpoolMapRequest(query);
-        //폴리라인
-        call= Retrofit_client.getApiService().mapList(Authorization,carpoolMapRequest);
-        call.enqueue(new Callback<CarpoolMapResponse>() {
+        CameraPosition cameraOption=CameraPosition.builder()
+                .target(new LatLng(35.15995278,129.0553194))
+                .zoom(10.4f)
+                .build();
+        CameraUpdate defaultCamera=CameraUpdateFactory.newCameraPosition(cameraOption);
+        googleMap.moveCamera(defaultCamera);
+
+        new Handler().postDelayed(new Runnable()
+        {
             @Override
-            public void onResponse(Call<CarpoolMapResponse> call, Response<CarpoolMapResponse> response) {
-                String path=response.body().getPath();
-                String pathList=path.substring(2,path.length()-2);
+            public void run()
+            {
+                LatLngBounds.Builder bounds=LatLngBounds.builder();
                 String[] list=pathList.split("\\],\\[");
                 List<LatLng> gpsList=new ArrayList<>();
                 for(String gps:list){
                     String[] latlon=gps.split(",");
-                    gpsList.add(new LatLng(Double.valueOf(latlon[1]),Double.valueOf(latlon[0])));
+                    LatLng latLng=new LatLng(Double.valueOf(latlon[1]),Double.valueOf(latlon[0]));
+                    gpsList.add(latLng);
+                    bounds.include(latLng);
                 }
-                Polyline polyline=googleMap.addPolyline(new PolylineOptions()
+                Polyline polyline=googleMap.addPolyline(new PolylineOptions().color(Color.parseColor("#D7191F"))
                         .clickable(true).addAll(gpsList));
                 //카메라이동
                 int all=gpsList.size();
                 int half=all/2;
-                CameraPosition cameraOption=CameraPosition.builder()
-                        .target(gpsList.get(half))
-                        .zoom(10.4f)
-                        .build();
-                CameraUpdate camera=CameraUpdateFactory.newCameraPosition(cameraOption);
-                googleMap.moveCamera(camera);
 
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(),100));
                 //출발,도착 마커
                 BitmapDrawable bitmapStart=(BitmapDrawable)getResources().getDrawable(R.drawable.marker_start);
                 BitmapDrawable bitmapEnd=(BitmapDrawable)getResources().getDrawable(R.drawable.marker_end);
@@ -209,12 +232,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
                 googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
                         .position(gpsList.get(all-1)).title("도착"));
             }
-
-            @Override
-            public void onFailure(Call<CarpoolMapResponse> call, Throwable t) {
-                Log.d("jjk","안됨");
-            }
-        });
+        }, 1000);
 
     }
 }

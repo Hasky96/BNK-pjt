@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.carpoolapp.MainActivity;
 import com.example.carpoolapp.R;
@@ -33,14 +36,24 @@ public class SplashFragment extends Fragment {
 
         preferences = getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
         String Authorization = preferences.getString("Authorization", null);
+        Animation animUp = AnimationUtils.loadAnimation(getActivity(),R.anim.slide_logo_up);
+        Animation animDown = AnimationUtils.loadAnimation(getActivity(),R.anim.slide_logo_down);
+
+        binding.SplashCarpoolLogo.startAnimation(animDown);
+        binding.SplashBNKLogo.startAnimation(animUp);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (Authorization != null) {
                     Log.d("jjk", Authorization);
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
+                    if (getActivity()!=null){
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                    }else {
+                        
+                    }
                 } else {
                     //딜레이 후 시작할 코드 작성
                     //데이터를 넘겨줘야할 때 사용하기
