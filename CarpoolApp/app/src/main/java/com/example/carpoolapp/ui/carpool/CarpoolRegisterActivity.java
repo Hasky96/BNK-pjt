@@ -73,6 +73,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_carpool_register);
 
+		overridePendingTransition(R.anim.slide_page_in,R.anim.slide_page_out);
+
 		preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
 		Authorization = preferences.getString("Authorization", null);
 
