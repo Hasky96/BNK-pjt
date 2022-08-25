@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Retrofit_client {
     private static final String BASE_URL = "http://192.168.0.121:8080/"; //IPv4 주소
 //        private static final String BASE_URL = "http://192.168.0.2:8080/"; //IPv4 주소
+//        private static final String BASE_URL = "http://192.168.0.122:8080/"; //IPv4 주소
 
     public static Retrofit_interface getApiService() {
         return getInstance().create(Retrofit_interface.class);

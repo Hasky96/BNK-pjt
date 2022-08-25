@@ -109,6 +109,14 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 								//  차가 없는 사용자는 참여할 수 없다.
 							}
 						});
+					}else{
+						builder.setTitle("참여하겠습니다.");
+						builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								carpoolViewModel.joinCarpool(carpoolNo, false);
+							}
+						});
 					}
 				} else {
 					builder.setTitle("참여하시겠습니까?");
@@ -154,6 +162,13 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 						}
 					});
 
+				}else{
+					builder.setTitle("이미 운전자가 있습니다");
+					builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialogInterface, int i) {
+						}
+					});
 				}
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
@@ -326,6 +341,8 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			if( LocalDateTime.now().isAfter(carpoolTime)) {
 				binding.btnCarpoolWaiting.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolComplete.setVisibility(View.VISIBLE);
+				binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
+				binding.tvDetailDriver.setVisibility(View.INVISIBLE);
 			}
 		});
 

@@ -3,7 +3,9 @@ package com.example.carpoolapp.ui.carpool;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -19,6 +21,7 @@ public class AddressApiActivity extends AppCompatActivity {
         @JavascriptInterface
         @SuppressWarnings("unused")
         public void processDATA(String data) {
+            Log.d(">>","address  " + data);
             Bundle extra = new Bundle();
             Intent intent = new Intent();
             extra.putString("data", data);
@@ -40,6 +43,7 @@ public class AddressApiActivity extends AppCompatActivity {
         webView = (WebView) binding.webView;
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new MyJavaScriptInterface(), "Android");
+        webView.loadUrl("http://192.168.0.122:8080/daum.html");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -48,8 +52,6 @@ public class AddressApiActivity extends AppCompatActivity {
             }
         });
 
-        webView.loadUrl("your server url");
-
-
     }
+
 }
