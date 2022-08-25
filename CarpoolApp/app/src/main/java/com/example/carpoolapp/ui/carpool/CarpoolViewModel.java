@@ -96,26 +96,28 @@ public class CarpoolViewModel extends AndroidViewModel {
 		callCarpool.enqueue(new Callback<CarpoolDetailRes>() {
 			@Override
 			public void onResponse(Call<CarpoolDetailRes> call, Response<CarpoolDetailRes> response) {
-				Log.d(">>","carpool detaili success");
+				Log.d(">>","carpool detail success");
 				carpoolDetail.setValue(response.body());
 			}
 
 			@Override
 			public void onFailure(Call<CarpoolDetailRes> call, Throwable t) {
-				Log.d(">>","carpool detaili fail " + t.getMessage());
-
+				Log.d(">>","carpool detail fail" + t.getMessage());
 			}
 		});
 	}
 
 	public void joinCarpool(int carpoolNo, boolean isDriverExist){
 		CarpoolJoinReq joinReq = new CarpoolJoinReq(isDriverExist);
-		Log.d(">>ss", joinReq.isDriver() +"");
+		Log.d(">>", "isDriverExist "+ isDriverExist );
 		carpoolService = Retrofit_client.getApiService();
 		Call<CommonResponse> joinCarpool = carpoolService.joinCarpool(Authorization, carpoolNo, joinReq);
 		joinCarpool.enqueue(new Callback<CommonResponse>() {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+
+				Log.d(">>", "joinReq.isDriverCheck "+joinReq.isDriverCheck());
+				Log.d(">>","carpool join success " +response.code());
 				if(response.code() == 200){
 					msg.setValue("카풀에 참여되었습니다");
 				}else {
@@ -138,21 +140,25 @@ public class CarpoolViewModel extends AndroidViewModel {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
 				if(response.code() == 200){
-					Log.d(">>", "carpool leave Success " + response.code() + "/" +  response.body().getMsg());
+					Log.d(">>", "carpool leave code " + response.code() + "/" +  response.body().getMsg());
 					msg.postValue("카풀 참여를 취소하였습니다");
-
 				}else {
-					Gson gson = new GsonBuilder().create();
-					Type type = new TypeToken<CommonResponse>() {}.getType();
-					CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
+						Gson gson = new GsonBuilder().create();
+						Type type = new TypeToken<CommonResponse>() {}.getType();
+						CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);
 
-					if( errorResponse.getMsg().equals("You are carpool writer! Delete the carpool!")){
-						msg.postValue("카풀 생성자 입니다. 취소할 수 없습니다");
-					}else if( errorResponse.getMsg().equals("user not in the carpool.") ){
-						msg.postValue("참여하지 않았습니다. 취소할 수 없습니다");
+						if( response.code() == 400){
+							if(errorResponse.getMsg().equals("You are carpool writer! Delete the carpool!")){
+								msg.postValue("카풀 생성자 입니다. 취소할 수 없습니다");
+							}else if( errorResponse.getMsg().equals("user not in the carpool.") ) {
+								msg.postValue("참여하지 않았습니다. 취소할 수 없습니다");
+							}
+						}
+						else if( response.code() == 406 ){
+							msg.postValue("카풀 운전자입니다. 취소할 수 없습니다");
+						}
 					}
 
-				}
 				loadCarpoolDetail(carpoolNo);
 			}
 

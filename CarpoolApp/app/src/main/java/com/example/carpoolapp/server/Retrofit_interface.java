@@ -39,6 +39,7 @@ public interface Retrofit_interface {
 	Call<CommonResponse> joinCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo, @Body CarpoolJoinReq joinReq);
 
 	@DELETE("api/carpool/leave/{carpoolNo}")
+//	@HTTP(method = "DELETE", path="api/carpool/leave/{carpoolNo}",hasBody = true)
 	Call<CommonResponse> cancelCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo);
 
 	@DELETE("api/carpool/{carpoolNo}")
@@ -46,6 +47,9 @@ public interface Retrofit_interface {
 
 	@PUT("api/carpool/{carpoolNo}")
 	Call<CommonResponse> updateCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo, @Body CarpoolRequest detailRes);
+
+	@POST("api/carpool/{carpoolNo}/done")
+	Call<CommonResponse> doneCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo);
 
 	@POST("/api/user/login")
 	Call<LoginResponse> login(@Body LoginRequest loginRequest);

@@ -1,17 +1,17 @@
 package com.example.carpoolapp.model;
 
 public class CarpoolJoinReq {
-	boolean isDriver;
+	boolean driverCheck;
 
-	public CarpoolJoinReq(boolean isDriver) {
-		this.isDriver = isDriver;
+	public CarpoolJoinReq(boolean driverCheck) {
+		this.driverCheck = driverCheck;
 	}
 
-	public boolean isDriver() {
-		return isDriver;
+	public boolean isDriverCheck() {
+		return driverCheck;
 	}
 
-	public void setDriver(boolean driver) {
-		isDriver = driver;
+	public void setDriverCheck(boolean driverCheck) {
+		this.driverCheck = driverCheck;
 	}
 }

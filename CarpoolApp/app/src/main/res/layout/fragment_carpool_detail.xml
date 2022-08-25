@@ -4,6 +4,7 @@
 												   xmlns:tools="http://schemas.android.com/tools"
 												   android:layout_width="match_parent"
 												   android:layout_height="match_parent"
+												   android:id="@+id/fgCarpoolDetail"
 												   tools:context=".ui.carpool.CarpoolDetailFragment">
     <ImageView
 		android:id="@+id/carpoolEnd"
@@ -15,13 +16,27 @@
 		app:layout_constraintTop_toTopOf="parent" />
 	
 	<Button
+		android:id="@+id/btnCarpoolComplete"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:layout_marginEnd="24dp"
+		android:background="@drawable/round_square"
+		android:backgroundTint="@color/bnkRed"
+		android:text="카풀 완료"
+		android:textColor="@color/white"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+	
+	<Button
+		android:id="@+id/btnCarpoolWaiting"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
 		android:layout_marginEnd="24dp"
 		android:background="@drawable/round_square"
 		android:backgroundTint="#198754"
-		android:text="카풀 완료"
+		android:text="모집중"
 		android:textColor="@color/white"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
@@ -131,7 +146,7 @@
 				
 				<LinearLayout
 					android:id="@+id/lyDetailPerson"
-					android:layout_width="300dp"
+					android:layout_width="320dp"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="20dp"
 					android:layout_marginTop="15dp"
@@ -148,7 +163,7 @@
 					android:textSize="15sp" />
                 
                 <TextView
-					android:id="@+id/ttvDetailPerson"
+					android:id="@+id/tvDetailPerson"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:ems="3"
@@ -162,11 +177,10 @@
 						 android:textSize="15sp" />
                 
                 <TextView
-					android:id="@+id/ttvDetailDriver"
+					android:id="@+id/tvDetailDriver"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:ems="3"
-					android:text="없음"
+					android:ems="5"
 					android:textSize="20sp" />
                 </LinearLayout>
                 
@@ -223,13 +237,13 @@
 				
 				<Button
 					android:id="@+id/btnCarpoolUpdate"
-					android:layout_width="wrap_content"
+					android:layout_width="55dp"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="20dp"
 					android:layout_marginTop="25dp"
 					android:layout_marginBottom="16dp"
 					android:background="@drawable/gray_round_square"
-					android:text="카풀 수정"
+					android:text="수정"
 					android:textColor="@color/black"
 					android:visibility="invisible"
 					app:layout_constraintBottom_toBottomOf="parent"
@@ -240,47 +254,63 @@
 				
 				<Button
 					android:id="@+id/btnCarpoolDelete"
-					android:layout_width="wrap_content"
+					android:layout_width="55dp"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="10dp"
 					android:layout_marginTop="25dp"
 					android:layout_marginBottom="16dp"
 					android:background="@drawable/gray_round_square"
-					android:text="카풀 삭제"
+					android:text="삭제"
 					android:textColor="@color/black"
 					android:visibility="invisible"
 					app:layout_constraintBottom_toBottomOf="parent"
 					app:layout_constraintLeft_toRightOf="@+id/btnCarpoolUpdate"
 					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
 				
+				<Button
+					android:id="@+id/btnCarpoolDriver"
+					android:layout_width="55dp"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dp"
+					android:layout_marginTop="25dp"
+					android:layout_marginBottom="16dp"
+					android:background="@drawable/gray_round_square"
+					android:text="운전"
+					android:visibility="invisible"
+					android:textColor="@color/black"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintRight_toRightOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
+				
 				
 				<Button
 					android:id="@+id/btnCarpoolJoin"
-					android:layout_width="wrap_content"
+					android:layout_width="55dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="25dp"
 					android:layout_marginRight="8dp"
 					android:layout_marginBottom="16dp"
 					android:background="@drawable/gray_round_square"
-					android:text="카풀 참여"
-					android:textColor="@color/bnkRed"
+					android:text="탑승"
+					android:backgroundTint="@color/bnkRed"
+					android:textColor="@color/white"
 					android:visibility="invisible"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintRight_toLeftOf="@+id/btnCarpoolDriver"
 					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
 				<Button
 					android:id="@+id/btnCarpoolCancle"
-					android:layout_width="wrap_content"
+					android:layout_width="55dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="25dp"
 					android:layout_marginRight="8dp"
 					android:layout_marginBottom="16dp"
-					android:background="@drawable/round_square"
-					android:text="참여 취소"
+					android:background="@drawable/gray_round_square"
+					android:text="비참여"
 					android:visibility="invisible"
 					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter" />
+					app:layout_constraintRight_toLeftOf="@+id/btnCarpoolDriver"
+					app:layout_constraintTop_toBottomOf="@+id/lyDetailWriter"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

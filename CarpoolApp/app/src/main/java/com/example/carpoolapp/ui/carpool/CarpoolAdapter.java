@@ -74,7 +74,6 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 
 		// holder에 계속 set
 		holder.tvItemDepartTime.setText(carpool.getTime().split("T")[1].substring(0,5));
-		Log.d(">>", activity.getCallingActivity() + "");
 		holder.tvDepartLoc.setSelected(true);
 		holder.tvDestinationLoc.setSelected(true);
 
@@ -100,7 +99,7 @@ public class CarpoolAdapter extends RecyclerView.Adapter<CarpoolAdapter.CarpoolV
 			holder.tvItemCarNum.setText("");
 		}
 
-		Log.d(">>",carpool.getOccupants() + " " + carpool.getQuota());
+		Log.d(">>","carpool adapter 인원 "+carpool.getOccupants() + "/" + carpool.getQuota());
 		holder.tvCurperson.setText(Integer.toString(carpool.getOccupants().split(",").length));
 		holder.tvTotalPerson.setText(Integer.toString(carpool.getQuota()));
 		holder.itemLine.setOnClickListener(new View.OnClickListener() {

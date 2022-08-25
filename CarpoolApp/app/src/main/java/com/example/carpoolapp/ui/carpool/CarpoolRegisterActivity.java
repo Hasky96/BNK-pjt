@@ -40,6 +40,7 @@ import com.example.carpoolapp.server.Retrofit_interface;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -52,10 +53,10 @@ import retrofit2.Retrofit;
 public class CarpoolRegisterActivity extends AppCompatActivity {
 
 
-	TextView tvDepartureTime, tvDepartureDate;
+	TextView tvDepartureTime, tvDepartureDate, tvLocation, tvchkDriver;
 	EditText edtLocation, edtFee, edtInfo;
 	CheckBox chkDriver;
-	Button btnCarpoolRegister, btnCarpoolDetailUpdate;
+	Button btnCarpoolRegister;
 	RadioButton rdoGoWork, rdoBackHome;
 	RadioGroup rdoGrouptoggle;
 	Spinner spPersonamount;
@@ -88,9 +89,17 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		rdoGoWork = findViewById(R.id.rdoGoWork);
 		rdoBackHome = findViewById(R.id.rdoBackHome);
 		rdoGrouptoggle = findViewById(R.id.rdoGrouptoggle);
+		tvLocation = findViewById(R.id.tvLocation);
+		tvchkDriver = findViewById(R.id.tvchkDriver);
 
 		arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spPersonamount, android.R.layout.simple_spinner_item);
 		spPersonamount.setAdapter(arrayAdapter);
+
+		Log.d(">>>", preferences.getString("userCarNo", null));
+		if( preferences.getString("userCarNo", null).equals("")){
+			tvchkDriver.setVisibility(View.INVISIBLE);
+			chkDriver.setVisibility(View.INVISIBLE);
+		}
 
 		Intent intent = getIntent();
 		if (intent.getStringExtra("from") != null && intent.getStringExtra("from").equals("detail")){
@@ -102,8 +111,10 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
 			if(cdetail.isType()){
 				rdoBackHome.setChecked(true);
+				tvLocation.setText("출발지");
 			}else{
 				rdoGoWork.setChecked(true);
+				tvLocation.setText("목적지");
 			}
 
 			tvDepartureDate.setText(cdetail.getTime().split("T")[0]);
@@ -114,13 +125,25 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
 			if( cdetail.getDriverNo() == 0){
 				chkDriver.setChecked(false);
-
 			}else{
 				chkDriver.setChecked(true);
 			}
 			cdetail.setCarpoolNo(cdetail.getCarpoolNo());
-
 		}
+
+		rdoGoWork.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				tvLocation.setText("출발지");
+			}
+		});
+
+		rdoBackHome.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				tvLocation.setText("목적지");
+			}
+		});
 
 
 		Calendar c = Calendar.getInstance();
@@ -144,6 +167,11 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 				}
 			}
 		});
+
+		LocalTime now = LocalTime.now();
+		mhourOfDay = now.getHour();
+		Log.d(">>",mhourOfDay+"");
+		mminute = now.getMinute();
 
 		tvDepartureTime.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -178,23 +206,20 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
 				carpoolType = rdoGrouptoggle.getCheckedRadioButtonId() == R.id.rdoBackHome ? true : false;
 				carpoolRequest.setCarpoolType(carpoolType);
-				Log.d(">>", carpoolType + "");
-
 				carpoolRequest.setCarpoolWriter(preferences.getInt("userNo", 0));
 				carpoolRequest.setCarpoolTime(strCarpoolTime);
-				Log.d(">>", strCarpoolTime);
 				carpoolRequest.setCarpoolLocation(edtLocation.getText().toString());
 				carpoolRequest.setCarpoolQuota(Integer.parseInt(spPersonamount.getSelectedItem().toString()));
-				carpoolRequest.setCarpoolFee(123);
+				carpoolRequest.setCarpoolFee(0);
 				carpoolRequest.setCarpoolInfo(edtInfo.getText().toString());
 
 				if (chkDriver.isChecked()) {
-					carpoolRequest.setCarpoolDriver(preferences.getInt("userNo", 0));
-					Log.d(">>", "checked" + carpoolRequest.getCarpoolDriver());
+					Log.d("register", "" + chkDriver.isChecked() + preferences.getInt("userNo",123));
+					carpoolRequest.setCarpoolDriver(preferences.getInt("userNo",0));
 				} else {
+					Log.d("register", "" + chkDriver.isChecked());
 					// 운전자 요청 글일 경우 userNo 0
 					carpoolRequest.setCarpoolDriver(0);
-					Log.d(">>", "unchecked" + carpoolRequest.getCarpoolDriver());
 				}
 
 				// 버튼 텍스트에 따라서 요청을 다르게 한다
@@ -218,18 +243,19 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 					callupdate.enqueue(new Callback<CommonResponse>() {
 						@Override
 						public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+							// 다시 돌아갈 때 성공 코드로 가지고 간다
+							// 성공 코드가 전달 되었다면 다시 업데이트된 상세화면을 load하도록 한다
+							setResult(807);
 							finish();
 						}
-
 						@Override
 						public void onFailure(Call<CommonResponse> call, Throwable t) {
-
 						}
 					});
 				}
-
 			}
 		});
+
 
 
 	}
