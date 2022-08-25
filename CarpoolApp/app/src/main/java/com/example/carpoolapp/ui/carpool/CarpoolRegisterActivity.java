@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.app.usage.NetworkStats;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.model.CarpoolDetailRes;
@@ -37,6 +39,7 @@ import com.example.carpoolapp.model.CarpoolResponse;
 import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 import com.example.carpoolapp.server.Retrofit_interface;
+import com.example.carpoolapp.util.NetworkStatus;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,7 +57,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
 
 	TextView tvDepartureTime, tvDepartureDate, tvLocation, tvchkDriver;
-	EditText edtLocation, edtFee, edtInfo;
+	EditText edtLocation, edtFee, edtInfo, edtLocation;
 	CheckBox chkDriver;
 	Button btnCarpoolRegister;
 	RadioButton rdoGoWork, rdoBackHome;
@@ -68,6 +71,9 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 	private String Authorization;
 	int mhourOfDay, mminute;
 	CarpoolDetailRes cdetail = new CarpoolDetailRes();
+	ActivityResultLauncher<Intent> addrActivityResultLauncher;
+	// 주소 요청코드 상수 requestCode
+	private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +97,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		rdoGrouptoggle = findViewById(R.id.rdoGrouptoggle);
 		tvLocation = findViewById(R.id.tvLocation);
 		tvchkDriver = findViewById(R.id.tvchkDriver);
+		edtLocation = findViewById(R.id.edtLocation);
 
 		arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spPersonamount, android.R.layout.simple_spinner_item);
 		spPersonamount.setAdapter(arrayAdapter);
@@ -193,6 +200,37 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 				dialog.setTitle("시간");
 				dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 				dialog.show();
+			}
+		});
+
+		addrActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+			@Override
+			public void onActivityResult(ActivityResult result) {
+				if (result.getResultCode() == RESULT_OK) {
+					Log.d(">>","주소 요청 완료");
+				}
+
+			}
+		});
+
+
+		edtLocation.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Log.i("주소설정페이지", "주소입력창 클릭");
+				int status = NetworkStatus.getConnectivityStatus(getApplicationContext());
+				if(status == NetworkStatus.TYPE_MOBILE || status == NetworkStatus.TYPE_WIFI) {
+
+					Log.i("주소설정페이지", "주소입력창 클릭");
+					Intent intentaddr = new Intent(getApplicationContext(), AddressApiActivity.class);
+					// 화면전환 애니메이션 없애기
+					overridePendingTransition(0, 0);
+					// 주소결과
+					addrActivityResultLauncher.launch(intentaddr);
+
+				}else {
+					Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 
