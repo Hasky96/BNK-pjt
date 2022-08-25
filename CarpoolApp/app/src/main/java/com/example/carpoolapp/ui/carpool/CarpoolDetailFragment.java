@@ -6,10 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,15 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Handler;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.carpoolapp.R;
@@ -50,7 +47,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.example.carpoolapp.util.CarpoolUtil;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -430,14 +426,19 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 					 sb.append(dto.toString()).append("/");
 				 }
 				 sb.setLength(sb.length()==0?0:sb.length()-1);
-//				 sb.setLength(sb.length()-1);
 				 String temp = sb.toString();
+
 				 bundle.putString("comments", temp);
+				 bundle.putInt("carpoolNo",carpoolNo);
 				 bundle.putInt("carpoolWriterNo",carpoolDetail.getWriterNo());
-				 CarpoolCommentsFragement carpoolCommentsFragement = new CarpoolCommentsFragement();
+
+				 CarpoolCommentsFragment carpoolCommentsFragement = new CarpoolCommentsFragment();
 				 carpoolCommentsFragement.setArguments(bundle);
 				 requireActivity().getSupportFragmentManager().beginTransaction()
 						 .replace(R.id.commentFragment, carpoolCommentsFragement).commit();
+
+			 EditText eTComment=getActivity().findViewById(R.id.eTComment);
+			 Button commentRegisterButton=getActivity().findViewById(R.id.commentRegisterButton);
 
 
 			if (CarpoolUtil.isUserInCarpool(cdetail, preferences.getString("userId", null))) {
