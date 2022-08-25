@@ -67,12 +67,18 @@ public class CarpoolController {
     }
 
     @PutMapping("/{carpoolNo}")
-    public ResponseEntity<?> update(@PathVariable("carpoolNo")int carpoolNo, @RequestBody CarpoolUpdateReq body){
+    public ResponseEntity<?> update(@PathVariable("carpoolNo")int carpoolNo, @RequestBody CarpoolUpdateReq body, Authentication authentication){
         Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);
+        User user = ((UserDetails) authentication.getDetails()).getUser();
+        if(body.isDriverCheck() && carpool.getCarpoolDriver()!=null) return ResponseEntity.status(400).body(new CommonResponse("이미 드라이버 있음"));
         if(carpool == null){
             return ResponseEntity.status(400).body(new CommonResponse("Not Exist!"));
         }
         carpool = carpoolService.carpoolUpdate(carpool, body);
+        if(body.isDriverCheck()){
+            carpool.setCarpoolDriver(user);
+            carpoolRepository.save(carpool);
+        }
         if(carpool==null){
             return ResponseEntity.status(400).body(new CommonResponse("Update Failed!!!\nPlease put right value"));
         }
@@ -113,7 +119,7 @@ public class CarpoolController {
         String msg = status ? "Successfully Deleted!":"user not in the carpool.";
         return ResponseEntity.status(statusCode).body(new CommonResponse(msg));
     }
- 
+
     @PostMapping("/{carpoolNo}/done")
     public ResponseEntity<?> done(@PathVariable("carpoolNo")int carpoolNo, Authentication authentication){
         Carpool carpool = carpoolRepository.getCarpoolByCarpoolNo(carpoolNo);

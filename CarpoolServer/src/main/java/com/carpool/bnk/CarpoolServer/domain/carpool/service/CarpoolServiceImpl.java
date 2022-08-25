@@ -43,7 +43,7 @@ public class CarpoolServiceImpl implements CarpoolService{
     public Carpool carpoolCreate(CarpoolCreateReq body) {
         User writer = userRepository.getUserByUserNo(body.getCarpoolWriter());
         User driver = null;
-        if(body.getCarpoolDriver()==0) driver = userRepository.getUserByUserNo(body.getCarpoolDriver());
+        if(body.getCarpoolDriver()!=0) driver = userRepository.getUserByUserNo(body.getCarpoolDriver());
         Carpool newCarpool = new Carpool(driver,
                                         writer,
                                         body.isCarpoolType(),

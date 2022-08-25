@@ -20,6 +20,7 @@ public class CarpoolUpdateReq {
 
     private String carpoolInfo;
 
+    private boolean driverCheck;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime carpoolTime;
 
