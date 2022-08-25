@@ -1,9 +1,16 @@
 package com.example.carpoolapp.ui.carpool;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,10 +25,9 @@ import com.example.carpoolapp.model.CommentDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CarpoolViewHolder> {
+public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder> {
 
 
-	ArrayList<CommentDto> commentDtoArrayList;
 	FragmentActivity activity;
 	int carpoolWriterNo;
 
@@ -50,26 +56,31 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Carpoo
 		differ.submitList(commentDtoList);
 	}
 
+	CommentViewHolder holder1;
+
 	@NonNull
 	@Override
-	public CarpoolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View carpoolItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_carpool, parent, false);
-		return new CarpoolViewHolder(carpoolItemView);
+	public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		holder1 = new CommentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_comment, parent, false));
+		View carpoolItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment, parent, false);
+		return new CommentViewHolder(carpoolItemView);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull CarpoolViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
 		CommentDto comment = differ.getCurrentList().get(position);
 
 		if(carpoolWriterNo == comment.getUserNo()){
-			holder.tvMyCommentWriter.setText(comment.getUserId());
-			holder.tvMyCommentContent.setText(comment.getComment());
-			holder.tvMyCommentCreated.setText(comment.getCreated().toString().replace("T", " ").substring(0,16));
+			holder.commentLayout.setGravity(Gravity.RIGHT);
+			holder.shapeLayout.setBackgroundResource(R.drawable.my_comment);
+			holder.shapeLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFe812")));
 		}else{
+			holder.commentLayout.setGravity(Gravity.LEFT);
+			holder.shapeLayout.setBackgroundResource(R.drawable.comment);
+		}
 			holder.tvCommentWriter.setText(comment.getUserId());
 			holder.tvCommentContent.setText(comment.getComment());
 			holder.tvCommentCreated.setText(comment.getCreated().toString().replace("T", " ").substring(0,16));
-		}
 	}
 
 	@Override
@@ -77,15 +88,16 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Carpoo
 		return differ.getCurrentList().size();
 	}
 
-	class CarpoolViewHolder extends RecyclerView.ViewHolder {
+	class CommentViewHolder extends RecyclerView.ViewHolder {
 		TextView tvMyCommentWriter,
 				tvCommentWriter,
 				tvMyCommentContent,
 				tvCommentContent,
 				tvMyCommentCreated,
 				tvCommentCreated;
+		LinearLayout commentLayout, shapeLayout;
 
-		public CarpoolViewHolder(@NonNull View itemView) {
+		public CommentViewHolder(@NonNull View itemView) {
 			super(itemView);
 			tvMyCommentWriter = itemView.findViewById(R.id.myCommentWriter);
 			tvCommentWriter = itemView.findViewById(R.id.commentWriter);
@@ -93,7 +105,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Carpoo
 			tvCommentContent = itemView.findViewById(R.id.commentContent);
 			tvMyCommentCreated = itemView.findViewById(R.id.myCommentCreated);
 			tvCommentCreated = itemView.findViewById(R.id.commentCreated);
-
+			commentLayout = itemView.findViewById(R.id.commentLayout);
+			shapeLayout = itemView.findViewById(R.id.shapeLayout);
 
 		}
 	}

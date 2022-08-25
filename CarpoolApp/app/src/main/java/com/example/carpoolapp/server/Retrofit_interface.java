@@ -1,6 +1,8 @@
 package com.example.carpoolapp.server;
 
+import com.example.carpoolapp.model.AllCommentRes;
 import com.example.carpoolapp.model.CarpoolJoinReq;
+import com.example.carpoolapp.model.CommentRequest;
 import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.model.CarpoolDetailRes;
 import com.example.carpoolapp.model.CarpoolMapRequest;
@@ -66,5 +68,11 @@ public interface Retrofit_interface {
 
 	@PUT("/api/user/pwupdate")
 	Call<UserUpdatePwResponse> updatePwUser(@Header("Authorization") String Authorization, @Body UserUpdatePwRequest userUpdatePwRequest);
+
+	@GET("/api/carpool/{carpoolNo}/comments")
+	Call<AllCommentRes> allComments(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo);
+
+	@POST("/api/carpool/{carpoolNo}/comment")
+	Call<CommonResponse> registerComment(@Header("Authorization") String Authorization,@Path("carpoolNo") int carpoolNo,@Body CommentRequest commentRequest);
 
 }

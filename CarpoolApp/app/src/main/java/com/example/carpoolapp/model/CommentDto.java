@@ -49,4 +49,17 @@ public class CommentDto implements Serializable {
 	public void setCreated(String created) {
 		this.created = created;
 	}
+
+	@Override
+	public String toString() {
+		return commentNo+ " " + userNo+ " " + userId+ " "+ comment+ " " + created ;
+	}
+
+	public CommentDto(int commentNo, int userNo, String userId, String comment, String created) {
+		this.commentNo = commentNo;
+		this.userNo = userNo;
+		this.userId = userId;
+		this.comment = comment;
+		this.created = created;
+	}
 }

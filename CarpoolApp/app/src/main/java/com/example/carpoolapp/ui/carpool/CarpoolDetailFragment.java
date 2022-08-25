@@ -6,10 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -23,12 +21,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.os.Handler;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.carpoolapp.R;
@@ -57,6 +55,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +63,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallback {
 
@@ -85,6 +85,8 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		Log.d(">>", "detail onCreateView");
+
+
 
 		binding = FragmentCarpoolDetailBinding.inflate(inflater, container, false);
 		View root = binding.getRoot();
@@ -276,6 +278,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				}
 			});
 
+
 			// 운전자 번호 표시
 //			if (cdetail.getDriverNo() > 0) {
 //				binding.tvDetailDriver.setText(Integer.toString(carpoolDetail.getDriverNo()));
@@ -287,6 +290,30 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			}
 
 			// 참여, 취소 버튼
+
+			 // Comments
+             Bundle bundle = new Bundle();
+             List<CommentDto> comments = carpoolDetail.getComments();
+				 StringBuilder sb = new StringBuilder();
+				 for(CommentDto dto:comments){
+					 sb.append(dto.toString()).append("/");
+				 }
+				 sb.setLength(sb.length()==0?0:sb.length()-1);
+				 String temp = sb.toString();
+
+				 bundle.putString("comments", temp);
+				 bundle.putInt("carpoolNo",carpoolNo);
+				 bundle.putInt("carpoolWriterNo",carpoolDetail.getWriterNo());
+
+				 CarpoolCommentsFragment carpoolCommentsFragement = new CarpoolCommentsFragment();
+				 carpoolCommentsFragement.setArguments(bundle);
+				 requireActivity().getSupportFragmentManager().beginTransaction()
+						 .replace(R.id.commentFragment, carpoolCommentsFragement).commit();
+
+			 EditText eTComment=getActivity().findViewById(R.id.eTComment);
+			 Button commentRegisterButton=getActivity().findViewById(R.id.commentRegisterButton);
+
+
 			if (CarpoolUtil.isUserInCarpool(cdetail, preferences.getString("userId", null))) {
 				binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.VISIBLE);
