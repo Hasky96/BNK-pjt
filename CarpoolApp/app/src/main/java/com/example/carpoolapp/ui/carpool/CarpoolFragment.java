@@ -35,12 +35,13 @@ public class CarpoolFragment extends Fragment {
     private final int numPage = 2;
     private ViewPager2 viewPager2;
     private FragmentStateAdapter fragmentStateAdapter;
+    private View root;
     TabLayout tabLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCarpoolBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
         binding.flbCarpoolRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +81,12 @@ public class CarpoolFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(">>", "resume");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(">>", "onstart");
+
     }
 
     @Override

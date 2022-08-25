@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    tools:context=".ui.carpool.CarpoolCommentsFragement">
+    android:layout_height="350dp"
+    tools:context=".ui.carpool.CarpoolCommentsFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="댓글"
-        android:textSize="30dp"
-        />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:src="@drawable/comment_logo" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComments"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:paddingHorizontal="20dp"
         >
-
-
-
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_marginTop="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        >
+        <EditText
+            android:id="@+id/eTComment"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:inputType="text"
+            android:background="@drawable/edit_text_box">
+        </EditText>
+
+        <Button
+            android:id="@+id/commentRegisterButton"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:text="댓글입력"
+            android:textColor="@color/white"
+            android:background="@drawable/button"/>
+    </LinearLayout>
+
 
 </FrameLayout>

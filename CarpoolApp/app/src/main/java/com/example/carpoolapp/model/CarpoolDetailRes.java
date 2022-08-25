@@ -1,5 +1,7 @@
 package com.example.carpoolapp.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -156,6 +158,7 @@ public class CarpoolDetailRes implements Serializable {
 	}
 
 	public List<CommentDto> getComments() {
+		Log.d(">>","getComments"+this.comments);
 		return comments;
 	}
 
