@@ -75,6 +75,6 @@ public interface Retrofit_interface {
 	@POST("/api/carpool/{carpoolNo}/comment")
 	Call<CommonResponse> registerComment(@Header("Authorization") String Authorization,@Path("carpoolNo") int carpoolNo,@Body CommentRequest commentRequest);
 
-	@GET("/api/user/idcheck?id={checkId}")
-	Call<CommonResponse> idCheck(@Path("checkId")String userId);
+	@GET("/api/user/idcheck")
+	Call<CommonResponse> idCheck(@Query("id") String userId);
 }
