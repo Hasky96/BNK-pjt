@@ -4,6 +4,7 @@
 												   xmlns:tools="http://schemas.android.com/tools"
 												   android:layout_width="match_parent"
 												   android:layout_height="match_parent"
+												   android:id="@+id/fgCarpoolDetail"
 												   tools:context=".ui.carpool.CarpoolDetailFragment">
     <ImageView
 		android:id="@+id/imgLogo"
@@ -21,7 +22,7 @@
 		android:layout_marginTop="8dp"
 		android:layout_marginEnd="24dp"
 		android:background="@drawable/round_square"
-		android:backgroundTint="#198754"
+		android:backgroundTint="@color/bnkRed"
 		android:text="카풀 완료"
 		android:textColor="@color/white"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +146,7 @@
 				
 				<LinearLayout
 					android:id="@+id/lyDetailPerson"
-					android:layout_width="300dp"
+					android:layout_width="320dp"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="20dp"
 					android:layout_marginTop="15dp"
@@ -179,7 +180,7 @@
 					android:id="@+id/tvDetailDriver"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:ems="3"
+					android:ems="5"
 					android:textSize="20sp" />
                 </LinearLayout>
                 
@@ -304,7 +305,7 @@
 					android:layout_marginTop="25dp"
 					android:layout_marginRight="8dp"
 					android:layout_marginBottom="16dp"
-					android:background="@drawable/round_square"
+					android:background="@drawable/gray_round_square"
 					android:text="비참여"
 					android:visibility="invisible"
 					app:layout_constraintBottom_toBottomOf="parent"

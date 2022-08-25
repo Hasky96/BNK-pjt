@@ -96,27 +96,27 @@ public class CarpoolViewModel extends AndroidViewModel {
 		callCarpool.enqueue(new Callback<CarpoolDetailRes>() {
 			@Override
 			public void onResponse(Call<CarpoolDetailRes> call, Response<CarpoolDetailRes> response) {
-				Log.d(">>","carpool detaili success");
+				Log.d(">>","carpool detail success");
 				carpoolDetail.setValue(response.body());
 			}
 
 			@Override
 			public void onFailure(Call<CarpoolDetailRes> call, Throwable t) {
-				Log.d(">>","carpool detaili fail");
+				Log.d(">>","carpool detail fail" + t.getMessage());
 			}
 		});
 	}
 
 	public void joinCarpool(int carpoolNo, boolean isDriverExist){
 		CarpoolJoinReq joinReq = new CarpoolJoinReq(isDriverExist);
-		Log.d(">>ss", isDriverExist +"");
+		Log.d(">>", "isDriverExist "+ isDriverExist );
 		carpoolService = Retrofit_client.getApiService();
 		Call<CommonResponse> joinCarpool = carpoolService.joinCarpool(Authorization, carpoolNo, joinReq);
 		joinCarpool.enqueue(new Callback<CommonResponse>() {
 			@Override
 			public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
 
-				Log.d(">>ss", joinReq.isDriverCheck() +"");
+				Log.d(">>", "joinReq.isDriverCheck "+joinReq.isDriverCheck());
 				Log.d(">>","carpool join success " +response.code());
 				if(response.code() == 200){
 					msg.setValue("카풀에 참여되었습니다");
@@ -143,7 +143,6 @@ public class CarpoolViewModel extends AndroidViewModel {
 					Log.d(">>", "carpool leave code " + response.code() + "/" +  response.body().getMsg());
 					msg.postValue("카풀 참여를 취소하였습니다");
 				}else {
-						Log.d(">>", "carpool leave code " + response.code() + "/" );
 						Gson gson = new GsonBuilder().create();
 						Type type = new TypeToken<CommonResponse>() {}.getType();
 						CommonResponse errorResponse = gson.fromJson(response.errorBody().charStream(),type);

@@ -150,9 +150,11 @@
             app:layout_constraintTop_toBottomOf="@+id/glDeparture">
 
             <TextView
+                android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="출발지 / 목적지" />
+                android:text="출발지"
+                />
 
             <EditText
                 android:id="@+id/edtLocation"
@@ -210,6 +212,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lyInfo">
 
             <TextView
+                android:id="@+id/tvchkDriver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="차량여부" />

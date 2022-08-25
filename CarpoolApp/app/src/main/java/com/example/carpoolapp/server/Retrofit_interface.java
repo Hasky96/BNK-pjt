@@ -46,6 +46,9 @@ public interface Retrofit_interface {
 	@PUT("api/carpool/{carpoolNo}")
 	Call<CommonResponse> updateCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo, @Body CarpoolRequest detailRes);
 
+	@POST("api/carpool/{carpoolNo}/done")
+	Call<CommonResponse> doneCarpool(@Header("Authorization") String Authorization, @Path("carpoolNo") int carpoolNo);
+
 	@POST("/api/user/login")
 	Call<LoginResponse> login(@Body LoginRequest loginRequest);
 

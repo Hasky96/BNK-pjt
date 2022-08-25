@@ -1,13 +1,14 @@
 package com.example.carpoolapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class CommentDto {
+public class CommentDto implements Serializable {
 	int commentNo;
 	int userNo;
 	String userId;
 	String comment;
-	LocalDateTime created;
+	String created;
 
 	public int getCommentNo() {
 		return commentNo;
@@ -41,11 +42,11 @@ public class CommentDto {
 		this.comment = comment;
 	}
 
-	public LocalDateTime getCreated() {
+	public String getCreated() {
 		return created;
 	}
 
-	public void setCreated(LocalDateTime created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 }
