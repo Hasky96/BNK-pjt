@@ -101,7 +101,7 @@ public class LoginFragment extends Fragment {
                     }
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Log.d("jjk","실패");
+                        Toast.makeText(getActivity().getApplicationContext(), "통신 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
 

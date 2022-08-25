@@ -1,13 +1,11 @@
 package com.example.carpoolapp.ui.user;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentSignupBinding;
-import com.example.carpoolapp.model.LoginResponse;
 import com.example.carpoolapp.model.SignupRequest;
 import com.example.carpoolapp.model.SignupResponse;
 import com.example.carpoolapp.server.Retrofit_client;

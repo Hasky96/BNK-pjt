@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -18,10 +17,8 @@ import android.view.animation.AnimationUtils;
 
 import com.example.carpoolapp.MainActivity;
 import com.example.carpoolapp.R;
-import com.example.carpoolapp.databinding.ActivitySplashBinding;
 import com.example.carpoolapp.databinding.FragmentSplashBinding;
 import com.example.carpoolapp.ui.user.LoginFragment;
-import com.example.carpoolapp.ui.user.SignupFragment;
 
 public class SplashFragment extends Fragment {
 

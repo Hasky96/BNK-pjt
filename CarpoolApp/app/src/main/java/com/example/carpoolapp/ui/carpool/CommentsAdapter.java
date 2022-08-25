@@ -3,13 +3,10 @@ package com.example.carpoolapp.ui.carpool;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.model.CommentDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder> {
