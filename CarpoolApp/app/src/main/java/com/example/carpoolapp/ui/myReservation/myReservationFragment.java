@@ -1,14 +1,12 @@
 package com.example.carpoolapp.ui.myReservation;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,19 +17,12 @@ import androidx.navigation.Navigation;
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentMyreservationBinding;
 import com.example.carpoolapp.model.CarpoolAllDetailRes;
-import com.example.carpoolapp.model.CarpoolsResponse;
-import com.example.carpoolapp.server.Retrofit_client;
 import com.example.carpoolapp.ui.carpool.CarpoolViewModel;
-import com.example.carpoolapp.ui.splash.SplashActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class myReservationFragment extends Fragment {
 
@@ -44,7 +35,6 @@ public class myReservationFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("jjk","0");
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

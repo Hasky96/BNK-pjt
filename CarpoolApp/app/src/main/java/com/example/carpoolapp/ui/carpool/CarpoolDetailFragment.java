@@ -34,7 +34,6 @@ import com.example.carpoolapp.databinding.FragmentCarpoolDetailBinding;
 import com.example.carpoolapp.model.CarpoolDetailRes;
 import com.example.carpoolapp.model.CarpoolMapRequest;
 import com.example.carpoolapp.model.CarpoolMapResponse;
-import com.example.carpoolapp.model.CommentDto;
 import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 import com.google.android.gms.maps.CameraUpdate;
@@ -51,13 +50,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.example.carpoolapp.util.CarpoolUtil;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -293,22 +288,13 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 
 			 // Comments
              Bundle bundle = new Bundle();
-             List<CommentDto> comments = carpoolDetail.getComments();
-				 StringBuilder sb = new StringBuilder();
-				 for(CommentDto dto:comments){
-					 sb.append(dto.toString()).append("/");
-				 }
-				 sb.setLength(sb.length()==0?0:sb.length()-1);
-				 String temp = sb.toString();
+			 bundle.putInt("carpoolNo",carpoolNo);
+			 bundle.putInt("carpoolWriterNo",carpoolDetail.getWriterNo());
 
-				 bundle.putString("comments", temp);
-				 bundle.putInt("carpoolNo",carpoolNo);
-				 bundle.putInt("carpoolWriterNo",carpoolDetail.getWriterNo());
-
-				 CarpoolCommentsFragment carpoolCommentsFragement = new CarpoolCommentsFragment();
-				 carpoolCommentsFragement.setArguments(bundle);
-				 requireActivity().getSupportFragmentManager().beginTransaction()
-						 .replace(R.id.commentFragment, carpoolCommentsFragement).commit();
+			 CarpoolCommentsFragment carpoolCommentsFragement = new CarpoolCommentsFragment();
+			 carpoolCommentsFragement.setArguments(bundle);
+			 requireActivity().getSupportFragmentManager().beginTransaction()
+					 .replace(R.id.commentFragment, carpoolCommentsFragement).commit();
 
 			 EditText eTComment=getActivity().findViewById(R.id.eTComment);
 			 Button commentRegisterButton=getActivity().findViewById(R.id.commentRegisterButton);

@@ -159,7 +159,15 @@
             <EditText
                 android:id="@+id/edtLocation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="ex) 미음산단로 127번길 21"/>
+
+            <TextView
+                android:id="@+id/tvWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="주소를 도로명 주소로 입력해주세요." />
         </LinearLayout>
 
         <LinearLayout

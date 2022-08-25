@@ -1,12 +1,9 @@
 package com.example.carpoolapp.ui.carpool;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -15,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.carpoolapp.R;
-import com.example.carpoolapp.databinding.FragmentBackHomeBinding;
 import com.example.carpoolapp.databinding.FragmentGoWorkBinding;
 import com.example.carpoolapp.model.CarpoolAllDetailRes;
 

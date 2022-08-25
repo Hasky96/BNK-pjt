@@ -1,21 +1,7 @@
 package com.example.carpoolapp.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
-import com.example.carpoolapp.MainActivity;
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.ActivitySplashBinding;
 import com.example.carpoolapp.ui.user.LoginFragment;

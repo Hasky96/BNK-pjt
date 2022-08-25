@@ -5,12 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +22,6 @@ import com.example.carpoolapp.model.CommentRequest;
 import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -88,7 +85,6 @@ public class CarpoolCommentsFragment extends Fragment {
                     call_comment.enqueue(new Callback<CommonResponse>() {
                         @Override
                         public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                            Log.d("jjk",response.code()+"");
                             Bundle bundle1=new Bundle();
                             bundle1.putInt("carpoolNo",carpoolNo);
                             bundle1.putInt("carpoolWriterNo",carpoolWriterNo);
