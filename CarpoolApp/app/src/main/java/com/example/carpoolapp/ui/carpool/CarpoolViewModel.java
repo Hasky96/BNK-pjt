@@ -120,8 +120,10 @@ public class CarpoolViewModel extends AndroidViewModel {
 				Log.d(">>","carpool join success " +response.code());
 				if(response.code() == 200){
 					msg.setValue("카풀에 참여되었습니다");
-				}else {
-					msg.setValue("카풀 참여에 실패하였습니다");
+				}else if( response.code() == 500) {
+					msg.setValue("인원이 찼습니다");
+				}else{
+					msg.setValue("여긴가" + response.code());
 				}
 				loadCarpoolDetail(carpoolNo);
 			}
@@ -129,6 +131,8 @@ public class CarpoolViewModel extends AndroidViewModel {
 			@Override
 			public void onFailure(Call<CommonResponse> call, Throwable t) {
 				Log.d(">>","carpool join fail " + t.getMessage());
+				msg.setValue("not found");
+
 			}
 		});
 	}

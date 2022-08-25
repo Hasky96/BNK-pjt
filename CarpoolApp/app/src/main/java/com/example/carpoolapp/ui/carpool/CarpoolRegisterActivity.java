@@ -57,7 +57,7 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 
 
 	TextView tvDepartureTime, tvDepartureDate, tvLocation, tvchkDriver;
-	EditText edtLocation, edtFee, edtInfo, edtLocation;
+	EditText edtLocation, edtFee, edtInfo;
 	CheckBox chkDriver;
 	Button btnCarpoolRegister;
 	RadioButton rdoGoWork, rdoBackHome;
@@ -97,7 +97,6 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		rdoGrouptoggle = findViewById(R.id.rdoGrouptoggle);
 		tvLocation = findViewById(R.id.tvLocation);
 		tvchkDriver = findViewById(R.id.tvchkDriver);
-		edtLocation = findViewById(R.id.edtLocation);
 
 		arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spPersonamount, android.R.layout.simple_spinner_item);
 		spPersonamount.setAdapter(arrayAdapter);
@@ -207,7 +206,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 			@Override
 			public void onActivityResult(ActivityResult result) {
 				if (result.getResultCode() == RESULT_OK) {
-					Log.d(">>","주소 요청 완료");
+//					Log.d(">>","주소 요청 완료" + result.getData().getStringExtra("data"));
+					edtLocation.setText(result.getData().getStringExtra("data"));
 				}
 
 			}
