@@ -1,9 +1,7 @@
 package com.example.carpoolapp.ui.myPage;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -103,7 +101,6 @@ public class MypageUpdateFragment extends Fragment {
                 call.enqueue(new Callback<UserUpdateResponse>() {
                     @Override
                     public void onResponse(Call<UserUpdateResponse> call, Response<UserUpdateResponse> response) {
-                        Log.d("jjk",String.valueOf(response.code()));
                         int code=response.code();
                         if(code==200){
                             SharedPreferences.Editor editor=preferences.edit();

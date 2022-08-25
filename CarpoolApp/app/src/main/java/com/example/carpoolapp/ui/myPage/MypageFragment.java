@@ -6,26 +6,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.carpoolapp.MainActivity;
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentMypageBinding;
 import com.example.carpoolapp.model.UserInfoResponse;
 import com.example.carpoolapp.server.Retrofit_client;
 import com.example.carpoolapp.ui.splash.SplashActivity;
-import com.example.carpoolapp.ui.user.LoginFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,7 +46,6 @@ public class MypageFragment extends Fragment {
         binding.tvProfileCarNo.setText(preferences.getString("userCarNo",null));
         binding.tvProfileCarInfo.setText(preferences.getString("userCarInfo",null));
         Authorization=preferences.getString("Authorization",null);
-        Log.d("jjk",Authorization);
         call= Retrofit_client.getApiService().userInfo(Authorization);
         call.enqueue(new Callback<UserInfoResponse>() {
             @Override
