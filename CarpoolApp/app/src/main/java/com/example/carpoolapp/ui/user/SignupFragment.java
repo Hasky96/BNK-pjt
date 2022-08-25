@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.carpoolapp.R;
 import com.example.carpoolapp.databinding.FragmentSignupBinding;
+import com.example.carpoolapp.model.CommonResponse;
 import com.example.carpoolapp.model.SignupRequest;
 import com.example.carpoolapp.model.SignupResponse;
 import com.example.carpoolapp.server.Retrofit_client;
@@ -29,6 +30,7 @@ public class SignupFragment extends Fragment {
     private String userCarInfo;
     private String userCarNo;
     private Call<SignupResponse> call;
+    private Call<CommonResponse> call_idCheck;
     private SignupResponse signupResponse;
 
     @Override
@@ -97,6 +99,24 @@ public class SignupFragment extends Fragment {
                     }
                 });
 
+            }
+        });
+
+        binding.idCheckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                call_idCheck=Retrofit_client.getApiService().idCheck(userId);
+                call_idCheck.enqueue(new Callback<CommonResponse>() {
+                    @Override
+                    public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                        
+                    }
+
+                    @Override
+                    public void onFailure(Call<CommonResponse> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
