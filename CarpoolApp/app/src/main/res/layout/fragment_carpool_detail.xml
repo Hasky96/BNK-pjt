@@ -25,6 +25,7 @@
 		android:backgroundTint="@color/bnkRed"
 		android:text="카풀 완료"
 		android:textColor="@color/white"
+		android:visibility="invisible"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 	

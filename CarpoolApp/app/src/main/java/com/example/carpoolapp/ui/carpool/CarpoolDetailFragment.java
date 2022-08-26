@@ -142,11 +142,12 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 		binding.btnCarpoolDriver.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				// 카풀에 운전자가 있는지 없는지 확인한다
 				Log.d(">>","detail driverNo "+cdetail.getDriverNo());
 				Log.d(">>","detail usercarNo "+ preferences.getString("userCarNo", "")+" /"+preferences.getString("userCarNo", "").equals(""));
-				if (cdetail.getDriverNo() == 0 ) {
+				if (cdetail.getCarNo() == null || cdetail.getCarNo().equals("")) {
 					// 카풀에 운전자가 없고, 사용자가 자동차를 가지고 있다면 운전자 참여여부를 물어본다
 					builder.setTitle("운전자로 참여하시겠습니까?");
 					builder.setPositiveButton("운전자로 참여", new DialogInterface.OnClickListener() {
@@ -290,13 +291,21 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 
 
 			// 운전자 번호 표시
-//			if (cdetail.getDriverNo() > 0) {
-//				binding.tvDetailDriver.setText(Integer.toString(carpoolDetail.getDriverNo()));
-//			}
-			if( cdetail.getCarNo() == null){
-				binding.tvDetailDriver.setText("없음");
+			if( cdetail.getCarNo() == null || cdetail.getCarNo().equals("")){
+				if(!preferences.getString("userCarNo","").equals("")
+				|| !preferences.getString("userCarInfo","").equals("")){
+					binding.tvDetailDriver.setText("없음");
+					binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+				}
+				else binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
 			}else{
 				binding.tvDetailDriver.setText(carpoolDetail.getCarNo());
+				binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+			}
+
+			// 운전 버튼
+			if (cdetail.getDriverNo() == 0  && !(preferences.getString("userCarNo", "").equals("")) ) {
+				binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
 			}
 
 			// 참여, 취소 버튼
@@ -331,15 +340,11 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
 			}
 
-			// 운전 버튼
-			if (cdetail.getDriverNo() == 0  && !(preferences.getString("userCarNo", "").equals("")) ) {
-				binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
-			}
+
 
 			LocalDateTime carpoolTime = LocalDateTime.parse(cdetail.getTime());
 
 			if( LocalDateTime.now().isAfter(carpoolTime)) {
-				binding.btnCarpoolWaiting.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolComplete.setVisibility(View.VISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
 				binding.tvDetailDriver.setVisibility(View.INVISIBLE);

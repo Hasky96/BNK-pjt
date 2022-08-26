@@ -161,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="ex) 미음산단로 127번길 21"/>
 
             <TextView

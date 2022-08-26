@@ -123,7 +123,7 @@ public class CarpoolViewModel extends AndroidViewModel {
 				}else if( response.code() == 500) {
 					msg.setValue("인원이 찼습니다");
 				}else{
-					msg.setValue("여긴가" + response.code());
+					msg.setValue("4000");
 				}
 				loadCarpoolDetail(carpoolNo);
 			}
