@@ -41,7 +41,7 @@ public class CarpoolRepositorySpp{
     public List<Carpool> getAllCarpools(){
         return jpaQueryFactory.select(qCarpool)
                 .from(qCarpool)
-                .where(qCarpool.carpoolCreated.after(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.of(18,00))))
+                .where(qCarpool.carpoolTime.after(LocalDateTime.of(LocalDate.now().minusDays(1), LocalTime.of(18,00))), qCarpool.done.eq(false))
                 .orderBy(qCarpool.carpoolTime.desc()).fetch();
     }
 }
