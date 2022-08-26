@@ -69,6 +69,7 @@ public class SecuirityConfig extends WebSecurityConfigurerAdapter{
                  .antMatchers("/api/user/login").permitAll() // 로그인 허용
                  .antMatchers("/api/user/signup").permitAll() // 회원가입 허용
                  .antMatchers("/api/user/idcheck").permitAll() // 회원가입 허용
+                 .antMatchers("/daum").permitAll() // 회원가입 허용
 //                 .antMatchers("/api/carpool/**").permitAll() // 임시 카풀관련 허용!
                  .antMatchers("/api/**").authenticated()  // api 로 시작하는 URL 모두 JWT 필요
                  .and().cors();

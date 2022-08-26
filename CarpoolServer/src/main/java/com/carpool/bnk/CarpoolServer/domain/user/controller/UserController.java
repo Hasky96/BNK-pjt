@@ -50,9 +50,9 @@ public class UserController {
     }
 
     @GetMapping("/idcheck")
-    public ResponseEntity<String> idcheck(@RequestParam String id){
-        if(userService.idCheck(id)) return ResponseEntity.status(200).body("Available!");
-        return ResponseEntity.status(400).body("Already existing id.");
+    public ResponseEntity<?> idcheck(@RequestParam String id){
+        if(userService.idCheck(id)) return ResponseEntity.status(200).body(new CommonResponse("Available!"));
+        return ResponseEntity.status(400).body(new CommonResponse("Already existing id."));
     }
 
     @PostMapping("/login")
