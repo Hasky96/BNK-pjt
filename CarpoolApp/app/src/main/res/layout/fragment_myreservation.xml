@@ -49,6 +49,10 @@
             android:text="출발"
             android:textSize="28sp"
             android:textStyle="bold"
+            android:focusable="true"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
@@ -89,6 +93,10 @@
             android:text="회사"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:focusable="true"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
@@ -182,6 +190,10 @@
             android:text="회사"
             android:textSize="28sp"
             android:textStyle="bold"
+            android:focusable="true"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/background" />
 
@@ -222,6 +234,10 @@
             android:text="도착지점"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:focusable="true"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/background" />
 

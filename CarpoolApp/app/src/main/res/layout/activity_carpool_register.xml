@@ -209,6 +209,7 @@
             <EditText
                 android:id="@+id/edtInfo"
                 android:layout_width="match_parent"
+                android:maxLength="25"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

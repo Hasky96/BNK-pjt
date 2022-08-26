@@ -222,7 +222,15 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				doneCall.enqueue(new Callback<CommonResponse>() {
 					@Override
 					public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-						Log.d(">>", "done carpool success");
+						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+						builder.setTitle("카풀 완료되었습니다");
+						builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+							}
+						});
+						AlertDialog alertDialog = builder.create();
+						alertDialog.show();
 					}
 
 					@Override
@@ -348,7 +356,10 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				binding.btnCarpoolComplete.setVisibility(View.VISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
 				binding.tvDetailDriver.setVisibility(View.INVISIBLE);
+			}else{
+				binding.btnCarpoolWaiting.setVisibility(View.VISIBLE);
 			}
+
 		});
 
 
@@ -433,10 +444,17 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 					Bitmap b2 = bitmapEnd.getBitmap();
 					Bitmap smallEndMarker = Bitmap.createScaledBitmap(b2, 120, 210, false);
 
-					googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallStartMarker))
-							.position(gpsList.get(0)).title("출발"));
-					googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
-							.position(gpsList.get(all - 1)).title("도착"));
+					if (cdetail.isType()){
+						googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
+								.position(gpsList.get(0)).title("도착"));
+						googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallStartMarker))
+								.position(gpsList.get(all - 1)).title("출발"));
+					}else {
+						googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallStartMarker))
+								.position(gpsList.get(0)).title("출발"));
+						googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallEndMarker))
+								.position(gpsList.get(all - 1)).title("도착"));
+					}
 				}
 			}
 		}, 1000);
