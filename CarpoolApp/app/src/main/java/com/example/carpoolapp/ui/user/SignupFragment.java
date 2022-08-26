@@ -35,6 +35,7 @@ public class SignupFragment extends Fragment {
     private Call<SignupResponse> call;
     private Call<CommonResponse> call_idCheck;
     private SignupResponse signupResponse;
+    private boolean flag=false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +55,7 @@ public class SignupFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 userId = editable.toString();
+                flag = false;
             }
         });
         binding.eTSignupPw.addTextChangedListener(new TextWatcher() {
@@ -102,31 +104,34 @@ public class SignupFragment extends Fragment {
         binding.buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignupRequest signupRequest = new SignupRequest(userId, userPw, userCarInfo, userCarNo);
-                call = Retrofit_client.getApiService().signup(signupRequest);
-                call.enqueue(new Callback<SignupResponse>() {
-                    @Override
-                    public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
-                        Toast.makeText(getActivity().getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
-                        //데이터를 넘겨줘야할 때 사용하기
-                        LoginFragment fragment = new LoginFragment();
-                        Bundle bundle = new Bundle();
-                        fragment.setArguments(bundle);
-                        //프래그먼트에서 프래그먼트로 이동
-                        requireActivity()
-                                .getSupportFragmentManager()
-                                .beginTransaction()
-                                .addToBackStack(null) //뒤로가기 가능하게 만듬
-                                .setCustomAnimations(R.anim.slide_page_in, R.anim.slide_page_out)
-                                .replace(R.id.ConstraintFragment, fragment).commit();
-                    }
+                if (flag){
+                    SignupRequest signupRequest = new SignupRequest(userId, userPw, userCarInfo, userCarNo);
+                    call = Retrofit_client.getApiService().signup(signupRequest);
+                    call.enqueue(new Callback<SignupResponse>() {
+                        @Override
+                        public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                            Toast.makeText(getActivity().getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            //데이터를 넘겨줘야할 때 사용하기
+                            LoginFragment fragment = new LoginFragment();
+                            Bundle bundle = new Bundle();
+                            fragment.setArguments(bundle);
+                            //프래그먼트에서 프래그먼트로 이동
+                            requireActivity()
+                                    .getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .addToBackStack(null) //뒤로가기 가능하게 만듬
+                                    .setCustomAnimations(R.anim.slide_page_in, R.anim.slide_page_out)
+                                    .replace(R.id.ConstraintFragment, fragment).commit();
+                        }
 
-                    @Override
-                    public void onFailure(Call<SignupResponse> call, Throwable t) {
-                        Toast.makeText(getActivity().getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                        @Override
+                        public void onFailure(Call<SignupResponse> call, Throwable t) {
+                            Toast.makeText(getActivity().getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else {
+                    showDialog("아이디 중복확인 하세요.");
+                }
             }
         });
 
@@ -141,6 +146,7 @@ public class SignupFragment extends Fragment {
                         public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
                             if (response.code()==200) {
                                 showDialog("사용 가능한 아이디입니다.");
+                                flag=true;
                             } else if(response.code()==400){
                                 showDialog("이미 있는 아이디 입니다.");
                             }else {

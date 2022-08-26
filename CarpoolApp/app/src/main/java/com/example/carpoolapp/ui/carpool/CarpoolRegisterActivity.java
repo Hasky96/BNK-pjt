@@ -98,6 +98,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 		tvLocation = findViewById(R.id.tvLocation);
 		tvchkDriver = findViewById(R.id.tvchkDriver);
 
+		edtLocation.clearFocus();
+
 		arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spPersonamount, android.R.layout.simple_spinner_item);
 		spPersonamount.setAdapter(arrayAdapter);
 
