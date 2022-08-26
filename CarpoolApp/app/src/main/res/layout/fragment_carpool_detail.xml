@@ -25,6 +25,7 @@
 		android:backgroundTint="@color/bnkRed"
 		android:text="카풀 완료"
 		android:textColor="@color/white"
+		android:visibility="invisible"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 	
@@ -37,6 +38,7 @@
 		android:background="@drawable/round_square"
 		android:backgroundTint="#198754"
 		android:text="모집중"
+		android:visibility="invisible"
 		android:textColor="@color/white"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />

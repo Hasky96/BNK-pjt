@@ -43,7 +43,7 @@ public class AddressApiActivity extends AppCompatActivity {
         webView = (WebView) binding.webView;
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new MyJavaScriptInterface(), "Android");
-        webView.loadUrl("http://192.168.0.122:8080/daum.html");
+        webView.loadUrl("http://192.168.0.121:8080/daum.html");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
