@@ -352,6 +352,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			LocalDateTime carpoolTime = LocalDateTime.parse(cdetail.getTime());
 
 			if( LocalDateTime.now().isAfter(carpoolTime)) {
+//				binding.btnCarpoolWaiting.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolComplete.setVisibility(View.VISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.INVISIBLE);
 				binding.tvDetailDriver.setVisibility(View.INVISIBLE);
