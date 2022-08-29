@@ -300,15 +300,15 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 
 			// 운전자 번호 표시
 			if( cdetail.getCarNo() == null || cdetail.getCarNo().equals("")){
-				if(!preferences.getString("userCarNo","").equals("")
-				|| !preferences.getString("userCarInfo","").equals("")){
+//				if(!preferences.getString("userCarNo","").equals("")
+//				|| !preferences.getString("userCarInfo","").equals("")){
 					binding.tvDetailDriver.setText("없음");
-					binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
-				}
-				else binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
+//					binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+//				}
+//				else binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
 			}else{
 				binding.tvDetailDriver.setText(carpoolDetail.getCarNo());
-				binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+//				binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
 			}
 
 			// 운전 버튼
