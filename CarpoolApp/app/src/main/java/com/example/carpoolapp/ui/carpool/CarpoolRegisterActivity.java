@@ -167,6 +167,8 @@ public class CarpoolRegisterActivity extends AppCompatActivity {
 			}
 		}, mYear, mMonth, mDay);
 
+		datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
 		tvDepartureDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

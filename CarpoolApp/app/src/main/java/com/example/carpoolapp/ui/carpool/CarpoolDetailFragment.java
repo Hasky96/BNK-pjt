@@ -300,15 +300,15 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 
 			// 운전자 번호 표시
 			if( cdetail.getCarNo() == null || cdetail.getCarNo().equals("")){
-				if(!preferences.getString("userCarNo","").equals("")
-				|| !preferences.getString("userCarInfo","").equals("")){
+//				if(!preferences.getString("userCarNo","").equals("")
+//				|| !preferences.getString("userCarInfo","").equals("")){
 					binding.tvDetailDriver.setText("없음");
-					binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
-				}
-				else binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
+//					binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+//				}
+//				else binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
 			}else{
 				binding.tvDetailDriver.setText(carpoolDetail.getCarNo());
-				binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
+//				binding.btnCarpoolDriver.setVisibility(View.INVISIBLE);
 			}
 
 			// 운전 버튼
@@ -316,7 +316,6 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
 			}
 
-			// 참여, 취소 버튼
 
 			 // Comments
              Bundle bundle = new Bundle();
@@ -331,7 +330,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			 EditText eTComment=getActivity().findViewById(R.id.eTComment);
 			 Button commentRegisterButton=getActivity().findViewById(R.id.commentRegisterButton);
 
-
+			 // 참여, 취소 버튼
 			if (CarpoolUtil.isUserInCarpool(cdetail, preferences.getString("userId", null))) {
 				binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.VISIBLE);
