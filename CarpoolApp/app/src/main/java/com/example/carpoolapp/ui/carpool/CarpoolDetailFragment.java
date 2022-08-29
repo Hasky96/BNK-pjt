@@ -316,7 +316,6 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 				binding.btnCarpoolDriver.setVisibility(View.VISIBLE);
 			}
 
-			// 참여, 취소 버튼
 
 			 // Comments
              Bundle bundle = new Bundle();
@@ -331,7 +330,7 @@ public class CarpoolDetailFragment extends Fragment implements OnMapReadyCallbac
 			 EditText eTComment=getActivity().findViewById(R.id.eTComment);
 			 Button commentRegisterButton=getActivity().findViewById(R.id.commentRegisterButton);
 
-
+			 // 참여, 취소 버튼
 			if (CarpoolUtil.isUserInCarpool(cdetail, preferences.getString("userId", null))) {
 				binding.btnCarpoolJoin.setVisibility(View.INVISIBLE);
 				binding.btnCarpoolCancle.setVisibility(View.VISIBLE);
